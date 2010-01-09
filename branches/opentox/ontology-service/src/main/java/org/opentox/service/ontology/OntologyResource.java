@@ -235,10 +235,12 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				"		where {\n"+
 				"	        ?Feature owl:sameAs ?SameAS\n"+
 				"		}\n";
-			} else if (key.toString().toLowerCase().equals("endpoints")) {
-				ns = "otee";
-				key = "Endpoints";
-				predicate = "rdfs:subClassOf";
+			} else {
+				if (key.toString().toLowerCase().equals("endpoints")) {
+					ns = "otee";
+					key = "Endpoints";
+					predicate = "rdfs:subClassOf";
+				}
 				
 				query = 
 					String.format(
@@ -261,8 +263,9 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 					key.toString())
 					;
 				
-			}
+			
 			//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
+		}
 		}
 		return sparql(query,variant);		
 	}
