@@ -131,7 +131,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							w.write(
 								"<h3>Query Ontology service</h3>"+
 								"<html><head><title>Search Opentox RDF</title></head><body>"+
-								"<FORM action='' method='get'>"+
+								"<FORM action='' method='post'>"+
 								"<FIELDSET><LEGEND>SPARQL</LEGEND>"+
 							    "<TEXTAREA name=\"query\" rows=\"10\" cols=\"120\" tabindex=\"1\">");
 							w.flush();
