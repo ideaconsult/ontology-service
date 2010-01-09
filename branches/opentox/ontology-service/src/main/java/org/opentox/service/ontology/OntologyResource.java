@@ -119,25 +119,48 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							ResultSetFormatter.out(out, results, query);
 						else if (getMediaType().equals(MediaType.TEXT_HTML)) {
 							OutputStreamWriter w = new OutputStreamWriter(out);
+							w.write(String.format("<a href='%s/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
+							w.write(String.format("<a href='%s/Algorithm'>Algorithms</a>&nbsp;",getRequest().getRootRef()));
+							w.write(String.format("<a href='%s/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
+							w.write(String.format("<a href='%s/Endpoints'>Endpoints</a>&nbsp;",getRequest().getRootRef()));
 							w.write(
+								"<h3>Query Ontology service</h3>"+
 								"<html><head><title>Search Opentox RDF</title></head><body>"+
 								"<FORM action='' method='get'>"+
 								"<FIELDSET><LEGEND>SPARQL</LEGEND>"+
-							    "<TEXTAREA name=\"query\" rows=\"10\" cols=\"80\" tabindex=\"1\">");
+							    "<TEXTAREA name=\"query\" rows=\"10\" cols=\"120\" tabindex=\"1\">");
 							w.flush();
 							w.write(queryString);
 							w.write(
 							    "</TEXTAREA>"+
-							    "</FIELDSET><INPUT name=\"run\" type=\"submit\">"
+							    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
 									);
 							w.write(
 									"<FIELDSET><LEGEND>Results</LEGEND>"+
-								    "<TEXTAREA name=\"results\" rows=\"10\" cols=\"80\" tabindex=\"1\">");
+								    "<TEXTAREA name=\"results\" rows=\"10\" cols=\"120\" tabindex=\"3\">");
 							w.flush();
 							ResultSetFormatter.out(out, results, query);
 							w.write("</TEXTAREA>"+
-								    "</FIELDSET></FORM></body>"
+								    "</FIELDSET></FORM>"
 										);
+							
+							//post
+							
+							w.write(
+									"<h3>Import RDF data into Ontology service</h3>"+
+									"<FORM action='' method='post'>"+
+									"<FIELDSET><LEGEND>Models URI</LEGEND>"+
+								    "<input name=\"model_uri\" size=\"80\" tabindex=\"4\">"+
+								    "</FIELDSET>"+
+								    "<FIELDSET><LEGEND>Algorithms URI</LEGEND>"+
+								    "<input name=\"algorithm_uri\"  size=\"80\" tabindex=\"5\">"+
+								    "</FIELDSET>"+
+								    "<FIELDSET><LEGEND>Features URI</LEGEND>"+
+								    "<input name=\"feature_uris\" size=\"80\" tabindex=\"6\">"+
+								    "</FIELDSET>"+
+								    "<INPUT name=\"run\" type=\"submit\" value=\"SUBMIT\" tabindex=\"7\">"+
+									"</FORM></body>"
+											);							
 							w.flush();
 						} else {
 							
@@ -191,9 +214,16 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		Form form = getRequest().getResourceRef().getQueryAsForm();
 		String query = form.getFirstValue("query");
 		if(query == null) {
+			String ns = "ot";
+			String predicate = "rdf:type";
 			Object key = getRequest().getAttributes().get(resourceKey);
 			if (key==null) 
 				key = "Model";
+			else if (key.toString().toLowerCase().equals("endpoints")) {
+				ns = "otee";
+				key = "Endpoints";
+				predicate = "rdfs:subClassOf";
+			}
 				
 			query = 
 				String.format(
@@ -206,11 +236,13 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
 				"	select ?%s ?title\n"+ 
 				"	where {\n"+
-				"	?%s rdf:type ot:%s\n"+
+				"	?%s %s %s:%s\n"+
 			//	"   ?x dc:title ?title.\n"+
 				"	}\n",
 				key.toString(),
 				key.toString(),
+				predicate,
+				ns,
 				key.toString())
 				;
 			//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
@@ -248,6 +280,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	@Override
 	protected Representation post(Representation entity, Variant variant)
 			throws ResourceException {
+		String ref = "";
 		Form form = new Form(entity);
 		try {
 			ResourceException xx = null;
@@ -256,7 +289,10 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			try {
 				for (String uri:uris) {
 					String search = form.getFirstValue(uri);
-					if (search != null) getOntology(ontology,new Reference(search));
+					if (search != null) {
+						getOntology(ontology,new Reference(search));
+						ref = getRequest().getOriginalRef().getBaseRef()+"/Model";
+					}
 				}
 			} catch(ResourceException x) {
 				xx = x;
@@ -273,7 +309,10 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			String query = form.getFirstValue("query");
 			if(query != null) {
 				return sparql(query,variant);
-			} else return null;			
+			} else {
+				getResponse().setLocationRef(ref);
+				return get(variant);
+			}
 		} catch (Exception x) {
 			throw new ResourceException(x);
 		} finally {
