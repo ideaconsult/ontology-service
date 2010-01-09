@@ -222,34 +222,46 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			String ns = "ot";
 			String predicate = "rdf:type";
 			Object key = getRequest().getAttributes().get(resourceKey);
-			if (key==null) 
-				key = "Model";
-			else if (key.toString().toLowerCase().equals("endpoints")) {
-				ns = "otee";
-				key = "Endpoints";
-				predicate = "rdfs:subClassOf";
-			}
-				
-			query = 
-				String.format(
+			if (key==null) { 
+				query = 
 				"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
 				"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-				String.format("PREFIX dc:<%s#>\n",DC.NS)+
+				"PREFIX dc:<http://purl.org/dc/elements/1.1/#>\n"+
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
 				"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
 				"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-				"	select ?%s ?title\n"+ 
-				"	where {\n"+
-				"	?%s %s %s:%s\n"+
-			//	"   ?x dc:title ?title.\n"+
-				"	}\n",
-				key.toString(),
-				key.toString(),
-				predicate,
-				ns,
-				key.toString())
-				;
+				"select ?Feature ?SameAS\n"+
+				"		where {\n"+
+				"	        ?Feature owl:sameAs ?SameAS\n"+
+				"		}\n";
+			} else if (key.toString().toLowerCase().equals("endpoints")) {
+				ns = "otee";
+				key = "Endpoints";
+				predicate = "rdfs:subClassOf";
+				
+				query = 
+					String.format(
+					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
+					"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
+					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
+					String.format("PREFIX dc:<%s#>\n",DC.NS)+
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
+					"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
+					"	select ?%s ?title\n"+ 
+					"	where {\n"+
+					"	?%s %s %s:%s\n"+
+				//	"   ?x dc:title ?title.\n"+
+					"	}\n",
+					key.toString(),
+					key.toString(),
+					predicate,
+					ns,
+					key.toString())
+					;
+				
+			}
 			//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
 		}
 		return sparql(query,variant);		
