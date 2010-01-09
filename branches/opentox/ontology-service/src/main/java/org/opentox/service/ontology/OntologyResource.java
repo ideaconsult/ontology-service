@@ -70,14 +70,19 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 					if (client.getStatus().equals(Status.SUCCESS_OK)) {
 						readOWL(r.getStream(),model);
 						return model;
-					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,reference.toString());
+					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
+							String.format("%s %s",client.getStatus().toString(),reference.toString()));
+				} catch (ResourceException x) {
+					throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
+							String.format("%s %s %s", Status.SERVER_ERROR_BAD_GATEWAY.toString(),reference,x.getMessage()),x);
 				} catch (Exception x) {
 					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,reference.toString(),x);
 				} finally {
 					try {r.release();} catch (Exception x) {};
 				}
 			}
-			
+		} catch (ResourceException x) {
+			throw x;
 		} catch (Exception x) {
 			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x.getMessage(),x);
 		}
@@ -298,6 +303,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				xx = x;
 			} finally {}	
 			if (xx!=null)	throw xx;
+		} catch (ResourceException x) {
+			throw x;
 		} catch(Exception x) {
 			throw new ResourceException(x);
 		} finally {
