@@ -1,5 +1,6 @@
 package org.opentox.rest.component;
 
+import org.opentox.service.ontology.OntologyService;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Context;
@@ -7,6 +8,12 @@ import org.restlet.data.Protocol;
 
 public class RESTComponent extends Component {
 
+	public RESTComponent() {
+		this(null);
+	}
+	public RESTComponent(Context context) {
+		this(context,new Application[] {new OntologyService()});
+	}
 	public RESTComponent(Context context,Application[] applications) {
 		super();
 		this.getClients().add(Protocol.FILE);

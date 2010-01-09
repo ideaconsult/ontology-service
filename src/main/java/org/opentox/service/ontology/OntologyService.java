@@ -41,7 +41,7 @@ public class OntologyService extends Application {
 	public Restlet createInboundRoot() {
 		Router router = new MyRouter(this.getContext());
 		router.attach("", OntologyResource.class);
-
+		router.attach("/", OntologyResource.class);
 		router.attach(String.format("/{%s}",OntologyResource.resourceKey), OntologyResource.class);	
 		router.setDefaultMatchingMode(Template.MODE_STARTS_WITH); 
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
