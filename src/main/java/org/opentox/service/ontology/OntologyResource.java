@@ -302,31 +302,33 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			throws ResourceException {
 		String ref = "";
 		Form form = new Form(entity);
-		try {
-			ResourceException xx = null;
-			ontology = createOntologyModel();
-			String[] uris = new String[] {"model_uri","algorithm_uri","feature_uris"};
+		synchronized (this) {
+		
 			try {
-				for (String uri:uris) {
-					String search = form.getFirstValue(uri);
-					if (search != null) {
-						getOntology(ontology,new Reference(search));
-						ref = getRequest().getOriginalRef().getBaseRef()+"/Model";
+				ResourceException xx = null;
+				ontology = createOntologyModel();
+				String[] uris = new String[] {"model_uri","algorithm_uri","feature_uris"};
+				try {
+					for (String uri:uris) {
+						String search = form.getFirstValue(uri);
+						if (search != null) {
+							getOntology(ontology,new Reference(search));
+							ref = getRequest().getOriginalRef().getBaseRef()+"/Model";
+						}
 					}
-				}
-			} catch(ResourceException x) {
-				xx = x;
-			} finally {}	
-			if (xx!=null)	throw xx;
-		} catch (ResourceException x) {
-			throw x;
-		} catch(Exception x) {
-			throw new ResourceException(x);
-		} finally {
-			try { ontology.commit(); } catch (Exception x) {}
-			try { ontology.close(); ontology = null;} catch (Exception x) {}
+				} catch(ResourceException x) {
+					xx = x;
+				} finally {}	
+				if (xx!=null)	throw xx;
+			} catch (ResourceException x) {
+				throw x;
+			} catch(Exception x) {
+				throw new ResourceException(x);
+			} finally {
+				try { ontology.commit(); } catch (Exception x) {}
+				try { ontology.close(); ontology = null;} catch (Exception x) {}
+			}
 		}
-	
 		try {
 			String query = form.getFirstValue("query");
 			if(query != null) {
