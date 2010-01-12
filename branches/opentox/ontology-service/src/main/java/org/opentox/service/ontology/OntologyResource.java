@@ -26,6 +26,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.vocabulary.DC;
 
@@ -100,8 +101,12 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	
 					QueryExecution qe = null;
 					try {
+						ontology.enterCriticalSection(Lock.READ) ;
+					
+					try {
 						Query query = QueryFactory.create(queryString);
-				
+						
+
 						// Execute the query and obtain results
 						qe = QueryExecutionFactory.create(query,ontology );
 						ResultSet results = qe.execSelect();
@@ -178,17 +183,28 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 					} finally {
 						try {qe.close();} catch (Exception x) {}
 					}
+					} finally {
+						ontology.leaveCriticalSection() ; 
+					}
 				}
 		
 			};
 	}
 	protected void readOWL(InputStream in , Model model) throws Exception {
 		try {
-			model.read(in,null);
+			model.enterCriticalSection(Lock.WRITE) ;
+			try {
+				model.read(in,null);
+				try { model.commit(); } catch (Exception x) {}
+			} catch (Exception x) {
+				Logger.getLogger(getClass().getName()).severe(x.toString());
+			} finally {
+				try { if (in != null) in.close();} catch (Exception x) {}
+			}
 		} catch (Exception x) {
-			Logger.getLogger(getClass().getName()).severe(x.toString());
+			throw x;
 		} finally {
-			try { if (in != null) in.close();} catch (Exception x) {}
+			model.leaveCriticalSection() ; 
 		}
 	}
 	@Override
@@ -285,8 +301,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			} catch (Exception x) {
 				
 			}
-		try { ontology.commit(); } catch (Exception x) {}
-		try { ontology.close(); ontology = null;} catch (Exception x) {}			
+		
 	}
 	protected Model createOntologyModel() throws ResourceException {
 		File dir  = new File(directory);
