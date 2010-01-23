@@ -193,4 +193,55 @@ PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
         ?endpoint rdf:type otee:Endpoints.
 	}
 
+
+
+---
+Top level of endpoints ontology
+---
+
+PREFIX ot:<http://www.opentox.org/api/1.1#>
+PREFIX ota:<http://www.opentox.org/algorithms.owl#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX dc:<http://purl.org/dc/elements/1.1/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
+	select ?Endpoints 
+	where {
+	?Endpoints rdfs:subClassOf otee:Endpoints
+	}
+
+
+---
+Human health endpoints
+---
+
+PREFIX ot:<http://www.opentox.org/api/1.1#>
+PREFIX ota:<http://www.opentox.org/algorithms.owl#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX dc:<http://purl.org/dc/elements/1.1/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
+	select ?Endpoints 
+	where {
+	?Endpoints rdfs:subClassOf otee:HumanHealthEffects 
+	}
+
+
 --
+
+All features same as http://www.opentox.org/echaEndpoints.owl#Endpoint Carcinogenicity  
+--
+PREFIX ot:<http://www.opentox.org/api/1.1#>
+PREFIX ota:<http://www.opentox.org/algorithms.owl#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX dc:<http://purl.org/dc/elements/1.1/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
+select ?Feature ?SameAS
+		where {
+	        ?Feature owl:sameAs otee:Carcinogenicity
+		}
+
