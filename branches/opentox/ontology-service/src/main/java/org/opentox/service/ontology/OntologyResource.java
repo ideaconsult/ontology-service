@@ -46,6 +46,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		super();
 	}
 	
+	
 	@Override
 	protected void doRelease() throws ResourceException {
 		super.doRelease();
@@ -110,9 +111,12 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 						// Execute the query and obtain results
 						qe = QueryExecutionFactory.create(query,ontology );
 						ResultSet results = qe.execSelect();
-	
+	//application/sparql-results+xml
+
 						if (getMediaType().equals(MediaType.APPLICATION_RDF_XML))
 							ResultSetFormatter.outputAsRDF(out,"RDF/XML", results);
+						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_XML))
+							ResultSetFormatter.outputAsXML(out, results);
 						else if (getMediaType().equals(MediaType.APPLICATION_RDF_TURTLE))
 							ResultSetFormatter.outputAsRDF(out,"TURTLE", results);
 						else if (getMediaType().equals(MediaType.TEXT_RDF_N3))
@@ -121,10 +125,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							ResultSetFormatter.outputAsRDF(out,"N-TRIPLE", results);
 						else if (getMediaType().equals(MediaType.TEXT_CSV))
 							ResultSetFormatter.outputAsCSV(out, results);
-						else if (getMediaType().equals(MediaType.APPLICATION_JSON))
+						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_JSON))
 							ResultSetFormatter.outputAsJSON(out, results);		
-						else if (getMediaType().equals(MediaType.TEXT_XML))
-							ResultSetFormatter.outputAsXML(out, results);
 						else if (getMediaType().equals(MediaType.TEXT_PLAIN))
 							ResultSetFormatter.out(out, results, query);
 						else if (getMediaType().equals(MediaType.TEXT_HTML)) {
@@ -211,13 +213,12 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	protected void doInit() throws ResourceException {
 		super.doInit();
 		customizeVariants(new MediaType[] {
-				
+				MediaType.APPLICATION_SPARQL_RESULTS_XML,
 				MediaType.APPLICATION_RDF_XML,
 				MediaType.APPLICATION_RDF_TURTLE,
 				MediaType.TEXT_RDF_N3,
 				MediaType.TEXT_RDF_NTRIPLES	,
-				MediaType.TEXT_XML,
-				MediaType.APPLICATION_JSON,
+				MediaType.APPLICATION_SPARQL_RESULTS_JSON,
 				MediaType.TEXT_CSV,
 				MediaType.TEXT_PLAIN,
 				MediaType.TEXT_URI_LIST,
@@ -263,19 +264,20 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
 					"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
 					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-					String.format("PREFIX dc:<%s#>\n",DC.NS)+
+					String.format("PREFIX dc:<%s>\n",DC.NS)+
 					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
 					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
 					"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
 					"	select ?%s ?title\n"+ 
 					"	where {\n"+
-					"	?%s %s %s:%s\n"+
-				//	"   ?x dc:title ?title.\n"+
+					"	?%s %s %s:%s.\n"+
+					"   ?%s dc:title ?title.\n"+
 					"	}\n",
 					key.toString(),
 					key.toString(),
 					predicate,
 					ns,
+					key.toString(),
 					key.toString())
 					;
 				

@@ -56,7 +56,7 @@ public class OntologyService extends Application {
         
         // Create a component
         Component component = new RESTComponent(null,new Application[]{new OntologyService()});
-        final Server server = component.getServers().add(Protocol.HTTP, 8080);
+        final Server server = component.getServers().add(Protocol.HTTP, 8081);
         component.start();
    
         System.out.println("Server started on port " + server.getPort());
