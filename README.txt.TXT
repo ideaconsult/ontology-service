@@ -194,6 +194,25 @@ PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
 	}
 
 
+---
+Select models, predicting Eye irritation/corrosion
+---
+
+PREFIX ot:<http://www.opentox.org/api/1.1#>
+PREFIX ota:<http://www.opentox.org/algorithms.owl#>
+PREFIX owl:<http://www.w3.org/2002/07/owl#>
+PREFIX dc:<http://purl.org/dc/elements/1.1/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
+	select DISTINCT  ?Model
+	where {
+        ?Model rdf:type ot:Model.
+        ?Model ot:predictedVariables ?Predicted.
+        ?Predicted owl:sameAs <http://www.opentox.org/echaEndpoints.owl#Eye_irritation/corrosion>.
+
+	}
+
 
 ---
 Top level of endpoints ontology
@@ -243,5 +262,18 @@ PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>
 select ?Feature ?SameAS
 		where {
 	        ?Feature owl:sameAs otee:Carcinogenicity
+		}
+
+
+--- 
+Blue Obelisk ontology
+All Molecular descriptors
+---
+
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>
+select ?x 
+		where {
+	        ?x rdf:type bo:MolecularDescriptor
 		}
 
