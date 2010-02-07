@@ -358,6 +358,11 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		File dir  = new File(directory);
 		if (!dir.exists()) {
 			dir.mkdir();
+			try {
+				new File(directory+"/fixed.opt").createNewFile();
+			} catch (Exception x) {
+				x.printStackTrace();
+			}
 		}
 		Model ontology = TDBFactory.createModel(directory) ;
 		if (init && (ontology.size()==0)) readOntologies(ontology);
