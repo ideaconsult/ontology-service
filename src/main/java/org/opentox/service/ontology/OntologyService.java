@@ -1,8 +1,4 @@
 package org.opentox.service.ontology;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.opentox.rest.component.RESTComponent;
 import org.restlet.Application;
 import org.restlet.Component;
@@ -19,11 +15,7 @@ import org.restlet.routing.Template;
  */
 
 public class OntologyService extends Application {
-	protected Properties properties = null;
-	protected long taskCleanupRate = 2*60*60*1000; //2h
 
-	//protected String connectionURI;
-	protected DataSource datasource = null;
 
 	public OntologyService() {
 		super();
@@ -42,7 +34,7 @@ public class OntologyService extends Application {
 		Router router = new MyRouter(this.getContext());
 		router.attach("", OntologyResource.class);
 		router.attach("/", OntologyResource.class);
-		router.attach(String.format("/{%s}",OntologyResource.resourceKey), OntologyResource.class);	
+		router.attach(String.format("/query/{%s}",OntologyResource.resourceKey), OntologyResource.class);	
 		router.setDefaultMatchingMode(Template.MODE_STARTS_WITH); 
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
 		return router;
