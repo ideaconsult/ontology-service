@@ -175,7 +175,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
 									);
 							w.write(String.format(
-									"<FIELDSET><LEGEND>Results %d</LEGEND><table bgcolor='#DDDDDD'>",""));
+									"<FIELDSET><LEGEND>Results</LEGEND><table bgcolor='#DDDDDD'>"));
 							w.write("<tr bgcolor='#FFFFFF'>");
 							List<String> vars = results.getResultVars();
 							for (int i=0; i < vars.size();i++) {
