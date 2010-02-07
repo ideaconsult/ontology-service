@@ -108,7 +108,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			return new OutputRepresentation(variant.getMediaType()) {
 				@Override
 				public void write(OutputStream out) throws IOException {
-	
+					long elapsed = System.currentTimeMillis();
 					QueryExecution qe = null;
 					ResultSet results = null;
 					try {
@@ -121,6 +121,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 						// Execute the query and obtain results
 						qe = QueryExecutionFactory.create(query,ontology );
 						results = qe.execSelect();
+						elapsed = System.currentTimeMillis()-elapsed;
 	//application/sparql-results+xml
 
 						if (getMediaType().equals(MediaType.APPLICATION_RDF_XML))
@@ -144,7 +145,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							w.write(
 									String.format(
 								"<html><head><title>Search Opentox RDF</title>"+
-								"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"+		
+								"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"+	
+								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">"+
 								"</head><body>",
 							    getRequest().getRootRef()));							
 							w.write(String.format("<a href='%s/query/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
@@ -152,9 +154,9 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							w.write(String.format("<a href='%s/query/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
 							w.write(String.format("<a href='%s/query/Endpoints'>Endpoints</a>&nbsp;",getRequest().getRootRef()));
 							w.write(
-									"<h3>Import RDF data into Ontology service</h3>"+
 									"<FORM action='' method='post'>"+
-									"<FIELDSET><LEGEND>URI</LEGEND>"+
+									"<FIELDSET><LEGEND>Import RDF data into Ontology service</LEGEND>"+
+									"<label for=\"uri\">URL</label>"+
 								    "<input name=\"uri\" size=\"120\" tabindex=\"4\">"+
 								    "</FIELDSET>"+
 								    "<INPUT name=\"run\" type=\"submit\" value=\"SUBMIT\" tabindex=\"7\">"+
@@ -175,7 +177,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
 									);
 							w.write(String.format(
-									"<FIELDSET><LEGEND>Results</LEGEND><table bgcolor='#DDDDDD'>"));
+									"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND><table bgcolor='#DDDDDD'>",elapsed));
 							w.write("<tr bgcolor='#FFFFFF'>");
 							List<String> vars = results.getResultVars();
 							for (int i=0; i < vars.size();i++) {
