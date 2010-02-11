@@ -95,5 +95,15 @@
   			<enabled>false</enabled>
   			</snapshots>
 		</repository>
+ 	    <repository>
+      <id>opennms-repo</id>
+      <name>OpenNMS Repository</name>
+      <url>http://repo.opennms.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+
 	</repositories>  
 </project>
