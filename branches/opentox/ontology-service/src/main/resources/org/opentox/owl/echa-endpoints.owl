@@ -19,19 +19,19 @@
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >ECHA endpoints</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:about="#Dissociation_constant_(pKa)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Dissociation constant (pKa)</title>
+  <owl:Class rdf:ID="Vapour_pressure">
     <rdfs:subClassOf>
       <owl:Class rdf:ID="PhysicoChemicalEffects"/>
     </rdfs:subClassOf>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Vapour pressure</title>
   </owl:Class>
-  <owl:Class rdf:ID="Vapour_pressure">
+  <owl:Class rdf:ID="Air-_water_partition_coefficient_Henry_s_law_constant_H">
     <rdfs:subClassOf>
       <owl:Class rdf:about="#PhysicoChemicalEffects"/>
     </rdfs:subClassOf>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Vapour pressure</title>
+    >Air- water partition coefficient (Henry`s law constant, H)</title>
   </owl:Class>
   <owl:Class rdf:ID="Gastrointestinal_absorption">
     <rdfs:subClassOf>
@@ -47,6 +47,20 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Ecotoxic effects</title>
   </owl:Class>
+  <owl:Class rdf:ID="Adsorption_Desorption_in_soil">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Adsorption/Desorption in soil </title>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="EnvironmentalFateParameters"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Adsorption_Desorption_in_sediment">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#EnvironmentalFateParameters"/>
+    </rdfs:subClassOf>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Adsorption/Desorption in sediment</title>
+  </owl:Class>
   <owl:Class rdf:ID="Carcinogenicity">
     <rdfs:subClassOf>
       <owl:Class rdf:ID="HumanHealthEffects"/>
@@ -54,17 +68,19 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Carcinogenicity</title>
   </owl:Class>
-  <owl:Class rdf:about="#Eye_irritation/corrosion">
+  <owl:Class rdf:ID="Receptor_binding_and_gene_expression_specify_receptor">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Receptor binding and gene expression (specify receptor)</title>
     <rdfs:subClassOf>
       <owl:Class rdf:about="#HumanHealthEffects"/>
     </rdfs:subClassOf>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Eye irritation/corrosion</title>
   </owl:Class>
-  <owl:Class rdf:about="#Long-term_toxicity_to_Daphnia_(lethality,_inhibition_of_reproduction)">
+  <owl:Class rdf:ID="Octanol-water_partition_coefficient_Kow">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PhysicoChemicalEffects"/>
+    </rdfs:subClassOf>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Long-term toxicity to Daphnia (lethality, inhibition of reproduction)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    >Octanol-water partition coefficient (Kow)</title>
   </owl:Class>
   <owl:Class rdf:ID="Photocarcinogenicity">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -80,11 +96,6 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Acute inhalation toicity</title>
   </owl:Class>
-  <owl:Class rdf:about="#Short-term_toxicity_to_algae_(inhibition_of_the_exponential_growth_rate)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short-term toxicity to algae (inhibition of the exponential growth rate)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-  </owl:Class>
   <owl:Class rdf:ID="Toxicity_to_birds">
     <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -97,12 +108,10 @@
       <owl:Class rdf:about="#HumanHealthEffects"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#Air-_water_partition_coefficient_(Henry&apos;s_law_constant,_H)">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#PhysicoChemicalEffects"/>
-    </rdfs:subClassOf>
+  <owl:Class rdf:ID="Microbial_inhibition_activated_sludge_respiration_inhibition_inhibition_of_nitrification_other">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Air- water partition coefficient (Henry`s law constant, H)</title>
+    >Microbial inhibition (activated sludge respiration inhibition, inhibition of nitrification, other)</title>
   </owl:Class>
   <owl:Class rdf:ID="Water_solubility">
     <rdfs:subClassOf>
@@ -120,10 +129,22 @@
   </owl:Class>
   <owl:Class rdf:ID="Vegetation-air_partition_coefficient">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="EnvironmentalFateParameters"/>
+      <owl:Class rdf:about="#EnvironmentalFateParameters"/>
     </rdfs:subClassOf>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Vegetation-air partition coefficient</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Short-term_toxicity_to_algae_inhibition_of_the_exponential_growth_rate">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short-term toxicity to algae (inhibition of the exponential growth rate)</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Receptor-binding_specify_receptor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#HumanHealthEffects"/>
+    </rdfs:subClassOf>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Receptor-binding (specify receptor)</title>
   </owl:Class>
   <owl:Class rdf:about="#HumanHealthEffects">
     <rdfs:subClassOf>
@@ -132,24 +153,12 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Human health effects</title>
   </owl:Class>
-  <owl:Class rdf:about="#Toxicity_to_soil_invertebrates_(survival,_growth,_reproduction)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Toxicity to soil invertebrates (survival, growth, reproduction)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-  </owl:Class>
   <owl:Class rdf:ID="Vegetation-soil_partition_coefficient">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Vegetation-soil partition coefficient</title>
     <rdfs:subClassOf>
       <owl:Class rdf:about="#EnvironmentalFateParameters"/>
     </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="#Adsorption/Desorption_in_soil">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#EnvironmentalFateParameters"/>
-    </rdfs:subClassOf>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Adsorption/Desorption in soil </title>
   </owl:Class>
   <owl:Class rdf:about="#EnvironmentalFateParameters">
     <rdfs:subClassOf>
@@ -158,6 +167,11 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Environmental fate parameters </title>
   </owl:Class>
+  <owl:Class rdf:ID="Short-term_toxicity_to_Daphnia_immobilisation">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short-term toxicity to Daphnia (immobilisation)</title>
+  </owl:Class>
   <owl:Class rdf:ID="s45">
     <rdfs:subClassOf>
       <owl:Class rdf:about="#ToxicoKinetics"/>
@@ -165,30 +179,29 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Ocular membrane penetration</title>
   </owl:Class>
-  <owl:Class rdf:about="#Organic_carbon-sorption_partition_coefficient_(organic_carbon;_Koc)">
+  <owl:Class rdf:ID="Octanol-air_partition_coefficient_Koa">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Organic carbon-sorption partition coefficient (organic carbon; Koc)</title>
+    >Octanol-air partition coefficient (Koa)</title>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PhysicoChemicalEffects"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Biodegradation_time_frame_primary_ultimate_degradation">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Biodegradation time frame (primary, ultimate degradation)</title>
     <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
   </owl:Class>
-  <owl:Class rdf:about="#In_vivo_pre-,_peri-,_post_natal_development_and_/_or_fertility_(1_or_2_gen._Study_or_enhanced_1_gen_study)">
-    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
+  <owl:Class rdf:ID="Toxicity_to_soil_microorganisms_inhibition_of_C-mineralisation_inhibition_of_N-mineralisation_other">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >In vivo pre-, peri-, post natal development and / or fertility (1 or 2 gen. Study or enhanced 1 gen study) </title>
-  </owl:Class>
-  <owl:Class rdf:about="#Adsorption/Desorption_in_sediment">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Adsorption/Desorption in sediment</title>
-    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
-  </owl:Class>
-  <owl:Class rdf:about="#In_vitro_reproductive_toxicity_(e.g._embryotoxic_effects_in_cell_culture_such_as_embryo_stem_cells)">
-    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >In vitro reproductive toxicity (e.g. embryotoxic effects in cell culture such as embryo stem cells)  </title>
-  </owl:Class>
-  <owl:Class rdf:about="#Toxicity_to_plants_(leaves,_seed_germination,_root_elongation)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Toxicity to plants (leaves, seed germination, root elongation)</title>
+    >Toxicity to soil microorganisms (inhibition of C-mineralisation, inhibition of N-mineralisation, other)</title>
     <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Octanol-water_distribution_coefficient_D">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Octanol-water distribution coefficient (D)</title>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PhysicoChemicalEffects"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="Surface_tension">
     <rdfs:subClassOf>
@@ -202,6 +215,11 @@
     >Acute oral toxicity</title>
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
   </owl:Class>
+  <owl:Class rdf:ID="Toxicity_to_earthworms_survival_growth_reproduction">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Toxicity to earthworms (survival, growth, reproduction)</title>
+  </owl:Class>
   <owl:Class rdf:ID="Blood-lung_barrier_penetration">
     <rdfs:subClassOf>
       <owl:Class rdf:about="#ToxicoKinetics"/>
@@ -214,17 +232,17 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Repeated dose toxicity </title>
   </owl:Class>
+  <owl:Class rdf:ID="Indirect_photolysis_OH-radical_reaction_ozone-radical_reaction_other">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Indirect photolysis (OH-radical reaction, ozone-radical reaction, other)</title>
+    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
+  </owl:Class>
   <owl:Class rdf:ID="DNA-binding">
     <rdfs:subClassOf>
       <owl:Class rdf:about="#ToxicoKinetics"/>
     </rdfs:subClassOf>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >DNA-binding</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Other_(e.g._inhibition_of_specific_enzymes_involved_in_hormone_synthesis_or_regulation,_specify_enzyme(s)_and_hormone)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Other (e.g. inhibition of specific enzymes involved in hormone synthesis or regulation, specify enzyme(s) and hormone)</title>
-    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
   </owl:Class>
   <owl:Class rdf:ID="Vegetation-water_partition_coefficient">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -243,6 +261,11 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Boiling point</title>
   </owl:Class>
+  <owl:Class rdf:ID="Long-term_toxicity_survival_growth_reproduction">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Long-term toxicity (survival, growth, reproduction)</title>
+  </owl:Class>
   <owl:Class rdf:about="#PhysicoChemicalEffects">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Physicochemical effects </title>
@@ -250,14 +273,14 @@
       <owl:Class rdf:about="#Endpoints"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#Octanol-water_distribution_coefficient_(D)">
-    <rdfs:subClassOf rdf:resource="#PhysicoChemicalEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Octanol-water distribution coefficient (D)</title>
-  </owl:Class>
   <owl:Class rdf:ID="SkinSensitisation">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Skin sensitisation</title>
+    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Eye_irritation_corrosion">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Eye irritation/corrosion</title>
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
   </owl:Class>
   <owl:Class rdf:ID="PersistenceAbioticDegradationAir">
@@ -267,22 +290,17 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Persistence: Abiotic degradation in air (Phototransformation)</title>
   </owl:Class>
-  <owl:Class rdf:about="#Octanol-water_partition_coefficient_(Kow)">
-    <rdfs:subClassOf rdf:resource="#PhysicoChemicalEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Octanol-water partition coefficient (Kow)</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Ready/not_ready_biodegradability">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Ready/not ready biodegradability</title>
-    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
-  </owl:Class>
   <owl:Class rdf:ID="BCF_fish">
     <rdfs:subClassOf>
       <owl:Class rdf:ID="BioConcentration"/>
     </rdfs:subClassOf>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >BCF fish</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Acute_toxicity_to_fish_lethality">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Acute toxicity to fish (lethality)</title>
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
   </owl:Class>
   <owl:Class rdf:ID="s39">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -301,15 +319,10 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Mutagenicity </title>
   </owl:Class>
-  <owl:Class rdf:about="#Short-term_toxicity_to_Daphnia_(immobilisation)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short-term toxicity to Daphnia (immobilisation)</title>
+  <owl:Class rdf:ID="Toxicity_to_soil_invertebrates_survival_growth_reproduction">
     <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-  </owl:Class>
-  <owl:Class rdf:about="#Receptor-binding_(specify_receptor)">
-    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Receptor-binding (specify receptor)</title>
+    >Toxicity to soil invertebrates (survival, growth, reproduction)</title>
   </owl:Class>
   <owl:Class rdf:about="#Persistence">
     <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
@@ -319,24 +332,9 @@
     >Melting point</title>
     <rdfs:subClassOf rdf:resource="#PhysicoChemicalEffects"/>
   </owl:Class>
-  <owl:Class rdf:about="#Octanol-air_partition_coefficient_(Koa)">
-    <rdfs:subClassOf rdf:resource="#PhysicoChemicalEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Octanol-air partition coefficient (Koa)</title>
-  </owl:Class>
   <owl:Class rdf:about="#Endpoints">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Endpoints</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Toxicity_to_soil_microorganisms_(inhibition_of_C-mineralisation,_inhibition_of_N-mineralisation,_other)">
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Toxicity to soil microorganisms (inhibition of C-mineralisation, inhibition of N-mineralisation, other)</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Toxicity_to_earthworms_(survival,_growth,_reproduction)">
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Toxicity to earthworms (survival, growth, reproduction)</title>
   </owl:Class>
   <owl:Class rdf:ID="Blood-brain_barrier_penetration">
     <rdfs:subClassOf>
@@ -355,16 +353,6 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Bioaccumulation</title>
   </owl:Class>
-  <owl:Class rdf:about="#Microbial_inhibition_(activated_sludge_respiration_inhibition,_inhibition_of_nitrification,_other)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Microbial inhibition (activated sludge respiration inhibition, inhibition of nitrification, other)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-  </owl:Class>
-  <owl:Class rdf:about="#Long-term_toxicity_to_fish_(egg/sac_fry,_growth_inhibition_of_juvenile_fish,_early_life_stage,_full_life_cycle)">
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Long-term toxicity to fish (egg/sac fry, growth inhibition of juvenile fish, early life stage, full life cycle)</title>
-  </owl:Class>
   <owl:Class rdf:about="#BioConcentration">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Bioconcentration </title>
@@ -374,11 +362,6 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Direct photolysis</title>
     <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
-  </owl:Class>
-  <owl:Class rdf:about="#Biodegradation_time_frame_(primary,_ultimate_degradation)">
-    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Biodegradation time frame (primary, ultimate degradation)</title>
   </owl:Class>
   <owl:Class rdf:ID="Blood-testis_barrier_penetration">
     <rdfs:subClassOf>
@@ -392,17 +375,27 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Respiratory sensitisation</title>
   </owl:Class>
+  <owl:Class rdf:ID="Organic_carbon-sorption_partition_coefficient_organic_carbon_Koc">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organic carbon-sorption partition coefficient (organic carbon; Koc)</title>
+    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
+  </owl:Class>
+  <owl:Class rdf:ID="In_vitro_reproductive_toxicity_e.g._embryotoxic_effects_in_cell_culture_such_as_embryo_stem_cells">
+    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >In vitro reproductive toxicity (e.g. embryotoxic effects in cell culture such as embryo stem cells)  </title>
+  </owl:Class>
+  <owl:Class rdf:ID="In_vivo_pre-_peri-_post_natal_development_and_or_fertility_1_or_2_gen._Study_or_enhanced_1_gen_study">
+    <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >In vivo pre-, peri-, post natal development and / or fertility (1 or 2 gen. Study or enhanced 1 gen study) </title>
+  </owl:Class>
   <owl:Class rdf:ID="Skin_penetration">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Skin penetration</title>
     <rdfs:subClassOf>
       <owl:Class rdf:about="#ToxicoKinetics"/>
     </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="#Long-term_toxicity_(survival,_growth,_reproduction)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Long-term toxicity (survival, growth, reproduction)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
   </owl:Class>
   <owl:Class rdf:ID="Placental_barrier_penetration">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -416,6 +409,11 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Toxicokinetics </title>
   </owl:Class>
+  <owl:Class rdf:ID="Toxicity_to_sediment_organisms_survival_growth_reproduction">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Toxicity to sediment organisms (survival, growth, reproduction)</title>
+  </owl:Class>
   <owl:Class rdf:ID="PersistenceBiodegradation">
     <rdfs:subClassOf rdf:resource="#Persistence"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -426,25 +424,15 @@
     >BAF other organisms </title>
     <rdfs:subClassOf rdf:resource="#BioAccumulation"/>
   </owl:Class>
-  <owl:Class rdf:about="#Short_term_toxicity_(feeding,_gavage,_other)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short term toxicity (feeding, gavage, other)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-  </owl:Class>
   <owl:Class rdf:ID="Oxidation">
     <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Oxidation </title>
   </owl:Class>
-  <owl:Class rdf:about="#Receptor_binding_and_gene_expression_(specify_receptor)">
+  <owl:Class rdf:ID="Other_e.g._inhibition_of_specific_enzymes_involved_in_hormone_synthesis_or_regulation_specify_enzyme_s_and_hormone">
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Receptor binding and gene expression (specify receptor)</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Toxicity_to_sediment_organisms_(survival,_growth,_reproduction)">
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Toxicity to sediment organisms (survival, growth, reproduction)</title>
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    >Other (e.g. inhibition of specific enzymes involved in hormone synthesis or regulation, specify enzyme(s) and hormone)</title>
   </owl:Class>
   <owl:Class rdf:ID="BAF_fish">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -456,25 +444,30 @@
     >Acute photoirritation</title>
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
   </owl:Class>
+  <owl:Class rdf:ID="Long-term_toxicity_to_Daphnia_lethality_inhibition_of_reproduction">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Long-term toxicity to Daphnia (lethality, inhibition of reproduction)</title>
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+  </owl:Class>
   <owl:Class rdf:ID="In_vivo_pre-natal-developmental_toxicity">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >In vivo pre-natal-developmental toxicity</title>
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
   </owl:Class>
-  <owl:Class rdf:about="#Indirect_photolysis_(OH-radical_reaction,_ozone-radical_reaction,_other)">
-    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
+  <owl:Class rdf:ID="Short_term_toxicity_feeding_gavage_other">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Indirect photolysis (OH-radical reaction, ozone-radical reaction, other)</title>
+    >Short term toxicity (feeding, gavage, other)</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Dissociation_constant_pKa">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Dissociation constant (pKa)</title>
+    <rdfs:subClassOf rdf:resource="#PhysicoChemicalEffects"/>
   </owl:Class>
   <owl:Class rdf:ID="AcuteDermalToxicity">
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Acute dermal toxicity</title>
-  </owl:Class>
-  <owl:Class rdf:about="#Acute_toxicity_to_fish_(lethality)">
-    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
-    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Acute toxicity to fish (lethality)</title>
   </owl:Class>
   <owl:Class rdf:ID="BCF_other_organisms">
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -485,6 +478,21 @@
     <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Skin irritation /corrosion</title>
     <rdfs:subClassOf rdf:resource="#HumanHealthEffects"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Toxicity_to_plants_leaves_seed_germination_root_elongation">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Toxicity to plants (leaves, seed germination, root elongation)</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Long-term_toxicity_to_fish_egg_sac_fry_growth_inhibition_of_juvenile_fish_early_life_stage_full_life_cycle">
+    <rdfs:subClassOf rdf:resource="#EcotoxicEffects"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Long-term toxicity to fish (egg/sac fry, growth inhibition of juvenile fish, early life stage, full life cycle)</title>
+  </owl:Class>
+  <owl:Class rdf:ID="Ready_not_ready_biodegradability">
+    <rdfs:subClassOf rdf:resource="#EnvironmentalFateParameters"/>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ready/not ready biodegradability</title>
   </owl:Class>
   <otee:SkinSensitisation rdf:about="http://purl.org/dc/elements/1.1/SkinSensitisation"/>
 </rdf:RDF>
