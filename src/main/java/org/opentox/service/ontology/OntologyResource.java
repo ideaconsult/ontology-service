@@ -1,8 +1,10 @@
 package org.opentox.service.ontology;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -43,6 +45,7 @@ import com.hp.hpl.jena.vocabulary.OWL;
  * @param <T>
  */
 public class OntologyResource<T extends Serializable> extends ServerResource {
+	protected static String jsGoogleAnalytics = null;
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
 	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
@@ -202,6 +205,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 								    "</fieldset></FORM>"
 										);
 							
+							w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
 							w.write("</body>");
 							
 					
@@ -222,6 +226,23 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				}
 		
 			};
+	}
+	public static String jsGoogleAnalytics() {
+		if (jsGoogleAnalytics==null) try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					OntologyResource.class.getClassLoader().getResourceAsStream("org/opentox/config/googleanalytics.js"))
+			);
+			StringBuilder b = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+            	b.append(line);
+            	b.append('\n');
+            }
+            jsGoogleAnalytics = b.toString();
+			reader.close();
+			
+		} catch (Exception x) { jsGoogleAnalytics = null;}
+		return jsGoogleAnalytics;
 	}
 	protected void readOWL(InputStream in , Model model) throws Exception {
 		try {
