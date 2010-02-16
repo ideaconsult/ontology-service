@@ -6,6 +6,7 @@ import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
+import org.restlet.resource.Directory;
 import org.restlet.routing.Router;
 import org.restlet.routing.Template;
 
@@ -37,6 +38,10 @@ public class OntologyService extends Application {
 		router.attach(String.format("/query/{%s}",OntologyResource.resourceKey), OntologyResource.class);	
 		router.setDefaultMatchingMode(Template.MODE_STARTS_WITH); 
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
+	    
+		 Directory metaDir = new Directory(getContext(), "war:///META-INF");
+		 
+ 		 router.attach("/meta/", metaDir);
 		return router;
 	}
 	/**
