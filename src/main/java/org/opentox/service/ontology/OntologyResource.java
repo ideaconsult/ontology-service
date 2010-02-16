@@ -300,7 +300,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				MediaType.TEXT_URI_LIST,
 				MediaType.TEXT_HTML
 				});		
-		
+		readVersion();
 
 	}
 	protected void customizeVariants(MediaType[] mimeTypes) {
@@ -474,6 +474,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			ClientResource r = new ClientResource(String.format("%s/meta/MANIFEST.MF",getRequest().getRootRef()));
 			p = r.get();
 			String text = p.getText();
+			System.out.println(text);
 			//String text = build + ":0.0.1-SNAPSHOT-r1793-1266340980278";
 			int i = text.indexOf(build);
 			if (i>=0) {
@@ -485,6 +486,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							new Date(Long.parseLong(version.substring(i+1).trim())));
 			}
 		} catch (Exception x) {
+			x.printStackTrace();
 			version = "Unknown";
 		} finally {
 			//try { p.release();} catch (Exception x) {}
