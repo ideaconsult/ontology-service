@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -49,7 +50,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
 	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
-	
+	protected static String version = null;
 	public OntologyResource() {
 		super();
 	}
@@ -205,6 +206,10 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 								    "</fieldset></FORM>"
 										);
 							
+							w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
+									getRequest().getRootRef(),
+									version==null?"":version,
+									version));
 							w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
 							w.write("</body>");
 							
@@ -459,5 +464,31 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 
 		}
 		return get(variant);
+	}
+	
+	protected String readVersion() {
+		if (version!=null)return version;
+		final String build = "Implementation-Build:";
+		Representation p=null;
+		try {
+			ClientResource r = new ClientResource(String.format("%s/meta/MANIFEST.MF",getRequest().getRootRef()));
+			p = r.get();
+			String text = p.getText();
+			//String text = build + ":0.0.1-SNAPSHOT-r1793-1266340980278";
+			int i = text.indexOf(build);
+			if (i>=0) {
+				version = text.substring(i+build.length());
+				i = version.lastIndexOf('-');
+				if (i > 0) 
+					version = String.format("%s-%s", 
+							version.substring(1,i),
+							new Date(Long.parseLong(version.substring(i+1).trim())));
+			}
+		} catch (Exception x) {
+			version = "Unknown";
+		} finally {
+			//try { p.release();} catch (Exception x) {}
+		}
+		return version;
 	}
 }

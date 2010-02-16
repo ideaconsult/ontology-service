@@ -5,7 +5,7 @@
   <packaging>war</packaging>
   <name>Ontology service</name>
   <version>0.0.1-SNAPSHOT</version>
-  <description>Ontology service</description>
+  <description>OpenTox Ontology service</description>
   <dependencies>
   <dependency>
     	<groupId>org.restlet.jee</groupId>
@@ -59,8 +59,25 @@
      
   </dependencies>
   <inceptionYear>2010</inceptionYear>
+  <developers>
+  	<developer>
+  		<id>vedina</id>
+  		<name>Nina Jeliazkova</name>
+  		<email>jeliazkova.nina@gmail.com</email>
+  		<url>http://vediina.users.sourceforge.net</url>
+  		<roles>
+  			<role>developer</role>
+  		</roles>
+  	</developer>
+  </developers>
+  <scm>
+  	<connection>scm:svn:https://ambit.svn.sourceforge.net/svnroot/ambit/branches/opentox/ontology-service</connection>
+  	<developerConnection>scm:svn:https://ambit.svn.sourceforge.net/svnroot/ambit/branches/opentox/ontology-service</developerConnection>
+  	<url>scm:svn:https://ambit.svn.sourceforge.net/svnroot/ambit/branches/opentox/ontology-service</url>
+  </scm>
   <organization>
   	<name>Ideaconsult Ltd.</name>
+  	<url>http://www.ideaconsult.net</url>
   </organization>
     <build>
 	<finalName>ontology</finalName>
@@ -99,6 +116,46 @@
 					<path>/ambit2</path>
 				</configuration>
 			</plugin>
+			     <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.0-beta-3</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <revisionOnScmFailure>OntologyService</revisionOnScmFailure>
+          <doCheck>true</doCheck>
+          <doUpdate>true</doUpdate>
+      <!--
+          <providerImplementations>
+            <svn>javasvn</svn>
+          </providerImplementations>  
+   -->
+        </configuration>
+      </plugin>
+
+    <plugin>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>2.0</version>
+      <configuration>
+      <!-- 
+        <manifest>
+          <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+        </manifest>
+         -->
+        <archive>
+          <manifestEntries>
+            <Implementation-Build>${build.version}</Implementation-Build>
+            </manifestEntries>
+        </archive>
+      </configuration>
+    </plugin>
   	</plugins>
   	</pluginManagement>
  </build>
