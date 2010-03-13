@@ -1,478 +1,248 @@
 <?xml version="1.0"?>
-
-
-<!DOCTYPE rdf:RDF [
-    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
-    <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
-    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
-    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
-    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
-    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY ota "http://www.opentox.org/algorithmTypes.owl#" >
-    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY protege "http://protege.stanford.edu/plugins/owl/protege#" >
-    <!ENTITY xsp "http://www.owl-ontologies.com/2005/08/07/xsp.owl#" >
-]>
-
-
-<rdf:RDF xmlns="http://www.opentox.org/algorithmTypes.owl#"
-     xml:base="http://www.opentox.org/algorithmTypes.owl"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
-     xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
-     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
-     xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
-     xmlns:ota="http://www.opentox.org/algorithmTypes.owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <owl:Ontology rdf:about="">
-        <owl:versionInfo rdf:datatype="&xsd;string">1.1</owl:versionInfo>
-        <rdfs:comment rdf:datatype="&xsd;string"
-            >Algorithm Types, defined by OpenTox</rdfs:comment>
-    </owl:Ontology>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <owl:AnnotationProperty rdf:about="&dc;format"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#AlgorithmType -->
-
-    <owl:Class rdf:about="#AlgorithmType">
-        <dc:format>Algorithm types</dc:format>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Classification -->
-
-    <owl:Class rdf:about="#Classification">
-        <rdfs:subClassOf rdf:resource="#Learning"/>
-        <rdfs:comment
-            >Classification algorithms</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Clustering -->
-
-    <owl:Class rdf:about="#Clustering">
-        <rdfs:subClassOf rdf:resource="#MSDMTox"/>
-        <owl:disjointWith rdf:resource="#Learning"/>
-        <rdfs:comment
-            >Clustering algorithms</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#DataCleanup -->
-
-    <owl:Class rdf:about="#DataCleanup">
-        <rdfs:subClassOf rdf:resource="#Preprocessing"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#DescriptorCalculation -->
-
-    <owl:Class rdf:about="#DescriptorCalculation">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-        <rdfs:comment
-            >Description calculation</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Discretization -->
-
-    <owl:Class rdf:about="#Discretization">
-        <rdfs:subClassOf rdf:resource="#Preprocessing"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#EagerLearning -->
-
-    <owl:Class rdf:about="#EagerLearning">
-        <rdfs:subClassOf rdf:resource="#Learning"/>
-        <owl:disjointWith rdf:resource="#LazyLearning"/>
-        <rdfs:comment
-            >Eager lerning algorithms</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#FeatureSelection -->
-
-    <owl:Class rdf:about="#FeatureSelection">
-        <rdfs:subClassOf rdf:resource="#Preprocessing"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Generation3D -->
-
-    <owl:Class rdf:about="#Generation3D">
-        <rdfs:subClassOf rdf:resource="#Utility"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#LazyLearning -->
-
-    <owl:Class rdf:about="#LazyLearning">
-        <rdfs:subClassOf rdf:resource="#Learning"/>
-        <rdfs:comment
-            >Lazy learning algorithms</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Learning -->
-
-    <owl:Class rdf:about="#Learning">
-        <rdfs:subClassOf rdf:resource="#MSDMTox"/>
-        <rdfs:comment
-            >Learning algorithms</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#MSDMTox -->
-
-    <owl:Class rdf:about="#MSDMTox">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#MultipleTargets -->
-
-    <owl:Class rdf:about="#MultipleTargets">
-        <rdfs:subClassOf rdf:resource="#MSDMTox"/>
-        <owl:disjointWith rdf:resource="#SingleTarget"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Normalization -->
-
-    <owl:Class rdf:about="#Normalization">
-        <rdfs:subClassOf rdf:resource="#Preprocessing"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#PatternMining -->
-
-    <owl:Class rdf:about="#PatternMining">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#PharmacophoreGeneration -->
-
-    <owl:Class rdf:about="#PharmacophoreGeneration">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#PhysicoChemical -->
-
-    <owl:Class rdf:about="#PhysicoChemical">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Preprocessing -->
-
-    <owl:Class rdf:about="#Preprocessing">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#QuantumChemical -->
-
-    <owl:Class rdf:about="#QuantumChemical">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Regression -->
-
-    <owl:Class rdf:about="#Regression">
-        <rdfs:subClassOf rdf:resource="#Learning"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Rules -->
-
-    <owl:Class rdf:about="#Rules">
-        <rdfs:subClassOf rdf:resource="#MSDMTox"/>
-        <owl:deprecated
-            >Models, based on predefined rules</owl:deprecated>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#SemiSupervised -->
-
-    <owl:Class rdf:about="#SemiSupervised">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-        <owl:disjointWith rdf:resource="#Supervised"/>
-        <owl:disjointWith rdf:resource="#Unsupervised"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#SimilarityDistance -->
-
-    <owl:Class rdf:about="#SimilarityDistance">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#SimilarityDistanceCalculation -->
-
-    <owl:Class rdf:about="#SimilarityDistanceCalculation">
-        <rdfs:subClassOf rdf:resource="#Utility"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#SingleTarget -->
-
-    <owl:Class rdf:about="#SingleTarget">
-        <rdfs:subClassOf rdf:resource="#MSDMTox"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Supervised -->
-
-    <owl:Class rdf:about="#Supervised">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-        <owl:disjointWith rdf:resource="#Unsupervised"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Topological -->
-
-    <owl:Class rdf:about="#Topological">
-        <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Unsupervised -->
-
-    <owl:Class rdf:about="#Unsupervised">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Utility -->
-
-    <owl:Class rdf:about="#Utility">
-        <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#Visualisation -->
-
-    <owl:Class rdf:about="#Visualisation">
-        <rdfs:subClassOf rdf:resource="#Utility"/>
-    </owl:Class>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#ClassificationEagerMultipleTargets -->
-
-    <owl:Thing rdf:about="#ClassificationEagerMultipleTargets">
-        <rdf:type rdf:resource="#Classification"/>
-        <rdf:type rdf:resource="#EagerLearning"/>
-        <rdf:type rdf:resource="#MultipleTargets"/>
-        <rdf:type rdf:resource="#Supervised"/>
-    </owl:Thing>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#ClassificationEagerSingleTarget -->
-
-    <SingleTarget rdf:about="#ClassificationEagerSingleTarget">
-        <rdf:type rdf:resource="#Classification"/>
-        <rdf:type rdf:resource="#EagerLearning"/>
-        <rdf:type rdf:resource="#Supervised"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </SingleTarget>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#ClassificationLazyMultipleTargets -->
-
-    <owl:Thing rdf:about="#ClassificationLazyMultipleTargets">
-        <rdf:type rdf:resource="#Classification"/>
-        <rdf:type rdf:resource="#LazyLearning"/>
-        <rdf:type rdf:resource="#MultipleTargets"/>
-        <rdf:type rdf:resource="#Supervised"/>
-    </owl:Thing>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#ClassificationLazySingleTarget -->
-
-    <owl:Thing rdf:about="#ClassificationLazySingleTarget">
-        <rdf:type rdf:resource="#Classification"/>
-        <rdf:type rdf:resource="#LazyLearning"/>
-        <rdf:type rdf:resource="#SingleTarget"/>
-        <rdf:type rdf:resource="#Supervised"/>
-    </owl:Thing>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#DiscretizationSupervised -->
-
-    <Supervised rdf:about="#DiscretizationSupervised">
-        <rdf:type rdf:resource="#Discretization"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Supervised>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#DiscretizationUnsupervised -->
-
-    <Discretization rdf:about="#DiscretizationUnsupervised">
-        <rdf:type rdf:resource="#Unsupervised"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Discretization>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#FeatureSelectionSupervised -->
-
-    <Supervised rdf:about="#FeatureSelectionSupervised">
-        <rdf:type rdf:resource="#FeatureSelection"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Supervised>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#FeatureSelectionUnsupervised -->
-
-    <owl:Thing rdf:about="#FeatureSelectionUnsupervised">
-        <rdf:type rdf:resource="#FeatureSelection"/>
-        <rdf:type rdf:resource="#Unsupervised"/>
-    </owl:Thing>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#PatternMiningSupervised -->
-
-    <Supervised rdf:about="#PatternMiningSupervised">
-        <rdf:type rdf:resource="#PatternMining"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Supervised>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#PatternMiningUnsupervised -->
-
-    <PatternMining rdf:about="#PatternMiningUnsupervised">
-        <rdf:type rdf:resource="#Unsupervised"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </PatternMining>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#RegressionEagerMultipleTargets -->
-
-    <MultipleTargets rdf:about="#RegressionEagerMultipleTargets">
-        <rdf:type rdf:resource="#EagerLearning"/>
-        <rdf:type rdf:resource="#Regression"/>
-        <rdf:type rdf:resource="#Supervised"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </MultipleTargets>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#RegressionEagerSingleTarget -->
-
-    <Supervised rdf:about="#RegressionEagerSingleTarget">
-        <rdf:type rdf:resource="#EagerLearning"/>
-        <rdf:type rdf:resource="#Regression"/>
-        <rdf:type rdf:resource="#SingleTarget"/>
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Supervised>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#RegressionLazyMultipleTargets -->
-
-    <owl:Thing rdf:about="#RegressionLazyMultipleTargets">
-        <rdf:type rdf:resource="#LazyLearning"/>
-        <rdf:type rdf:resource="#MultipleTargets"/>
-        <rdf:type rdf:resource="#Regression"/>
-        <rdf:type rdf:resource="#Supervised"/>
-    </owl:Thing>
-    
-
-
-    <!-- http://www.opentox.org/algorithmTypes.owl#RegressionLazySingleTarget -->
-
-    <owl:Thing rdf:about="#RegressionLazySingleTarget">
-        <rdf:type rdf:resource="#LazyLearning"/>
-        <rdf:type rdf:resource="#Regression"/>
-        <rdf:type rdf:resource="#SingleTarget"/>
-        <rdf:type rdf:resource="#Supervised"/>
-    </owl:Thing>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:ota="http://www.opentox.org/algorithmTypes.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.opentox.org/algorithmTypes.owl">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1</owl:versionInfo>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Algorithm Types, defined by OpenTox</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="QuantumChemical">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DescriptorCalculation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Normalization">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Preprocessing"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Topological">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DescriptorCalculation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Utility">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AlgorithmType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Regression">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Learning"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Visualisation">
+    <rdfs:subClassOf rdf:resource="#Utility"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Preprocessing">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AlgorithmType"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#AlgorithmType">
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Algorithm types</dc:format>
+  </owl:Class>
+  <owl:Class rdf:ID="SimilarityDistance">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DescriptorCalculation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="SimilarityDistanceCalculation">
+    <rdfs:subClassOf rdf:resource="#Utility"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SemiSupervised">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Unsupervised"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Supervised"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LazyLearning">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lazy learning algorithms</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Learning"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Discretization">
+    <rdfs:subClassOf rdf:resource="#Preprocessing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DescriptorCalculation">
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Description calculation</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="ApplicabilityDomain">
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DataCleanup">
+    <rdfs:subClassOf rdf:resource="#Preprocessing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PatternMining">
+    <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
+  </owl:Class>
+  <owl:Class rdf:ID="FeatureSelection">
+    <rdfs:subClassOf rdf:resource="#Preprocessing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Classification">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Learning"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Classification algorithms</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="PharmacophoreGeneration">
+    <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
+  </owl:Class>
+  <owl:Class rdf:ID="EagerLearning">
+    <owl:disjointWith rdf:resource="#LazyLearning"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Eager lerning algorithms</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Learning"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Rules">
+    <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Models, based on predefined rules</owl:deprecated>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="MSDMTox"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicoChemical">
+    <rdfs:subClassOf rdf:resource="#DescriptorCalculation"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Supervised">
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Unsupervised"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="Generation3D">
+    <rdfs:subClassOf rdf:resource="#Utility"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Learning">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MSDMTox"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Learning algorithms</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="MultipleTargets">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MSDMTox"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="SingleTarget"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Unsupervised">
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Clustering">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MSDMTox"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Clustering algorithms</rdfs:comment>
+    <owl:disjointWith rdf:resource="#Learning"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SingleTarget">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MSDMTox"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MSDMTox">
+    <rdfs:subClassOf rdf:resource="#AlgorithmType"/>
+  </owl:Class>
+  <ota:Unsupervised rdf:ID="FeatureSelectionUnsupervised">
+    <rdf:type rdf:resource="#FeatureSelection"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Unsupervised>
+  <owl:Thing rdf:ID="RegressionEagerMultipleTargets">
+    <rdf:type rdf:resource="#Supervised"/>
+    <rdf:type rdf:resource="#Regression"/>
+    <rdf:type rdf:resource="#EagerLearning"/>
+    <rdf:type rdf:resource="#MultipleTargets"/>
+  </owl:Thing>
+  <ota:Supervised rdf:ID="ClassificationEagerMultipleTargets">
+    <rdf:type rdf:resource="#MultipleTargets"/>
+    <rdf:type rdf:resource="#EagerLearning"/>
+    <rdf:type rdf:resource="#Classification"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Supervised>
+  <ota:Supervised rdf:ID="RegressionLazyMultipleTargets">
+    <rdf:type rdf:resource="#Regression"/>
+    <rdf:type rdf:resource="#MultipleTargets"/>
+    <rdf:type rdf:resource="#LazyLearning"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Supervised>
+  <owl:Thing rdf:ID="RegressionEagerSingleTarget">
+    <rdf:type rdf:resource="#SingleTarget"/>
+    <rdf:type rdf:resource="#Regression"/>
+    <rdf:type rdf:resource="#EagerLearning"/>
+    <rdf:type rdf:resource="#Supervised"/>
+  </owl:Thing>
+  <owl:Thing rdf:ID="ClassificationEagerSingleTarget">
+    <rdf:type rdf:resource="#Supervised"/>
+    <rdf:type rdf:resource="#EagerLearning"/>
+    <rdf:type rdf:resource="#Classification"/>
+    <rdf:type rdf:resource="#SingleTarget"/>
+  </owl:Thing>
+  <owl:Thing rdf:ID="FeatureSelectionSupervised">
+    <rdf:type rdf:resource="#FeatureSelection"/>
+    <rdf:type rdf:resource="#Supervised"/>
+  </owl:Thing>
+  <ota:Supervised rdf:ID="RegressionLazySingleTarget">
+    <rdf:type rdf:resource="#SingleTarget"/>
+    <rdf:type rdf:resource="#Regression"/>
+    <rdf:type rdf:resource="#LazyLearning"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Supervised>
+  <owl:Thing rdf:ID="PatternMiningUnsupervised">
+    <rdf:type rdf:resource="#Unsupervised"/>
+    <rdf:type rdf:resource="#PatternMining"/>
+  </owl:Thing>
+  <owl:Thing rdf:ID="DiscretizationUnsupervised">
+    <rdf:type rdf:resource="#Unsupervised"/>
+    <rdf:type rdf:resource="#Discretization"/>
+  </owl:Thing>
+  <owl:Thing rdf:ID="PatternMiningSupervised">
+    <rdf:type rdf:resource="#PatternMining"/>
+    <rdf:type rdf:resource="#Supervised"/>
+  </owl:Thing>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/format"/>
+  <ota:Supervised rdf:ID="ClassificationLazyMultipleTargets">
+    <rdf:type rdf:resource="#MultipleTargets"/>
+    <rdf:type rdf:resource="#LazyLearning"/>
+    <rdf:type rdf:resource="#Classification"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Supervised>
+  <ota:Supervised rdf:ID="ClassificationLazySingleTarget">
+    <rdf:type rdf:resource="#SingleTarget"/>
+    <rdf:type rdf:resource="#LazyLearning"/>
+    <rdf:type rdf:resource="#Classification"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </ota:Supervised>
+  <owl:Thing rdf:ID="DiscretizationSupervised">
+    <rdf:type rdf:resource="#Discretization"/>
+    <rdf:type rdf:resource="#Supervised"/>
+  </owl:Thing>
 </rdf:RDF>
 
-
-
-<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
-
+<!-- Created with Protege (with OWL Plugin 3.4.1, Build 536)  http://protege.stanford.edu -->
