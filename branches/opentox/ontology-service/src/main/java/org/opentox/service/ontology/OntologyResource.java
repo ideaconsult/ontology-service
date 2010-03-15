@@ -196,7 +196,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 								for (int i=0; i < vars.size();i++) {
 									RDFNode node = s.get(vars.get(i));
 									w.write("<td>");
-									w.write(PrintUtil.print(node));
+									w.write(node==null?"":PrintUtil.print(node));
 									w.write("</td>");
 								}
 								w.write("</tr>");
@@ -319,14 +319,21 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
 				"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-				"PREFIX dc:<http://purl.org/dc/elements/1.1/#>\n"+
+				"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
 				"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
 				"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-				"select ?Feature ?SameAS\n"+
+				"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+				"select ?descriptor ?label ?definition ?requires ?category ?contributor\n"+
 				"		where {\n"+
-				"	        ?Feature owl:sameAs ?SameAS\n"+
+				"	        ?descriptor rdf:type bo:MolecularDescriptor.\n"+
+				"   		OPTIONAL {?descriptor rdfs:label ?label}.\n"+
+				"                OPTIONAL {?descriptor bo:definition ?definition}.\n"+
+				"                OPTIONAL {?descriptor dc:contributor ?contributor}.\n"+
+				"                OPTIONAL {?descriptor bo:isClassifiedAs ?category}.\n"+
+				"                OPTIONAL {?descriptor bo:requires?requires}.\n"+
 				"		}\n";
+
 			} else {
 				if (key.toString().toLowerCase().equals("endpoints")) {
 					ns = "otee";
@@ -371,6 +378,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				"descriptor-algorithms.owl",
 				"echa-endpoints.owl",
 				"AlgorithmTypes.owl",
+				"descriptors-ambit.owl"
 		};
 		for (String owl:owls)
 			try {
@@ -399,7 +407,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		ontology.setNsPrefix( "otee", "http://www.opentox.org/echaEndpoints.owl#" );
 		ontology.setNsPrefix( "owl", OWL.NS );
 		ontology.setNsPrefix( "dc", DC.NS );
-		ontology.setNsPrefix( "bx", "http://purl.org/net/nknouf/ns/bibtex#" );		
+		ontology.setNsPrefix( "bx", "http://purl.org/net/nknouf/ns/bibtex#" );
+		ontology.setNsPrefix( "bo", "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#" );		
 		/*
 		if (ontology == null) ontology = TDBFactory.createModel(directory) ;
 		if (ontology.size()==0) readOntologies();
@@ -486,7 +495,6 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							new Date(Long.parseLong(version.substring(i+1).trim())));
 			}
 		} catch (Exception x) {
-			x.printStackTrace();
 			version = "Unknown";
 		} finally {
 			//try { p.release();} catch (Exception x) {}
