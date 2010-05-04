@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.restlet.data.Form;
@@ -33,6 +34,9 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.util.PrintUtil;
@@ -415,6 +419,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		*/
 		return ontology;
 	}
+	
 	@Override
 	protected Representation post(Representation entity, Variant variant)
 			throws ResourceException {
@@ -460,7 +465,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			
 		}
 	}
-	
+	/*
 	@Override
 	protected Representation delete(Variant variant) throws ResourceException {
 		Model ontology = createOntologyModel(false);
@@ -471,6 +476,38 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		} finally {
 			ontology.close();
 
+		}
+		return get(variant);
+	}
+	*/
+	@Override
+	protected Representation delete(Variant variant) throws ResourceException {
+		String ref = "";
+		Form form = getRequest().getResourceRef().getQueryAsForm();
+		synchronized (this) {
+			Model ontology= null;
+			try {
+				ResourceException xx = null;
+				ontology = createOntologyModel(true);
+				String[] uris = form.getValuesArray("uri");
+				try {
+					for (String uri:uris) {
+						if (uri != null) {
+							removeURI(ontology,uri);
+						}
+					}
+				} catch(ResourceException x) {
+					xx = x;
+				} finally {}	
+				if (xx!=null)	throw xx;
+			} catch (ResourceException x) {
+				throw x;
+			} catch(Exception x) {
+				throw new ResourceException(x);
+			} finally {
+				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
+				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+			}
 		}
 		return get(variant);
 	}
@@ -500,5 +537,9 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			//try { p.release();} catch (Exception x) {}
 		}
 		return version;
+	}
+	protected void removeURI(Model ontology, String uri) throws Exception {
+		StmtIterator iter = ontology.listStatements(new SimpleSelector(ontology.createResource(uri),null,(RDFNode)null));
+		ontology.remove(iter);
 	}
 }
