@@ -40,8 +40,12 @@ public class OntologyService extends Application {
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
 	    
 		 Directory metaDir = new Directory(getContext(), "war:///META-INF");
-		 
+		 Directory jqueryDir = new Directory(getContext(), "war:///jquery");
+		 Directory styleDir = new Directory(getContext(), "war:///style");
  		 router.attach("/meta/", metaDir);
+		 
+ 		 router.attach("/jquery/", jqueryDir);
+ 		router.attach("/style/", styleDir); 	
 		return router;
 	}
 	/**

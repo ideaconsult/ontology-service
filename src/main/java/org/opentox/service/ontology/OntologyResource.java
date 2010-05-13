@@ -154,9 +154,13 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 									String.format(
 								"<html><head><title>Search Opentox RDF</title>"+
 								"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"+	
-								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">"+
-								"</head><body>",
-							    getRequest().getRootRef()));							
+								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">",
+							    getRequest().getRootRef()));
+							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery-1.4.2.min.js\"></script>\n",getRequest().getRootRef()));
+							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery.tablesorter.min.js\"></script>\n",getRequest().getRootRef()));
+
+							w.write("</head><body>");
+							w.write(String.format("<link rel=\"stylesheet\" href=\"%s/style/tablesorter.css\" type=\"text/css\" media=\"screen\" title=\"Flora (Default)\">",getRequest().getRootRef()));
 							w.write(String.format("<a href='%s/query/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
 							w.write(String.format("<a href='%s/query/Algorithm'>Algorithms</a>&nbsp;",getRequest().getRootRef()));
 							w.write(String.format("<a href='%s/query/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
@@ -184,19 +188,21 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							    "</TEXTAREA>"+
 							    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
 									);
+							w.write(jsTableSorter("results","pager"));
 							w.write(String.format(
-									"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND><table bgcolor='#DDDDDD'>",elapsed));
-							w.write("<tr bgcolor='#FFFFFF'>");
+									"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND><table class='tablesorter' id='results'>",elapsed));
+							w.write("<thead><tr>");
 							List<String> vars = results.getResultVars();
 							for (int i=0; i < vars.size();i++) {
 								w.write("<th>");
 								w.write(vars.get(i));
 								w.write("</th>");
 							}				
-							w.write("</tr>");
+							w.write("</tr></thead>");
+							w.write("<tbody>");
 							while (results.hasNext()) {
 								QuerySolution s = results.next();
-								w.write("<tr  bgcolor='#FFFFFF'>");
+								w.write("<tr>");
 								for (int i=0; i < vars.size();i++) {
 									RDFNode node = s.get(vars.get(i));
 									w.write("<td>");
@@ -206,7 +212,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 								w.write("</tr>");
 							}
 							w.flush();
-							w.write("</table>"+
+							w.write("</tbody></table>"+
 								    "</fieldset></FORM>"
 										);
 							
@@ -541,5 +547,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	protected void removeURI(Model ontology, String uri) throws Exception {
 		StmtIterator iter = ontology.listStatements(new SimpleSelector(ontology.createResource(uri),null,(RDFNode)null));
 		ontology.remove(iter);
+	}
+	public static String jsTableSorter(String tableid,String pagerid) {
+		return String.format("<script type=\"text/javascript\">$(document).ready(function() {  $(\"#%s\").tablesorter({widgets: ['zebra'] }).tablesorterPager({container: $(\"#%s\")}); } );</script>",tableid,pagerid);
 	}
 }
