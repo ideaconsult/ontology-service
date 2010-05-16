@@ -55,6 +55,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	public static final String resourceKey="key";
 	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
 	protected boolean resultsOnly = false;
+	protected String title = null;
 	protected static String version = null;
 	public OntologyResource() {
 		super();
@@ -152,7 +153,9 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 							w.write("</head><body>");
 							w.write(String.format("<link rel=\"stylesheet\" href=\"%s/style/tablesorter.css\" type=\"text/css\" media=\"screen\" title=\"Flora (Default)\">",getRequest().getRootRef()));
 							if (!resultsOnly) 	writehtmlheader(w,ontology,queryString,elapsed);
-								w.write("<table class='tablesorter' id='results'>");								
+							else w.write(String.format("<h4>%s</h4>",title==null?"":title));
+								w.write("<table class='tablesorter' id='results'>");		
+							
 								w.write("<thead><tr>");
 								List<String> vars = results.getResultVars();
 								for (int i=0; i < vars.size();i++) {
@@ -281,6 +284,11 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		} catch (Exception x) {
 			resultsOnly = false;
 		}
+		try {
+			title = getRequest().getResourceRef().getQueryAsForm().getFirstValue("title");
+		} catch (Exception x) {
+			title = null;
+		}		
 	}
 	protected void customizeVariants(MediaType[] mimeTypes) {
         for (MediaType m:mimeTypes) getVariants().add(new Variant(m));
