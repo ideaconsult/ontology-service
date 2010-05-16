@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.io.Writer;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Logger;
 
 import org.restlet.data.Form;
@@ -35,7 +35,6 @@ import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.tdb.TDBFactory;
@@ -55,6 +54,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
 	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
+	protected boolean resultsOnly = false;
 	protected static String version = null;
 	public OntologyResource() {
 		super();
@@ -62,16 +62,6 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	
 
 	
-	@Override
-	protected void doRelease() throws ResourceException {
-		super.doRelease();
-		/*
-		if (ontology!= null) {
-			ontology.close();
-
-		}
-		*/
-	}
 	
 	protected Model getOntology(Model model, Reference reference) throws ResourceException {
 		try {
@@ -161,68 +151,43 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 
 							w.write("</head><body>");
 							w.write(String.format("<link rel=\"stylesheet\" href=\"%s/style/tablesorter.css\" type=\"text/css\" media=\"screen\" title=\"Flora (Default)\">",getRequest().getRootRef()));
-							w.write(String.format("<a href='%s/query/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
-							w.write(String.format("<a href='%s/query/Algorithm'>Algorithms</a>&nbsp;",getRequest().getRootRef()));
-							w.write(String.format("<a href='%s/query/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
-							w.write(String.format("<a href='%s/query/Endpoints'>Endpoints</a>&nbsp;",getRequest().getRootRef()));
-							w.write(
-									"<FORM action='' method='post'>"+
-									"<FIELDSET><LEGEND>Import RDF data into Ontology service</LEGEND>"+
-									"<label for=\"uri\">URL</label>"+
-								    "<input name=\"uri\" size=\"120\" tabindex=\"4\">"+
-								    "</FIELDSET>"+
-								    "<INPUT name=\"run\" type=\"submit\" value=\"SUBMIT\" tabindex=\"7\">"+
-									"</FORM>"
-											);									
-							w.write(
-									String.format(
-								"<h3>Ontology service&nbsp;%s triples</h3>"+											
-								"<FORM action='' method='post'>"+
-								"<FIELDSET><LEGEND>SPARQL</LEGEND>"+
-							    "<TEXTAREA name=\"query\" rows=\"10\" cols=\"120\" tabindex=\"1\">",
-							    ontology==null?0:ontology.size(),
-							    getRequest().getRootRef()));
-							w.flush();
-							w.write(queryString);
-							w.write(
-							    "</TEXTAREA>"+
-							    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
-									);
-							w.write(jsTableSorter("results","pager"));
-							w.write(String.format(
-									"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND><table class='tablesorter' id='results'>",elapsed));
-							w.write("<thead><tr>");
-							List<String> vars = results.getResultVars();
-							for (int i=0; i < vars.size();i++) {
-								w.write("<th>");
-								w.write(vars.get(i));
-								w.write("</th>");
-							}				
-							w.write("</tr></thead>");
-							w.write("<tbody>");
-							while (results.hasNext()) {
-								QuerySolution s = results.next();
-								w.write("<tr>");
+							if (!resultsOnly) 	writehtmlheader(w,ontology,queryString,elapsed);
+								w.write("<table class='tablesorter' id='results'>");								
+								w.write("<thead><tr>");
+								List<String> vars = results.getResultVars();
 								for (int i=0; i < vars.size();i++) {
-									RDFNode node = s.get(vars.get(i));
-									w.write("<td>");
-									w.write(node==null?"":PrintUtil.print(node));
-									w.write("</td>");
+									w.write("<th>");
+									w.write(vars.get(i));
+									w.write("</th>");
+								}				
+								w.write("</tr></thead>");
+								w.write("<tbody>");
+								while (results.hasNext()) {
+									QuerySolution s = results.next();
+									w.write("<tr>");
+									for (int i=0; i < vars.size();i++) {
+										RDFNode node = s.get(vars.get(i));
+										w.write("<td>");
+										w.write(node==null?"":PrintUtil.print(node));
+										w.write("</td>");
+									}
+									w.write("</tr>");
 								}
-								w.write("</tr>");
-							}
-							w.flush();
-							w.write("</tbody></table>"+
-								    "</fieldset></FORM>"
-										);
-							
-							w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
-									getRequest().getRootRef(),
-									version==null?"":version,
-									version));
-							w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
-							w.write("</body>");
-							
+								w.flush();
+								w.write("</tbody></table>");
+								
+								if (!resultsOnly) {
+									w.write("</fieldset></FORM>");
+									
+									w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
+											getRequest().getRootRef(),
+											version==null?"":version,
+											version));
+								}
+								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
+								
+								w.write("</body>");
+
 					
 							w.flush();
 						}
@@ -311,7 +276,11 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				MediaType.TEXT_HTML
 				});		
 		readVersion();
-
+		try {
+			resultsOnly = getRequest().getResourceRef().getQueryAsForm().getFirstValue("results").equals("yes");
+		} catch (Exception x) {
+			resultsOnly = false;
+		}
 	}
 	protected void customizeVariants(MediaType[] mimeTypes) {
         for (MediaType m:mimeTypes) getVariants().add(new Variant(m));
@@ -550,5 +519,38 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 	}
 	public static String jsTableSorter(String tableid,String pagerid) {
 		return String.format("<script type=\"text/javascript\">$(document).ready(function() {  $(\"#%s\").tablesorter({widgets: ['zebra'] }).tablesorterPager({container: $(\"#%s\")}); } );</script>",tableid,pagerid);
+	}
+	public void writehtmlheader(Writer w,Model ontology,String queryString,long elapsed) throws Exception {
+		w.write(String.format("<a href='%s/query/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
+		w.write(String.format("<a href='%s/query/Algorithm'>Algorithms</a>&nbsp;",getRequest().getRootRef()));
+		w.write(String.format("<a href='%s/query/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
+		w.write(String.format("<a href='%s/query/Validation'>Validation</a>&nbsp;",getRequest().getRootRef()));
+		w.write(String.format("<a href='%s/query/Endpoints'>Endpoints</a>&nbsp;",getRequest().getRootRef()));
+		w.write(
+				"<FORM action='' method='post'>"+
+				"<FIELDSET><LEGEND>Import RDF data into Ontology service</LEGEND>"+
+				"<label for=\"uri\">URL</label>"+
+			    "<input name=\"uri\" size=\"120\" tabindex=\"4\">"+
+			    "</FIELDSET>"+
+			    "<INPUT name=\"run\" type=\"submit\" value=\"SUBMIT\" tabindex=\"7\">"+
+				"</FORM>"
+						);									
+		w.write(
+				String.format(
+			"<h3>Ontology service&nbsp;%s triples</h3>"+											
+			"<FORM action='' method='post'>"+
+			"<FIELDSET><LEGEND>SPARQL</LEGEND>"+
+		    "<TEXTAREA name=\"query\" rows=\"10\" cols=\"120\" tabindex=\"1\">",
+		    ontology==null?0:ontology.size(),
+		    getRequest().getRootRef()));
+		w.flush();
+		w.write(queryString);
+		w.write(
+		    "</TEXTAREA>"+
+		    "</FIELDSET><INPUT name=\"run\" type=\"submit\" tabindex=\"2\">"
+				);
+		w.write(jsTableSorter("results","pager"));
+		w.write(String.format(
+				"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND>",elapsed));
 	}
 }
