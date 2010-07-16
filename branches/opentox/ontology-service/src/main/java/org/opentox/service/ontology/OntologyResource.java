@@ -337,6 +337,7 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
 					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
 					"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
+					"PREFIX toxcast:<http://www.opentox.org/toxcast.owl#>\n"+
 					"	select ?%s ?title ?id\n"+ 
 					"	where {\n"+
 					"	?%s %s %s:%s.\n"+
