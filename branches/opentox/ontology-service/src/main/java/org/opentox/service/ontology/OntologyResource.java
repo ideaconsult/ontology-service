@@ -365,7 +365,8 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 				"descriptor-algorithms.owl",
 				"echa-endpoints.owl",
 				"AlgorithmTypes.owl",
-				"descriptors-ambit.owl"
+				"descriptors-ambit.owl",
+				"toxcast.owl",
 		};
 		for (String owl:owls)
 			try {
