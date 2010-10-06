@@ -1,13 +1,11 @@
 package org.opentox.service.ontology;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.Writer;
 import java.util.Date;
 import java.util.List;
@@ -37,231 +35,18 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.Lock;
-import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.DC;
-import com.hp.hpl.jena.vocabulary.OWL;
 
-
-/**
- * Can be queried by ?subject=""&predicate=""&object=""
- * @author nina
- *
- * @param <T>
- */
-public class OntologyResource<T extends Serializable> extends ServerResource {
+public abstract class AbstractOntologyResource extends ServerResource {
 	protected static String jsGoogleAnalytics = null;
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
-	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
 	protected boolean resultsOnly = false;
 	protected String title = null;
 	protected static String version = null;
-	public OntologyResource() {
-		super();
-	}
 	
-
-	
-	
-	protected Model getOntology(Model model, Reference reference) throws ResourceException {
-		try {
-			ClientResource client = new ClientResource(reference);
-			MediaType[] mt = {
-					MediaType.APPLICATION_RDF_XML,
-					MediaType.TEXT_RDF_N3,					
-					MediaType.TEXT_RDF_NTRIPLES,
-					MediaType.APPLICATION_RDF_TURTLE,
-					
-			};
-			for (MediaType m : mt) {
-				Representation r = null;
-				try {
-					r = client.get(m);
-					if (client.getStatus().equals(Status.SUCCESS_OK)) {
-						readOWL(r.getStream(),model);
-						return model;
-					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
-							String.format("%s %s",client.getStatus().toString(),reference.toString()));
-				} catch (ResourceException x) {
-					throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
-							String.format("%s %s %s", Status.SERVER_ERROR_BAD_GATEWAY.toString(),reference,x.getMessage()),x);
-				} catch (Exception x) {
-					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,reference.toString(),x);
-				} finally {
-					try {r.release();} catch (Exception x) {};
-				}
-			}
-		} catch (ResourceException x) {
-			throw x;
-		} catch (Exception x) {
-			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x.getMessage(),x);
-		}
-		return model;
-	}
-	
-		
-	protected Representation sparql(final String queryString, Variant variant) throws ResourceException {
-		 
-		  final Model ontology = createOntologyModel(true);
-		  
-			return new OutputRepresentation(variant.getMediaType()) {
-				@Override
-				public void write(OutputStream out) throws IOException {
-					long elapsed = System.currentTimeMillis();
-					QueryExecution qe = null;
-					ResultSet results = null;
-					try {
-						ontology.enterCriticalSection(Lock.READ) ;
-					
-					try {
-						Query query = QueryFactory.create(queryString,null,Syntax.syntaxARQ);
-
-						// Execute the query and obtain results
-						qe = QueryExecutionFactory.create(query,ontology );
-						results = qe.execSelect();
-						elapsed = System.currentTimeMillis()-elapsed;
-	//application/sparql-results+xml
-
-						if (getMediaType().equals(MediaType.APPLICATION_RDF_XML))
-							ResultSetFormatter.outputAsRDF(out,"RDF/XML", results);
-						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_XML))
-							ResultSetFormatter.outputAsXML(out, results);
-						else if (getMediaType().equals(MediaType.APPLICATION_RDF_TURTLE))
-							ResultSetFormatter.outputAsRDF(out,"TURTLE", results);
-						else if (getMediaType().equals(MediaType.TEXT_RDF_N3))
-							ResultSetFormatter.outputAsRDF(out,"N3", results);
-						else if (getMediaType().equals(MediaType.TEXT_RDF_NTRIPLES))
-							ResultSetFormatter.outputAsRDF(out,"N-TRIPLE", results);
-						else if (getMediaType().equals(MediaType.TEXT_CSV))
-							ResultSetFormatter.outputAsCSV(out, results);
-						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_JSON))
-							ResultSetFormatter.outputAsJSON(out, results);		
-						else if (getMediaType().equals(MediaType.TEXT_PLAIN))
-							ResultSetFormatter.out(out, results, query);
-						else { //html
-							OutputStreamWriter w = new OutputStreamWriter(out);
-							w.write(
-									String.format(
-								"<html><head><title>Search Opentox RDF</title>"+
-								"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"+	
-								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">",
-							    getRequest().getRootRef()));
-							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery-1.4.2.min.js\"></script>\n",getRequest().getRootRef()));
-							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery.tablesorter.min.js\"></script>\n",getRequest().getRootRef()));
-
-							w.write("</head><body>");
-							w.write(String.format("<link rel=\"stylesheet\" href=\"%s/style/tablesorter.css\" type=\"text/css\" media=\"screen\" title=\"Flora (Default)\">",getRequest().getRootRef()));
-							if (!resultsOnly) 	writehtmlheader(w,ontology,queryString,elapsed);
-							else w.write(String.format("<h4>%s</h4>",title==null?"":title));
-								w.write("<table class='tablesorter' id='results'>");		
-							
-								w.write("<thead><tr>");
-								List<String> vars = results.getResultVars();
-								for (int i=0; i < vars.size();i++) {
-									w.write("<th>");
-									w.write(vars.get(i));
-									w.write("</th>");
-								}				
-								w.write("</tr></thead>");
-								w.write("<tbody>");
-								while (results.hasNext()) {
-									QuerySolution s = results.next();
-									w.write("<tr>");
-									for (int i=0; i < vars.size();i++) {
-										RDFNode node = s.get(vars.get(i));
-										w.write("<td>");
-										w.write(node==null?"":PrintUtil.print(node));
-										w.write("</td>");
-									}
-									w.write("</tr>");
-								}
-								w.flush();
-								w.write("</tbody></table>");
-								
-								if (!resultsOnly) {
-									w.write("</fieldset></FORM>");
-									
-									w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
-											getRequest().getRootRef(),
-											version==null?"":version,
-											version));
-								}
-								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
-								
-								w.write("</body>");
-
-					
-							w.flush();
-						}
-						out.flush();
-					
-					} catch (Exception x) {
-						throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x);
-					} finally {
-						try {qe.close();} catch (Exception x) {}
-						try {out.close();} catch (Exception x) {}
-
-					}
-					} finally {
-						ontology.leaveCriticalSection() ; 
-					}
-				}
-		
-			};
-	}
-	public static String jsGoogleAnalytics() {
-		if (jsGoogleAnalytics==null) try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					OntologyResource.class.getClassLoader().getResourceAsStream("org/opentox/config/googleanalytics.js"))
-			);
-			StringBuilder b = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-            	b.append(line);
-            	b.append('\n');
-            }
-            jsGoogleAnalytics = b.toString();
-			reader.close();
-			
-		} catch (Exception x) { jsGoogleAnalytics = null;}
-		return jsGoogleAnalytics;
-	}
-	protected void readOWL(InputStream in , Model model) throws Exception {
-		try {
-			model.enterCriticalSection(Lock.WRITE) ;
-			try {
-				model.read(in,null);
-				try { model.commit(); } catch (Exception x) {}
-			} catch (Exception x) {
-				Logger.getLogger(getClass().getName()).severe(x.toString());
-			} finally {
-				try { if (in != null) in.close();} catch (Exception x) {}
-			}
-		} catch (Exception x) {
-			throw x;
-		} finally {
-			model.leaveCriticalSection() ; 
-		}
-	}
-	
-	protected void deleteModel(Model model) throws Exception {
-		try {
-			model.enterCriticalSection(Lock.WRITE) ;
-			try {
-				model.removeAll();
-				try { model.commit(); } catch (Exception x) {}
-			} catch (Exception x) {
-				Logger.getLogger(getClass().getName()).severe(x.toString());
-			} finally {
-
-			}
-		} catch (Exception x) {
-			throw x;
-		} finally {
-			model.leaveCriticalSection() ; 
-		}
-	}	
+	abstract protected Model createOntologyModel(boolean init) throws ResourceException ;
 	@Override
 	protected void doInit() throws ResourceException {
 		super.doInit();
@@ -379,124 +164,204 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 			}
 		
 	}
-	protected Model createOntologyModel(boolean init) throws ResourceException {
-		File dir  = new File(directory);
-		if (!dir.exists()) {
-			dir.mkdir();
-			try {
-				new File(directory+"/fixed.opt").createNewFile();
-			} catch (Exception x) {
-				x.printStackTrace();
-			}
-		}
-		Model ontology = TDBFactory.createModel(directory) ;
-		if (init && (ontology.size()==0)) readOntologies(ontology);
-		ontology.setNsPrefix( "ot", "http://www.opentox.org/api/1.1#");
-		ontology.setNsPrefix( "ota", "http://www.opentox.org/algorithmTypes.owl#" );
-		ontology.setNsPrefix( "otee", "http://www.opentox.org/echaEndpoints.owl#" );
-		ontology.setNsPrefix( "owl", OWL.NS );
-		ontology.setNsPrefix( "dc", DC.NS );
-		ontology.setNsPrefix( "bx", "http://purl.org/net/nknouf/ns/bibtex#" );
-		ontology.setNsPrefix( "bo", "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#" );		
-		/*
-		if (ontology == null) ontology = TDBFactory.createModel(directory) ;
-		if (ontology.size()==0) readOntologies();
-		*/
-		return ontology;
-	}
-	
-	@Override
-	protected Representation post(Representation entity, Variant variant)
-			throws ResourceException {
-		String ref = "";
-		Form form = new Form(entity);
-		synchronized (this) {
-			Model ontology= null;
-			try {
-				ResourceException xx = null;
-				ontology = createOntologyModel(true);
-				String[] uris = form.getValuesArray("uri");
+	protected Model getOntology(Model model, Reference reference) throws ResourceException {
+		try {
+			ClientResource client = new ClientResource(reference);
+			MediaType[] mt = {
+					MediaType.APPLICATION_RDF_XML,
+					MediaType.TEXT_RDF_N3,					
+					MediaType.TEXT_RDF_NTRIPLES,
+					MediaType.APPLICATION_RDF_TURTLE,
+					
+			};
+			for (MediaType m : mt) {
+				Representation r = null;
 				try {
-					for (String search:uris) {
-						if (search != null) {
-							getOntology(ontology,new Reference(search));
-							ref = getRequest().getRootRef().toString();
-						}
-					}
-				} catch(ResourceException x) {
-					xx = x;
-				} finally {}	
-				if (xx!=null)	throw xx;
-			} catch (ResourceException x) {
-				throw x;
-			} catch(Exception x) {
-				throw new ResourceException(x);
-			} finally {
-				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
-				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+					r = client.get(m);
+					if (client.getStatus().equals(Status.SUCCESS_OK)) {
+						readOWL(r.getStream(),model);
+						return model;
+					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
+							String.format("%s %s",client.getStatus().toString(),reference.toString()));
+				} catch (ResourceException x) {
+					throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
+							String.format("%s %s %s", Status.SERVER_ERROR_BAD_GATEWAY.toString(),reference,x.getMessage()),x);
+				} catch (Exception x) {
+					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,reference.toString(),x);
+				} finally {
+					try {r.release();} catch (Exception x) {};
+				}
 			}
-		}
-		try {
-			String query = form.getFirstValue("query");
-			if(query != null) {
-				return sparql(query,variant);
-			} else {
-				getResponse().setLocationRef(ref);
-				return get(variant);
-			}
+		} catch (ResourceException x) {
+			throw x;
 		} catch (Exception x) {
-			throw new ResourceException(x);
-		} finally {
-			
+			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x.getMessage(),x);
 		}
+		return model;
 	}
-	/*
-	@Override
-	protected Representation delete(Variant variant) throws ResourceException {
-		Model ontology = createOntologyModel(false);
-		try {
-		if (ontology!=null) deleteModel(ontology);
-		} catch (Exception x) {
-			
-		} finally {
-			ontology.close();
+	protected Representation sparql(final String queryString, Variant variant) throws ResourceException {
+		 
+		  final Model ontology = createOntologyModel(true);
+		  
+			return new OutputRepresentation(variant.getMediaType()) {
+				@Override
+				public void write(OutputStream out) throws IOException {
+					long elapsed = System.currentTimeMillis();
+					QueryExecution qe = null;
+					ResultSet results = null;
+					try {
+						ontology.enterCriticalSection(Lock.READ) ;
+					
+					try {
+						Query query = QueryFactory.create(queryString,null,Syntax.syntaxARQ);
 
-		}
-		return get(variant);
-	}
-	*/
-	@Override
-	protected Representation delete(Variant variant) throws ResourceException {
-		String ref = "";
-		Form form = getRequest().getResourceRef().getQueryAsForm();
-		synchronized (this) {
-			Model ontology= null;
-			try {
-				ResourceException xx = null;
-				ontology = createOntologyModel(true);
-				String[] uris = form.getValuesArray("uri");
-				try {
-					for (String uri:uris) {
-						if (uri != null) {
-							removeURI(ontology,uri);
+						// Execute the query and obtain results
+						qe = QueryExecutionFactory.create(query,ontology );
+						results = qe.execSelect();
+						elapsed = System.currentTimeMillis()-elapsed;
+	//application/sparql-results+xml
+
+						if (getMediaType().equals(MediaType.APPLICATION_RDF_XML))
+							ResultSetFormatter.outputAsRDF(out,"RDF/XML", results);
+						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_XML))
+							ResultSetFormatter.outputAsXML(out, results);
+						else if (getMediaType().equals(MediaType.APPLICATION_RDF_TURTLE))
+							ResultSetFormatter.outputAsRDF(out,"TURTLE", results);
+						else if (getMediaType().equals(MediaType.TEXT_RDF_N3))
+							ResultSetFormatter.outputAsRDF(out,"N3", results);
+						else if (getMediaType().equals(MediaType.TEXT_RDF_NTRIPLES))
+							ResultSetFormatter.outputAsRDF(out,"N-TRIPLE", results);
+						else if (getMediaType().equals(MediaType.TEXT_CSV))
+							ResultSetFormatter.outputAsCSV(out, results);
+						else if (getMediaType().equals(MediaType.APPLICATION_SPARQL_RESULTS_JSON))
+							ResultSetFormatter.outputAsJSON(out, results);		
+						else if (getMediaType().equals(MediaType.TEXT_PLAIN))
+							ResultSetFormatter.out(out, results, query);
+						else { //html
+							OutputStreamWriter w = new OutputStreamWriter(out);
+							w.write(
+									String.format(
+								"<html><head><title>Search Opentox RDF</title>"+
+								"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">"+	
+								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">",
+							    getRequest().getRootRef()));
+							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery-1.4.2.min.js\"></script>\n",getRequest().getRootRef()));
+							w.write(String.format("<script type=\"text/javascript\" src=\"%s/jquery/jquery.tablesorter.min.js\"></script>\n",getRequest().getRootRef()));
+
+							w.write("</head><body>");
+							w.write(String.format("<link rel=\"stylesheet\" href=\"%s/style/tablesorter.css\" type=\"text/css\" media=\"screen\" title=\"Flora (Default)\">",getRequest().getRootRef()));
+							if (!resultsOnly) 	writehtmlheader(w,ontology,queryString,elapsed);
+							else w.write(String.format("<h4>%s</h4>",title==null?"":title));
+								w.write("<table class='tablesorter' id='results'>");		
+							
+								w.write("<thead><tr>");
+								List<String> vars = results.getResultVars();
+								for (int i=0; i < vars.size();i++) {
+									w.write("<th>");
+									w.write(vars.get(i));
+									w.write("</th>");
+								}				
+								w.write("</tr></thead>");
+								w.write("<tbody>");
+								while (results.hasNext()) {
+									QuerySolution s = results.next();
+									w.write("<tr>");
+									for (int i=0; i < vars.size();i++) {
+										RDFNode node = s.get(vars.get(i));
+										w.write("<td>");
+										w.write(node==null?"":PrintUtil.print(node));
+										w.write("</td>");
+									}
+									w.write("</tr>");
+								}
+								w.flush();
+								w.write("</tbody></table>");
+								
+								if (!resultsOnly) {
+									w.write("</fieldset></FORM>");
+									
+									w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
+											getRequest().getRootRef(),
+											version==null?"":version,
+											version));
+								}
+								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
+								
+								w.write("</body>");
+
+					
+							w.flush();
 						}
+						out.flush();
+					
+					} catch (Exception x) {
+						throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x);
+					} finally {
+						try {qe.close();} catch (Exception x) {}
+						try {out.close();} catch (Exception x) {}
+
 					}
-				} catch(ResourceException x) {
-					xx = x;
-				} finally {}	
-				if (xx!=null)	throw xx;
-			} catch (ResourceException x) {
-				throw x;
-			} catch(Exception x) {
-				throw new ResourceException(x);
+					} finally {
+						ontology.leaveCriticalSection() ; 
+					}
+				}
+		
+			};
+	}
+	public static String jsGoogleAnalytics() {
+		if (jsGoogleAnalytics==null) try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					TDBOntologyResource.class.getClassLoader().getResourceAsStream("org/opentox/config/googleanalytics.js"))
+			);
+			StringBuilder b = new StringBuilder();
+          String line;
+          while ((line = reader.readLine()) != null) {
+          	b.append(line);
+          	b.append('\n');
+          }
+          jsGoogleAnalytics = b.toString();
+			reader.close();
+			
+		} catch (Exception x) { jsGoogleAnalytics = null;}
+		return jsGoogleAnalytics;
+	}
+	protected void readOWL(InputStream in , Model model) throws Exception {
+		try {
+			model.enterCriticalSection(Lock.WRITE) ;
+			try {
+				model.read(in,null);
+				try { model.commit(); } catch (Exception x) {}
+			} catch (Exception x) {
+				Logger.getLogger(getClass().getName()).severe(x.toString());
 			} finally {
-				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
-				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+				try { if (in != null) in.close();} catch (Exception x) {}
 			}
+		} catch (Exception x) {
+			throw x;
+		} finally {
+			model.leaveCriticalSection() ; 
 		}
-		return get(variant);
 	}
 	
+	protected void deleteModel(Model model) throws Exception {
+		try {
+			model.enterCriticalSection(Lock.WRITE) ;
+			try {
+				model.removeAll();
+				try { model.commit(); } catch (Exception x) {}
+			} catch (Exception x) {
+				Logger.getLogger(getClass().getName()).severe(x.toString());
+			} finally {
+
+			}
+		} catch (Exception x) {
+			throw x;
+		} finally {
+			model.leaveCriticalSection() ; 
+		}
+	}	
+	
+
 	protected String readVersion() {
 		if (version!=null)return version;
 		final String build = "Implementation-Build:";
@@ -563,4 +428,82 @@ public class OntologyResource<T extends Serializable> extends ServerResource {
 		w.write(String.format(
 				"<FIELDSET><LEGEND>Results [found in %d ms]</LEGEND>",elapsed));
 	}
+	
+	@Override
+	protected Representation delete(Variant variant) throws ResourceException {
+		String ref = "";
+		Form form = getRequest().getResourceRef().getQueryAsForm();
+		synchronized (this) {
+			Model ontology= null;
+			try {
+				ResourceException xx = null;
+				ontology = createOntologyModel(true);
+				String[] uris = form.getValuesArray("uri");
+				try {
+					for (String uri:uris) {
+						if (uri != null) {
+							removeURI(ontology,uri);
+						}
+					}
+				} catch(ResourceException x) {
+					xx = x;
+				} finally {}	
+				if (xx!=null)	throw xx;
+			} catch (ResourceException x) {
+				throw x;
+			} catch(Exception x) {
+				throw new ResourceException(x);
+			} finally {
+				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
+				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+			}
+		}
+		return get(variant);
+	}
+	
+	@Override
+	protected Representation post(Representation entity, Variant variant)
+			throws ResourceException {
+		String ref = "";
+		Form form = new Form(entity);
+		synchronized (this) {
+			Model ontology= null;
+			try {
+				ResourceException xx = null;
+				ontology = createOntologyModel(true);
+				String[] uris = form.getValuesArray("uri");
+				try {
+					for (String search:uris) {
+						if (search != null) {
+							getOntology(ontology,new Reference(search));
+							ref = getRequest().getRootRef().toString();
+						}
+					}
+				} catch(ResourceException x) {
+					xx = x;
+				} finally {}	
+				if (xx!=null)	throw xx;
+			} catch (ResourceException x) {
+				throw x;
+			} catch(Exception x) {
+				throw new ResourceException(x);
+			} finally {
+				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
+				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+			}
+			}
+			try {
+			String query = form.getFirstValue("query");
+			if(query != null) {
+				return sparql(query,variant);
+			} else {
+				getResponse().setLocationRef(ref);
+				return get(variant);
+			}
+			} catch (Exception x) {
+			throw new ResourceException(x);
+			} finally {
+
+			}
+		}
 }
