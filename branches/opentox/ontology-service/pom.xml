@@ -41,7 +41,7 @@
     </dependency>
     <dependency>
     	<groupId>net.bull.javamelody</groupId>
-    	<artifactId>javamelody</artifactId>
+    	<artifactId>javamelody-core</artifactId>
     	<version>1.21.0</version>
     	<scope>runtime</scope>
     </dependency>
