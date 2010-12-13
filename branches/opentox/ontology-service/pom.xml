@@ -4,7 +4,7 @@
   <artifactId>ontology</artifactId>
   <packaging>war</packaging>
   <name>Ontology service</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <description>OpenTox Ontology service</description>
   <dependencies>
   <dependency>
