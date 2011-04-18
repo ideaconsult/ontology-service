@@ -3,10 +3,6 @@ package org.opentox.service.ontology;
 import java.io.File;
 import java.io.Serializable;
 
-import org.restlet.data.Form;
-import org.restlet.data.Reference;
-import org.restlet.representation.Representation;
-import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 
 import com.hp.hpl.jena.rdf.model.Model;

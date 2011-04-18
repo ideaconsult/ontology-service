@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.restlet.Request;
+import org.restlet.data.Cookie;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
 import org.restlet.data.Reference;
@@ -38,7 +40,7 @@ import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.DC;
 
-public abstract class AbstractOntologyResource extends ServerResource {
+public abstract class AbstractOntologyResource extends ServerResource implements IAuthToken {
 	protected static String jsGoogleAnalytics = null;
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
@@ -74,7 +76,14 @@ public abstract class AbstractOntologyResource extends ServerResource {
 		} catch (Exception x) {
 			title = null;
 		}		
+		try {ClientResourceWrapper.setTokenFactory(this);} catch (Exception x){}
 	}
+	
+	@Override
+	protected void doRelease() throws ResourceException {
+		try {ClientResourceWrapper.setTokenFactory(null);} catch (Exception x){}
+		super.doRelease();
+	}	
 	protected void customizeVariants(MediaType[] mimeTypes) {
         for (MediaType m:mimeTypes) getVariants().add(new Variant(m));
 	}
@@ -166,7 +175,7 @@ public abstract class AbstractOntologyResource extends ServerResource {
 	}
 	protected Model getOntology(Model model, Reference reference) throws ResourceException {
 		try {
-			ClientResource client = new ClientResource(reference);
+			ClientResourceWrapper client = new ClientResourceWrapper(reference);
 			MediaType[] mt = {
 					MediaType.APPLICATION_RDF_XML,
 					MediaType.TEXT_RDF_N3,					
@@ -506,4 +515,33 @@ public abstract class AbstractOntologyResource extends ServerResource {
 
 			}
 		}
+	
+	
+	protected String getTokenFromCookies(Request request) {
+		for (Cookie cookie : request.getCookies()) {
+			if ("subjectid".equals(cookie.getName()))
+				return cookie.getValue();
+		}
+		return null;
+	}
+	@Override
+	public String getToken() {
+		String token = getHeaderValue("subjectid");
+		
+		if (token == null) token = getTokenFromCookies(getRequest());
+		return token== null?null:token;
+		 
+	}
+	
+	private String getHeaderValue(String tag) {
+		try {
+			Form headers = (Form) getRequest().getAttributes().get("org.restlet.http.headers");  
+			if (headers==null) return null;
+			return headers.getFirstValue(tag);
+		} catch (Exception x) {
+			return null;
+		}
+	}
+	
+		
 }
