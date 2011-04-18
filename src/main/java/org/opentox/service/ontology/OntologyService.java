@@ -1,4 +1,6 @@
 package org.opentox.service.ontology;
+import org.opentox.rest.component.OpenSSOAuthenticator;
+import org.opentox.rest.component.OpenSSOFakeVerifier;
 import org.opentox.rest.component.RESTComponent;
 import org.restlet.Application;
 import org.restlet.Component;
@@ -7,6 +9,7 @@ import org.restlet.Restlet;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
 import org.restlet.resource.Directory;
+import org.restlet.routing.Filter;
 import org.restlet.routing.Router;
 import org.restlet.routing.Template;
 
@@ -46,7 +49,12 @@ public class OntologyService extends Application {
 		 
  		 router.attach("/jquery/", jqueryDir);
  		router.attach("/style/", styleDir); 	
-		return router;
+ 		
+		//Just sets the token, don't return error if not valid one
+		Filter authn = new OpenSSOAuthenticator(getContext(),false,"opentox.org",new OpenSSOFakeVerifier(false));
+		authn.setNext(router);
+ 		
+		return authn;
 	}
 	/**
 	 * Standalone, for testing mainly
