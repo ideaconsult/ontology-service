@@ -1,20 +1,18 @@
 package org.opentox.rest.component;
 
-import java.io.InputStream;
 import java.util.Properties;
 
 import org.opentox.aa.exception.AAException;
-import org.opentox.aa.exception.AAPropertiesException;
+import org.opentox.service.ontology.AbstractConfig;
 
 /**
  * Configuration for OpenSSO authn, authz and policy services
  * @author nina
  *
  */
-public class OpenSSOServicesConfig {
+public class OpenSSOServicesConfig extends AbstractConfig{
 	
 	private static OpenSSOServicesConfig ref;
-	protected Properties properties;
 	
 	
 	public static enum CONFIG {
@@ -69,17 +67,8 @@ public class OpenSSOServicesConfig {
 
 	}	
 	private OpenSSOServicesConfig() throws AAException {
-		properties = new Properties();
-		InputStream in = getClass().getClassLoader().getResourceAsStream("org/opentox/config/config.prop");
-		try {
-			properties.load(in);
-		} catch (AAException x) {
-			throw x;
-		} catch (Exception x) {
-			throw new AAPropertiesException(x);
-		} finally {
-			try {in.close();} catch (Exception x) {}
-		}		
+		super("org/opentox/config/aa.properties");
+	
 	}	
 
 	public static synchronized OpenSSOServicesConfig getInstance() throws AAException  {
@@ -87,6 +76,10 @@ public class OpenSSOServicesConfig {
 	        ref = new OpenSSOServicesConfig();		
 	    return ref;
 	}
+	
+	protected  synchronized String getConfig(CONFIG config) throws AAException  {
+		return properties==null?null:config.getValue(properties);
+	}	
 	
 	public String getTestUser() throws AAException  {
 	    return getConfig(CONFIG.user);
@@ -111,7 +104,5 @@ public class OpenSSOServicesConfig {
 	public Object clone() throws CloneNotSupportedException {
 	    throw new CloneNotSupportedException(); 
     }
-	protected  synchronized String getConfig(CONFIG config) throws AAException  {
-		return properties==null?null:config.getValue(properties);
-	}	
+
 }

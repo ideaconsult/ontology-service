@@ -19,13 +19,14 @@ import com.hp.hpl.jena.vocabulary.OWL;
  */
 public class TDBOntologyResource<T extends Serializable> extends AbstractOntologyResource {
 
-	protected String directory = String.format("%s/tdb",System.getProperty("java.io.tmpdir")); 
+
 	
 	public TDBOntologyResource() {
 		super();
 	}
 
 	protected Model createOntologyModel(boolean init) throws ResourceException {
+		String directory = OntologyServiceConfig.getInstance().getTDBDirectory();
 		File dir  = new File(directory);
 		if (!dir.exists()) {
 			dir.mkdir();

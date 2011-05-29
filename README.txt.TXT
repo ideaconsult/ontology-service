@@ -1,5 +1,42 @@
 OpenTox Ontology service
+----------------------------------------------------------------------------------------------
+Deployment
 
+Copy ontology.war under webapps directory of the servlet container. The application should be accessible at
+
+http://localhost:8080/ontology
+----------------------------------------------------------------------------------------------
+
+Build
+
+mvn package -P release -P tdb
+----------------------------------------------------------------------------------------------
+
+Maven dependency:
+
+<dependency>
+  <groupId>org.opentox</groupId>
+  <artifactId>ontology</artifactId>
+  <version>0.0.1</version>
+  <type>war</type>
+</dependency>
+
+----------------------------------------------------------------------------------------------
+Configuration:
+
+Does not use MySQL database. Uses Jena TDB for persistent storage (file based), which is automatically generated on deploy. 
+
+WEB-INF/classes/org/opentox/config/config.properties
+#tdb or sdb 
+persistence=${jena.persistence}
+#where to store TDB files. Default is java temporary directory
+tdb=${tdb.folder}
+
+WEB-INF/classes/org/opentox/config/aa.properties
+aa.opensso=${aa.opensso}
+aa.policy=${aa.policy}
+aa.enabled=${aa.enabled}
+----------------------------------------------------------------------------------------------
 Query examples
 
 Retrieve all classification algorithms:
