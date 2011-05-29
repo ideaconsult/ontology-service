@@ -204,7 +204,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"select ?Feature ?Property ?Value\n"+
 				"	where {\n"+
 				"	   ?Feature rdf:type ot:Feature.\n"+
-				"	   OPTIONAL {?Algorithm ?Property ?Value}.\n"+
+				"	   OPTIONAL {?Feature ?Property ?Value}.\n"+
 				"		}\n"+
 				"	order by ?Feature ?Property ?Value\n"+
 				"limit 20");
@@ -212,11 +212,33 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		},
 		NumericFeature {
 			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"select ?Feature ?Property ?Value\n"+
+				"	where {\n"+
+				"	   ?Feature rdf:type ot:NumericFeature.\n"+
+				"	   OPTIONAL {?Feature ?Property ?Value}.\n"+
+				"		}\n"+
+				"	order by ?Feature ?Property ?Value\n"+
+				"limit 20");
+			}
+			@Override
 			public Keys parent() {
 				return Feature;
 			}
 		},
 		NominalFeature {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"select ?Feature ?Property ?Value\n"+
+				"	where {\n"+
+				"	   ?Feature rdf:type ot:NominalFeature.\n"+
+				"	   OPTIONAL {?Feature ?Property ?Value}.\n"+
+				"		}\n"+
+				"	order by ?Feature ?Property ?Value\n"+
+				"limit 20");
+			}			
 			@Override
 			public Keys parent() {
 				return Feature;
