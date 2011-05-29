@@ -221,5 +221,10 @@
     </repository>
 
 
-	</repositories>  
+ 	    <repository>
+ 	    	<id>ambit-releases</id>
+ 	    	<name>ambit-releases</name>
+ 	    	<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
+ 	    </repository>
+   	</repositories>  
 </project>
