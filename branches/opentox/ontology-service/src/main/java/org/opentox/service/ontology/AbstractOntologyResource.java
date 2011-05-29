@@ -222,7 +222,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				return Feature;
 			}
 		},
+		/*
 		FeatureValue {
+		
 			@Override
 			public Keys parent() {
 				return DataEntry;
@@ -234,6 +236,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				return Dataset;
 			}
 		},
+		*/
 		Dataset {
 			@Override
 			public String getSPARQL() {
