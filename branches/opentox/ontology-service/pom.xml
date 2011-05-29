@@ -4,7 +4,7 @@
   <artifactId>ontology</artifactId>
   <packaging>war</packaging>
   <name>Ontology service</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>OpenTox Ontology service</description>
   <dependencies>
   <dependency>
@@ -93,6 +93,32 @@
   	<name>Ideaconsult Ltd.</name>
   	<url>http://www.ideaconsult.net</url>
   </organization>
+  <profiles>
+     <!--  release build -->
+     <profile>
+      <id>release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <aa.opensso>http://opensso.in-silico.ch/opensso/identity</aa.opensso>
+        <aa.policy>http://opensso.in-silico.ch/Pol/opensso-pol</aa.policy>
+        <aa.enabled>true</aa.enabled>
+        <jena.persistence>tdb</jena.persistence>
+		<tdb.folder></tdb.folder>
+      </properties>
+    </profile>
+     <profile>
+      <id>tdb</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <jena.persistence>tdb</jena.persistence>
+		<tdb.folder></tdb.folder>
+      </properties>
+    </profile>    
+    </profiles>
     <build>
 	<finalName>ontology</finalName>
      <resources>
@@ -134,7 +160,7 @@
 				<configuration>
 					<url>http://apps.ideaconsult.net:8180/manager</url>
 					<server>eos</server>
-					<path>/ambit2</path>
+					<path>/ontology</path>
 				</configuration>
 			</plugin>
 			     <plugin>
@@ -227,4 +253,8 @@
  	    	<url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
  	    </repository>
    	</repositories>  
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>	
+   	
 </project>

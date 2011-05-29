@@ -49,6 +49,264 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	protected static String version = null;
 	
 	abstract protected Model createOntologyModel(boolean init) throws ResourceException ;
+	
+	enum Keys {
+		Algorithm {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"select ?Algorithm ?Property ?Value\n"+
+				"	where {\n"+
+				"	   ?Algorithm rdf:type ot:Algorithm.\n"+
+				"	   OPTIONAL {?Algorithm ?Property ?Value}.\n"+
+				"		}\n"+
+				"	order by ?Algorithm ?Property ?Value\n"+
+				"limit 20");
+			}
+		},
+		Model{
+			@Override
+			public String getSPARQL() {
+				return
+					getPrefix()+
+				"select distinct ?model ?title ?creator ?trainingDataset ?algorithm\n"+
+				"		where {\n"+
+				"			?model rdf:type ot:Model;\n"+
+				"		    OPTIONAL {?model dc:title ?title}.\n"+
+				"			OPTIONAL {?model dc:creator ?creator}.\n"+
+				"			OPTIONAL {?model ot:trainingDataset ?trainingDataset}.\n"+
+				"			OPTIONAL {?model ot:algorithm ?algorithm }.\n"+
+				"		}";
+
+			}
+		},
+		Descriptors {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:Algorithm;" +
+				"  rdf:type ota:DescriptorCalculation;" +
+				"  bo:instanceOf ?desc ." +
+				"  ?desc rdf:type bo:MolecularDescriptor." +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+		},	
+		Learning {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:Algorithm;" +
+				"  rdf:type ota:Learning." +
+				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+			@Override
+			public String toString() {
+				return name();
+			}
+		},		
+		Classification {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:Algorithm;" +
+				"  rdf:type ota:Classification." +
+				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+			@Override
+			public String toString() {
+				return name();
+			}
+		},		
+		Regression {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:Algorithm;" +
+				"  rdf:type ota:Regression." +
+				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+			@Override
+			public String toString() {
+				return "Regression";
+			}
+		},			
+		Rules {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:Algorithm;" +
+				"  rdf:type ota:Rules." +
+				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+			@Override
+			public String toString() {
+				return "Expert rules";
+			}
+		},			
+		AppDomain {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"SELECT ?algo ?desc WHERE {" +
+				"  ?algo rdf:type ot:AppDomain;" +
+				"  rdf:type ota:Rules." +
+				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
+				"}\n"+
+				"limit 20");
+			}
+			@Override
+			public Keys parent() {
+				return Algorithm;
+			}
+			@Override
+			public String toString() {
+				return "Applicability domain";
+			}
+		},			
+		Feature {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"select ?Feature ?Property ?Value\n"+
+				"	where {\n"+
+				"	   ?Feature rdf:type ot:Feature.\n"+
+				"	   OPTIONAL {?Algorithm ?Property ?Value}.\n"+
+				"		}\n"+
+				"	order by ?Feature ?Property ?Value\n"+
+				"limit 20");
+			}
+		},
+		NumericFeature {
+			@Override
+			public Keys parent() {
+				return Feature;
+			}
+		},
+		NominalFeature {
+			@Override
+			public Keys parent() {
+				return Feature;
+			}
+		},
+		FeatureValue {
+			@Override
+			public Keys parent() {
+				return DataEntry;
+			}
+		},
+		DataEntry {
+			@Override
+			public Keys parent() {
+				return Dataset;
+			}
+		},
+		Dataset {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+				"select ?Dataset ?title ?source ?license ?rightsHolder ?seeAlso ?creator\n"+
+				"	where {\n"+
+				"	   ?Dataset rdf:type ot:Dataset.\n"+
+				"	   OPTIONAL {?Dataset dc:title ?title}.\n"+
+				"	   OPTIONAL {?Dataset dc:source ?source}.\n"+
+				"	   OPTIONAL {?Dataset dcterms:license ?license}.\n"+
+				"	   OPTIONAL {?Dataset dcterms:rightsHolder ?rightsHolder}.\n"+
+				"	   OPTIONAL {?Dataset rdfs:seeAlso ?seeAlso}.\n"+
+				"	   OPTIONAL {?Dataset dc:creator ?creator}.\n"+
+				"		}\n"+
+				"	order by ?Dataset\n"+
+				"limit 20");
+			}
+		},
+		Validation,
+		Endpoints {
+			@Override
+			public String getSPARQL() {
+				return super.getSPARQL("otee","rdfs:subClassOf");
+			}
+			@Override
+			public String toString() {
+				return "Endpoints";
+			}
+		};		
+		public String getPrefix() {
+			return 
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+			"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
+			"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
+			String.format("PREFIX dc:<%s>\n",DC.NS)+
+			"PREFIX dcterms:<http://purl.org/dc/terms/>\n"+ 
+			"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+			"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
+			"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
+			"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
+			"PREFIX toxcast:<http://www.opentox.org/toxcast.owl#>\n";
+		}
+		public String getSPARQL() {
+			return getSPARQL("ot","rdf:type");
+		}	
+		public String getSPARQL(String nameSpace,String predicate) {
+
+			return
+					String.format(
+					"%s\n"+
+					"	select ?%s ?title\n"+ 
+					"	where {\n"+
+					"	?%s %s %s:%s.\n"+
+					"   OPTIONAL {?%s dc:title ?title}.\n"+
+					"	}\n",
+					getPrefix(),
+					name(),
+					name(),
+					predicate,
+					nameSpace,
+					name(),
+					name())
+					;
+		}
+		public Keys parent() {
+			return null;
+		}
+		@Override
+		public String toString() {
+			return String.format("%s", name());
+		}
+	}
+	
 	@Override
 	protected void doInit() throws ResourceException {
 		super.doInit();
@@ -98,7 +356,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			if (key==null) { 
 				query = 
 				"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
-				"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
+				"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
 				"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
@@ -115,41 +373,11 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"                OPTIONAL {?descriptor bo:requires?requires}.\n"+
 				"		}\n";
 
-			} else {
-				if (key.toString().toLowerCase().equals("endpoints")) {
-					ns = "otee";
-					key = "Endpoints";
-					predicate = "rdfs:subClassOf";
-				}
-				
-				query = 
-					String.format(
-					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
-					"PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
-					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-					String.format("PREFIX dc:<%s>\n",DC.NS)+
-					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
-					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
-					"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-					"PREFIX toxcast:<http://www.opentox.org/toxcast.owl#>\n"+
-					"	select ?%s ?title ?id\n"+ 
-					"	where {\n"+
-					"	?%s %s %s:%s.\n"+
-					"   OPTIONAL {?%s dc:title ?title}.\n"+
-					"   OPTIONAL {?%s dc:identifier ?id}.\n"+
-					"	}\n",
-					key.toString(),
-					key.toString(),
-					predicate,
-					ns,
-					key.toString(),
-					key.toString(),
-					key.toString())
-					;
-				
-			
-			//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
-		}
+			} else try {
+				query =  Keys.valueOf(key.toString()).getSPARQL();
+			} catch (Exception x) {
+				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,key.toString());
+			}	
 		}
 		return sparql(query,variant);		
 	}
@@ -405,11 +633,31 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		return String.format("<script type=\"text/javascript\">$(document).ready(function() {  $(\"#%s\").tablesorter({widgets: ['zebra'] }).tablesorterPager({container: $(\"#%s\")}); } );</script>",tableid,pagerid);
 	}
 	public void writehtmlheader(Writer w,Model ontology,String queryString,long elapsed) throws Exception {
-		w.write(String.format("<a href='%s/query/Feature'>Features</a>&nbsp;",getRequest().getRootRef()));
-		w.write(String.format("<a href='%s/query/Algorithm'>Algorithms</a>&nbsp;",getRequest().getRootRef()));
-		w.write(String.format("<a href='%s/query/Model'>Models</a>&nbsp;",getRequest().getRootRef()));
-		w.write(String.format("<a href='%s/query/Validation'>Validation</a>&nbsp;",getRequest().getRootRef()));
-		w.write(String.format("<a href='%s/query/Endpoints'>Endpoints</a>&nbsp;",getRequest().getRootRef()));
+		
+		Keys qkey = null;
+		try { qkey = Keys.valueOf(getRequest().getAttributes().get(resourceKey).toString()); } catch (Exception x) {}
+		StringBuilder b = new StringBuilder();
+		
+		for (Keys key : Keys.values()) {
+			Keys parent = key.parent();
+			
+			String sparql = String.format("<a href='%s/query/%s' title='%s'>%s</a>&nbsp;",
+					getRequest().getRootRef(),
+					key.name(),
+					key.getSPARQL(),
+					key.toString()
+						
+					);
+			
+			if (parent==null) //top level
+				w.write(sparql);	
+			else {
+				if (parent.equals(qkey)) { b.append(sparql);	b.append("|");}
+			}
+		}
+		if (qkey!=null)
+		w.write(String.format("<br>%s&nbsp;%s&nbsp;",qkey.toString(),"\u00bb"));
+		w.write(b.toString());
 		w.write(
 				"<FORM action='' method='post'>"+
 				"<FIELDSET><LEGEND>Import RDF data into Ontology service</LEGEND>"+
