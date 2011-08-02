@@ -15,7 +15,7 @@ import org.restlet.security.ChallengeAuthenticator;
  */
 public class OpenSSOAuthenticator extends ChallengeAuthenticator {
 
-	public OpenSSOAuthenticator(Context context, boolean optional, String realm) {
+	public OpenSSOAuthenticator(Context context, boolean optional, String realm) throws Exception  {
 		this(context,optional,realm,new OpenSSOFakeVerifier());
 	}
 	public OpenSSOAuthenticator(Context context, boolean optional, String realm,OpenSSOFakeVerifier verifier) {

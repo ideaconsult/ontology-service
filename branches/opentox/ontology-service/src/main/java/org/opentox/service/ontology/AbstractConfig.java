@@ -15,8 +15,6 @@ public class AbstractConfig {
 		InputStream in = getClass().getClassLoader().getResourceAsStream(propertiesFile);
 		try {
 			properties.load(in);
-		} catch (AAException x) {
-			throw x;
 		} catch (Exception x) {
 			throw new AAPropertiesException(x);
 		} finally {

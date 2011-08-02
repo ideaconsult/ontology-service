@@ -18,50 +18,56 @@ import org.restlet.security.Verifier;
 public class OpenSSOFakeVerifier implements Verifier {
 	protected boolean enabled = false;
 	
-	public OpenSSOFakeVerifier() {
+	public OpenSSOFakeVerifier() throws Exception {
 		this( OpenSSOServicesConfig.getInstance().isEnabled());
 	}
+
 	public OpenSSOFakeVerifier(boolean enabled) {
 		this.enabled = enabled;
 	}
 	
 	public int verify(Request request, Response response) {
-		
-		
-		Form headers = (Form) request.getAttributes().get("org.restlet.http.headers");
-		String token = null;
-		if (headers!=null) 
-			token = headers.getFirstValue(OTAAParams.subjectid.toString());
-
-		if (token == null) //backup, check cookies
-			token = getTokenFromCookies(request);
-		
-		if (token==null) { //still nothing  
-			request.getCookies().removeAll("subjectid");
-			return enabled?Verifier.RESULT_MISSING:Verifier.RESULT_VALID;
-	    } else token = token.trim();
-		
-		
-		if ((token != null) && (!"".equals(token))) {
-			OpenSSOToken ssoToken = new OpenSSOToken(OpenSSOServicesConfig.getInstance().getOpenSSOService());
-			ssoToken.setToken(token);
-			try {
-				//if (ssoToken.isTokenValid()) {
-					setUser(ssoToken, request);
-					return enabled?Verifier.RESULT_INVALID:Verifier.RESULT_VALID;
-					/*
-				} else {
-					request.getCookies().removeAll("subjectid");
-					return enabled?Verifier.RESULT_INVALID:Verifier.RESULT_VALID;
+		try {
+			
+			Form headers = (Form) request.getAttributes().get("org.restlet.http.headers");
+			String token = null;
+			if (headers!=null) 
+				token = headers.getFirstValue(OTAAParams.subjectid.toString());
+	
+			if (token == null) //backup, check cookies
+				token = getTokenFromCookies(request);
+			
+			if (token==null) { //still nothing  
+				request.getCookies().removeAll("subjectid");
+				return enabled?Verifier.RESULT_MISSING:Verifier.RESULT_VALID;
+		    } else token = token.trim();
+			
+			
+			if ((token != null) && (!"".equals(token))) {
+				OpenSSOToken ssoToken = new OpenSSOToken(OpenSSOServicesConfig.getInstance().getOpenSSOService());
+				ssoToken.setToken(token);
+				try {
+					//if (ssoToken.isTokenValid()) {
+						setUser(ssoToken, request);
+						return enabled?Verifier.RESULT_INVALID:Verifier.RESULT_VALID;
+						/*
+					} else {
+						request.getCookies().removeAll("subjectid");
+						return enabled?Verifier.RESULT_INVALID:Verifier.RESULT_VALID;
+					}
+					*/
+				} catch (Exception x) {
+					x.printStackTrace(); //TODO
+					return enabled?Verifier.RESULT_MISSING:Verifier.RESULT_VALID;
 				}
-				*/
-			} catch (Exception x) {
-				x.printStackTrace(); //TODO
+			} else {
+				request.getCookies().removeAll("subjectid");
 				return enabled?Verifier.RESULT_MISSING:Verifier.RESULT_VALID;
 			}
-		} else {
-			request.getCookies().removeAll("subjectid");
-			return enabled?Verifier.RESULT_MISSING:Verifier.RESULT_VALID;
+		
+		}catch (Exception x) {
+			x.printStackTrace();
+			return Verifier.RESULT_MISSING;
 		}
 
 	}
