@@ -7,10 +7,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.opentox.dsl.aa.IAuthToken;
+import org.opentox.dsl.task.ClientResourceWrapper;
 import org.restlet.Request;
 import org.restlet.data.Cookie;
 import org.restlet.data.Form;
@@ -428,7 +431,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	}
 	protected Model getOntology(Model model, Reference reference) throws ResourceException {
 		try {
-			ClientResourceWrapper client = new ClientResourceWrapper(reference);
+			
+			
 			MediaType[] mt = {
 					MediaType.APPLICATION_RDF_XML,
 					MediaType.TEXT_RDF_N3,					
@@ -436,22 +440,26 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					MediaType.APPLICATION_RDF_TURTLE,
 					
 			};
+			HttpURLConnection cli = null;
 			for (MediaType m : mt) {
-				Representation r = null;
+				InputStream in = null;
 				try {
-					r = client.get(m);
-					if (client.getStatus().equals(Status.SUCCESS_OK)) {
-						readOWL(r.getStream(),model);
+					cli = ClientResourceWrapper.getHttpURLConnection(reference.toString(), "GET", m.toString());
+					cli.connect();
+					if (HttpURLConnection.HTTP_OK== cli.getResponseCode()) {
+						in = cli.getInputStream();
+						readOWL(in,model);
 						return model;
 					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
-							String.format("%s %s",client.getStatus().toString(),reference.toString()));
+							String.format("%d %s %s",cli.getResponseCode(),cli.getResponseMessage(),reference.toString()));
 				} catch (ResourceException x) {
 					throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
 							String.format("%s %s %s", Status.SERVER_ERROR_BAD_GATEWAY.toString(),reference,x.getMessage()),x);
 				} catch (Exception x) {
 					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,reference.toString(),x);
 				} finally {
-					try {r.release();} catch (Exception x) {};
+					try {if (in!=null) in.close();} catch (Exception x) {};
+					try {if (cli!=null) cli.disconnect();} catch (Exception x) {};
 				}
 			}
 		} catch (ResourceException x) {
