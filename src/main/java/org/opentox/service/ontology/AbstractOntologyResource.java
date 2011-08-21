@@ -302,7 +302,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
 			"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
 			"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-			"PREFIX toxcast:<http://www.opentox.org/toxcast.owl#>\n";
+			"PREFIX toxcast:<http://www.opentox.org/toxcast#>\n";
 		}
 		public String getSPARQL() {
 			return getSPARQL("ot","rdf:type");
@@ -565,6 +565,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 						out.flush();
 					
 					} catch (Exception x) {
+						
 						throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x);
 					} finally {
 						try {qe.close();} catch (Exception x) {}
