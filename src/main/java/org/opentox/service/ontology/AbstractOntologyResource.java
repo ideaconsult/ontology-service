@@ -985,7 +985,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			}
 		}
 		if (qkey!=null)
-		w.write(String.format("<br>%s&nbsp;%s&nbsp;",qkey.toString(),"\u00bb"));
+		w.write(String.format("<br>%s&nbsp;%s&nbsp;",qkey.toString(),"\u00BB"));
 		w.write(b.toString());
 		w.write(
 				"<FORM action='' method='post'>"+
