@@ -372,6 +372,35 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			}
 		},	
 		
+		ToxCast_ESR1 {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+						"select ?Feature ?title ?OpentoxDataset ?assay ?genename\n"+
+						"		where {\n"+
+						"	    ?Feature rdf:type ot:Feature.\n"+
+						"       {?Feature ot:hasSource ?OpentoxDataset}.\n"+
+						"	   {?Feature dc:title ?title}.\n"+
+						"	   {?Feature owl:sameAs ?assay}.\n"+
+						"	   {?assay toxcast:gene <http://bio2rdf.org/geneid:2099>}.\n"+
+						"	   {?assay toxcast:hasProperty ?genename}.\n"+
+						"	   {?genename rdf:type toxcast:GENE_NAME}.\n"+
+						"		}\n"
+						);
+						
+			}
+			@Override
+			public String toString() {
+				return "ToxCast ESR Assays";
+			}
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		},	
+
+
+
 		ToxCast_CYP450 {
 			@Override
 			public String getSPARQL() {
