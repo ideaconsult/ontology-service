@@ -1,6 +1,8 @@
 package org.opentox.service.ontology;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 
 import org.opentox.dsl.aa.IAuthToken;
 import org.opentox.dsl.task.ClientResourceWrapper;
+import org.opentox.service.ontology.tools.DownloadTool;
 import org.restlet.Request;
 import org.restlet.data.Cookie;
 import org.restlet.data.Form;
@@ -36,7 +39,9 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.RDFErrorHandler;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.RDFReader;
 import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.Lock;
@@ -52,6 +57,27 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	protected static String version = null;
 	
 	abstract protected Model createOntologyModel(boolean init) throws ResourceException ;
+	
+	public static String sparql_ToxcastAssayTarget = 
+
+				"	select *\n"+
+				"	where {\n"+
+				"	?Feature rdf:type ot:Feature.\n"+
+				"   {?Feature dc:title ?title}.\n"+
+				"   {?Feature ot:hasSource ?OpentoxDataset}.\n"+					
+				"   {?Feature owl:sameAs ?assay}.\n"+
+				"   {?assay toxcast:gene ?geneid}.\n"+
+				"   {?assay toxcast:hasProperty ?species}.\n"+
+				"   {?species rdf:type toxcast:SPECIES}.\n"+
+				"   {?assay toxcast:hasProperty ?target_source}.\n"+
+				"   {?target_source rdf:type toxcast:ASSAY_TARGET_SOURCE}\n"+
+				"   {?assay toxcast:hasProperty ?target_family}.\n"+
+				"   {?target_family rdf:type toxcast:ASSAY_TARGET_FAMILY}.\n"+
+				"   {?assay toxcast:hasProperty ?target}.\n"+
+				"   {?target rdf:type toxcast:ASSAY_TARGET}.\n"+
+				"   {?assay toxcast:hasProperty toxcast:%s}.\n"+
+				"}\n"+
+				"order by ?feature ?assay ?target\n";		
 	
 	enum Keys {
 		Algorithm {
@@ -290,7 +316,234 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			public String toString() {
 				return "Endpoints";
 			}
+		},	
+		ToxCast {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+						"	select *\n"+
+						"	where {\n"+
+						"	?Feature rdf:type ot:Feature.\n"+
+						"   {?Feature dc:title ?title}.\n"+
+						"   {?Feature owl:sameAs ?assay}.\n"+
+						"   {?Feature ot:hasSource ?OpentoxDataset}.\n"+	
+						"   {?assay toxcast:gene ?geneid}.\n"+
+						"   {?assay toxcast:hasProperty ?species}.\n"+
+						"   {?species rdf:type toxcast:SPECIES}.\n"+
+						"   {?assay toxcast:hasProperty ?target_source}.\n"+
+						"   {?target_source rdf:type toxcast:ASSAY_TARGET_SOURCE}\n"+
+						"   {?assay toxcast:hasProperty ?target_family}.\n"+
+						"   {?target_family rdf:type toxcast:ASSAY_TARGET_FAMILY}.\n"+
+						"   {?assay toxcast:hasProperty ?target}.\n"+
+						"   {?target rdf:type toxcast:ASSAY_TARGET}.\n"+
+						"}\n"+
+						"order by ?feature ?assay ?target\n");
+						
+			}
+			@Override
+			public String toString() {
+				return "ToxCast";
+			}
+
+		},			
+		ToxCast_gene {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+						"select ?Feature ?title ?OpentoxDataset ?assay ?geneid ?genename\n"+
+						"		where {\n"+
+						"		?Feature rdf:type ot:Feature.\n"+
+						"      {?Feature ot:hasSource ?OpentoxDataset}.\n"+						
+						"	   {?Feature dc:title ?title}.\n"+
+						"	   {?Feature owl:sameAs ?assay}.\n"+
+						"	   {?assay toxcast:gene ?geneid}.\n"+
+						"	   {?assay toxcast:hasProperty ?genename}.\n"+
+						"	   {?genename rdf:type toxcast:GENE_NAME}.\n"+
+						"		}\n");
+						
+			}
+			@Override
+			public String toString() {
+				return "ToxCast (gene)";
+			}
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		},	
+		
+		ToxCast_CYP450 {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Cytochrome_P450")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+			@Override
+			public String toString() {
+				return "Target family: CYP450";
+			}
+		},	
+
+		ToxCast_GPCR {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"GPCR")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+			@Override
+			public String toString() {
+				return "Target family: GPCR";
+			}
+		},	
+
+		ToxCast_Ion_Channel {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Ion_Channel")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+			@Override
+			public String toString() {
+				return "Target family: Ion Channel";
+			}			
+		},	
+		ToxCast_Kinase {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Kinase")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+			@Override
+			public String toString() {
+				return "Target family: Kinase";
+			}			
+		},		
+		/*
+		ToxCast_Membrane_Protein {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Membrane_Protein")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		},	
+		ToxCast_Nuclear_Receptor {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Nuclear_Receptor")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		},	
+		*/
+		ToxCast_Hormone {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Hormone")	
+					);
+						
+			}
+			@Override
+			public String toString() {
+				return "Target family: Hormone";
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		};
+		/*
+		Anti-Coagulation
+		Apolipoprotein
+		Cell_Adhesion_Molecule
+		Coagulation_Factor
+		Cytokine
+		Cytokine_Receptor
+		Hormone
+		Lyase
+		Oxidase
+		Oxygenase
+		Other
+		Phosphatase
+		Protease
+		Reductase
+		Sigma_Receptor
+		Synthase
+		Transferase
+		Transporter
+		*/
+		/*
+		ToxCast_CytokineReceptor {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Cytokine_Receptor")	
+					);
+						
+			}
+			
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
+		},			
+		ToxCast_Esterase {
+			@Override
+			public String getSPARQL() {
+				return String.format("%s%s",getPrefix(),
+					String.format( sparql_ToxcastAssayTarget,"Esterase")	
+					);
+						
+			}
+
+			@Override
+			public Keys parent() {
+				return ToxCast;
+			}
 		};		
+		*/	
 		public String getPrefix() {
 			return 
 			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
@@ -441,6 +694,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					
 			};
 			HttpURLConnection cli = null;
+			File tmpFile = null;
 			for (MediaType m : mt) {
 				InputStream in = null;
 				try {
@@ -448,18 +702,32 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					cli.connect();
 					if (HttpURLConnection.HTTP_OK== cli.getResponseCode()) {
 						in = cli.getInputStream();
-						readOWL(in,model);
+						tmpFile = File.createTempFile("ontologyservice_", ".rdf");
+						tmpFile.setWritable(true);
+						tmpFile.setReadable(true);
+						
+						DownloadTool.download(in, tmpFile);
+
+						System.out.println(tmpFile.getAbsolutePath());
+						if (tmpFile.exists()) {
+							readOWL(new File(tmpFile.getAbsolutePath()),model);
+							in = null;
+						}
 						return model;
 					} else throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
 							String.format("%d %s %s",cli.getResponseCode(),cli.getResponseMessage(),reference.toString()));
 				} catch (ResourceException x) {
 					throw new ResourceException(Status.SERVER_ERROR_BAD_GATEWAY,
 							String.format("%s %s %s", Status.SERVER_ERROR_BAD_GATEWAY.toString(),reference,x.getMessage()),x);
+				} catch (IOException x) {
+					throw new ResourceException(Status.SERVER_ERROR_INTERNAL,
+							String.format("%s %s %s", Status.SERVER_ERROR_INTERNAL.toString(),reference,x.getMessage()),x);
 				} catch (Exception x) {
 					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,reference.toString(),x);
 				} finally {
 					try {if (in!=null) in.close();} catch (Exception x) {};
 					try {if (cli!=null) cli.disconnect();} catch (Exception x) {};
+					try {if (tmpFile!=null) tmpFile.delete();} catch (Exception x) {}
 				}
 			}
 		} catch (ResourceException x) {
@@ -565,7 +833,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 						out.flush();
 					
 					} catch (Exception x) {
-						
+
 						throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,x);
 					} finally {
 						try {qe.close();} catch (Exception x) {}
@@ -596,13 +864,40 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		} catch (Exception x) { jsGoogleAnalytics = null;}
 		return jsGoogleAnalytics;
 	}
+	
+	protected void readOWL(File file , Model model) throws Exception {
+		FileInputStream in = new FileInputStream(file);
+		readOWL(in, model);
+	}	
 	protected void readOWL(InputStream in , Model model) throws Exception {
 		try {
 			model.enterCriticalSection(Lock.WRITE) ;
 			try {
-				model.read(in,null);
+				RDFReader reader = model.getReader();
+				reader.setErrorHandler(new RDFErrorHandler() {
+					
+					@Override
+					public void warning(Exception e) {
+						e.printStackTrace();
+						
+					}
+					
+					@Override
+					public void fatalError(Exception e) {
+						e.printStackTrace();
+						
+					}
+					
+					@Override
+					public void error(Exception e) {
+						e.printStackTrace();
+						
+					}
+				});
+				reader.read(model, in,null);
 				try { model.commit(); } catch (Exception x) {}
 			} catch (Exception x) {
+				x.printStackTrace();
 				Logger.getLogger(getClass().getName()).severe(x.toString());
 			} finally {
 				try { if (in != null) in.close();} catch (Exception x) {}
