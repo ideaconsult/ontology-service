@@ -38,6 +38,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFErrorHandler;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -836,7 +837,15 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 									for (int i=0; i < vars.size();i++) {
 										RDFNode node = s.get(vars.get(i));
 										w.write("<td>");
-										w.write(node==null?"":PrintUtil.print(node));
+										if (node != null) {
+											String value = node.isLiteral()?((Literal)node).getString():PrintUtil.print(node);
+											if ((value.indexOf("<")>=0) && (value.indexOf(">")>=0))//some xml inside
+												w.write(String.format("<textarea readonly width='100%%'>%s</textarea>",value));
+											else if (value.startsWith("http"))
+												w.write(String.format("<a href='%s' target='_blank'>%s</a>", value,value));
+											else	
+												w.write(value);
+										}
 										w.write("</td>");
 									}
 									w.write("</tr>");
