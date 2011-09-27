@@ -210,7 +210,7 @@ suggest significant toxicity or have reactive functional groups.
    <bo:cites>
 	  <bibrdf:Manual rdf:about="#TT250MANUAL">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
-	    <bibrdf:hasAuthor>, www.ideaconsult.net</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>www.ideaconsult.net</bibrdf:hasAuthor>
 	    <bibrdf:hasTitle>Toxtree 2.5.0 User manual</bibrdf:hasTitle>
 	    <bibrdf:hasURL>http://sourceforge.net/projects/toxtree/files/toxtree/Toxtree-v.2.5.0/Toxtree_user_manual.pdf/download</bibrdf:hasURL>
 	    <bibrdf:hasYear>2011</bibrdf:hasYear>
@@ -801,6 +801,223 @@ suggest significant toxicity or have reactive functional groups.
     <bo:cites rdf:resource="#MOPAC2009"/>
 
   </bo:MolecularDescriptor>  
+  
+  <bo:MolecularDescriptor rdf:ID="dragon">
+        <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Wrapper for Dragon 6 application for the calculation of molecular descriptors
+</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dragon</rdfs:label> 
+   
+   <bo:cites>
+	  <bibrdf:Manual rdf:about="#DRAGONMANUAL">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>http://www.talete.mi.it</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Dragon 6 user's manual</bibrdf:hasTitle>
+	    <bibrdf:hasURL>http://www.talete.mi.it/help/dragon_help/index.html</bibrdf:hasURL>
+	    <bibrdf:hasYear>2011</bibrdf:hasYear>
+	    
+	  </bibrdf:Manual>      
+    </bo:cites>      
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+   
+  <owl:Class rdf:ID="ApplicabilityDomainAlgorithm">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >QSAR Applicability domain</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Algorithm"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >QSAR Applicability domain
+        </rdfs:comment>
+  </owl:Class>
+  
+ <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_pcaRanges">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >pcaRanges</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain: Ranges in PCA transformed descriptor space</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+  </ambitd:ApplicabilityDomainAlgorithm>   
+  
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_distanceEuclidean">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >distanceEuclidean</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain: Euclidean distance in descriptor space</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#JAW2005">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Jaworska J.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Nikolova-Jeliazkova N.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Aldenberg T.</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>QSAR Applicability Domain Estimation by Projection of the Training Set in Descriptor Space: A Review</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>ATLA</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>33</bibrdf:hasVolume>
+	    <bibrdf:hasPages>445-459</bibrdf:hasPages>
+	    <bibrdf:hasISSN>0261-1929</bibrdf:hasISSN>
+      </bibrdf:Article>
+    </bo:cites>    
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#NIK2005">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Nikolova-Jeliazkova N.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Jaworska J.</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>An Approach to Determining Applicability Domains for QSAR Group Contribution Models: An Analysis of SRC KOWWIN</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>ATLA</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>33</bibrdf:hasVolume>
+	    <bibrdf:hasPages>461-470</bibrdf:hasPages>
+	    <bibrdf:hasISSN>0261-1929</bibrdf:hasISSN>
+      </bibrdf:Article>
+    </bo:cites>     
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#NET2005">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Netzeva T.I.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Worth A.P.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Aldenberg T.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Benigni R.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Cronin M.T.D.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Gramatica P.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Jaworska J.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Kahn S.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Klopman G.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Marchant C.A.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Myatt G.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Nikolova-Jeliazkova N.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Patlewicz G.Y.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Perkins R.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Roberts D.W.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Schultz T.W.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Stanton D.T.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>van de Sandt J.J.M.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Tong W.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Yang C.</bibrdf:hasAuthor>
+	    
+	    <bibrdf:hasTitle>ECVAM WORKSHOP REPORT Current status of methods for defining the applicability domain of (quantitative) structure-activity relationships</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>ATLA</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>33</bibrdf:hasVolume>
+	    <bibrdf:hasPages>155-173</bibrdf:hasPages>
+	    <bibrdf:hasISSN>0261-1929</bibrdf:hasISSN>
+      </bibrdf:Article>
+    </bo:cites>    
+  </ambitd:ApplicabilityDomainAlgorithm>   
+  
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_distanceCityBlock">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >distanceCityBlock</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain: CityBlock distance in descriptor space</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>   
+  
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_distanceMahalanobis">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >distanceMahalanobis</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain: Machalanobis distance in descriptor space.</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>     
+  
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_nparamdensity">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >nparamdensity</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain by non parametric probablity density estimation.</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>      
+   
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_leverage">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >leverage</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain by leverage calculation.</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>   
+  
+         
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_fptanimoto">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >fptanimoto</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain by hashed fingerprints and Tanimoto distance</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>   
+  
+  <ambitd:ApplicabilityDomainAlgorithm rdf:ID="ad_fpmissingfragments">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >fpmissingfragments</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applicability domain by hashed fingerprints and number of missing fragments</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hasDescriptors"/>
+    <bo:cites rdf:resource="#JAW2007"/>
+    <bo:cites rdf:resource="#JAW2005"/>
+    <bo:cites rdf:resource="#NIK2005"/>
+    <bo:cites rdf:resource="#NET2005"/>
+  </ambitd:ApplicabilityDomainAlgorithm>     
  
 </rdf:RDF>
 
