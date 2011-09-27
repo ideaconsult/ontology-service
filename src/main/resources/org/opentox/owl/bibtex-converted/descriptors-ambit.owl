@@ -18,6 +18,7 @@
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/"/>
   </owl:Ontology>
+ 
   <bo:MolecularDescriptor rdf:ID="SpherosityDescriptor">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
@@ -27,12 +28,26 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Spherosity</rdfs:label>
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Spherosity (ref. Todescini 2000)</bo:definition>
+    >Spherosity</bo:definition>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
+    <bo:cites>
+	  <bibrdf:Book rdf:about="#TOD00">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Roberto Todeschini</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Viviana Consonni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Raimund Mannhold</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Hugo Kubinyi</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Hendrik Timmerman</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Handbook of Molecular Descriptors</bibrdf:hasTitle>
+	    <bibrdf:hasPublisher>WILEY-VCH</bibrdf:hasPublisher>
+	    <bibrdf:hasYear>2000</bibrdf:hasYear>
+	    <bibrdf:hasISBN>978-3527299133</bibrdf:hasISBN>
+	  </bibrdf:Book>      
+    </bo:cites>    
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="PlanarityDescriptor">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Spherosity (ref. Todescini 2000)</bo:definition>
+    >Planarity</bo:definition>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-01-13</dc:date>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
@@ -41,6 +56,7 @@
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Planarity</rdfs:label>
+     <bo:cites rdf:resource="#TOD00"/>
   </bo:MolecularDescriptor>
   <bo:Contributor rdf:ID="ngn">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -718,6 +734,41 @@ suggest significant toxicity or have reactive functional groups.
       </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
+  
+  <bo:MolecularDescriptor rdf:ID="SOME">
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#electronicDescriptor"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SOME</rdfs:label>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cytochromes P450 (CYP450)-mediated sites of metabolism (SOM) prediction for the six most important metabolic reactions</bo:definition>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#LEE2008">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Mingyue Zheng</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Xiaomin Luo</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Qiancheng Shen</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Yong Wang</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Yun Du</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Weiliang Zhu</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Hualiang Jiang</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Site of metabolism prediction for six biotransformations mediated by cytochromes P450</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Bioinformatics</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2009</bibrdf:hasYear>
+	    <bibrdf:hasVolume>25(10)</bibrdf:hasVolume>
+	    <bibrdf:hasPages>1251-1258</bibrdf:hasPages>
+	    <bibrdf:hasURL>http://www.dddc.ac.cn/adme/myzheng/SOME_1_0.tar.gz</bibrdf:hasURL>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1093/bioinformatics/btp140</bo:DOI>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+      </bibrdf:Article>
+    </bo:cites>    
+  </bo:MolecularDescriptor> 
+    
   <bo:MolecularDescriptor rdf:ID="MOPAC">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >MOPAC wrapper for electronic descriptor calculation</bo:definition>
