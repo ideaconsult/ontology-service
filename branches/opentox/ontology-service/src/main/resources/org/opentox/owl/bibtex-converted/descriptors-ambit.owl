@@ -769,17 +769,38 @@ suggest significant toxicity or have reactive functional groups.
     </bo:cites>    
   </bo:MolecularDescriptor> 
     
-  <bo:MolecularDescriptor rdf:ID="MOPAC">
+  <bo:MolecularDescriptor rdf:ID="MOPACdescriptors">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >MOPAC wrapper for electronic descriptor calculation</bo:definition>
+    >MOPAC ((Molecular Orbital PACkage) wrapper for electronic descriptor calculation.</bo:definition>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >OpenMopac</rdfs:label>
+    >MopacDescriptor</rdfs:label>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
-    <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#electronicDescriptor"/>
+    <bo:cites>
+    <bibrdf:Manual rdf:about="#MOPAC2009">    
+        <bibrdf:hasTitle>MOPAC2009</bibrdf:hasTitle>
+    	<bibrdf:hasURL>http://http://openmopac.net/</bibrdf:hasURL>
+    	<bibrdf:hasAuthor>James J. P. Stewart</bibrdf:hasAuthor>
+    	<bibrdf:hasPublisher>Stewart Computational Chemistry, Colorado Springs, CO, USA</bibrdf:hasPublisher>
+    	<bibrdf:hasYear>2008</bibrdf:hasYear>
+    </bibrdf:Manual>    
+    </bo:cites>
   </bo:MolecularDescriptor>
+  
+  <bo:MolecularDescriptor rdf:ID="MOPACoptimisation">
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >MOPAC ((Molecular Orbital PACkage) wrapper for structure optimisaiton and electronic descriptor calculation.</bo:definition>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mopac</rdfs:label>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
+    <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#electronicDescriptor"/>
+    <bo:cites rdf:resource="#MOPAC2009"/>
+
+  </bo:MolecularDescriptor>  
  
 </rdf:RDF>
 
