@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF
-    xmlns="http://www.w3.org/1998/Math/MathML"
+    xmlns:mathml="http://www.w3.org/1998/Math/MathML"
     xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
     xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
-    xmlns:cvs="https://www.cvshome.org/"
+    xmlns="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/"
     xmlns:bibrdf="http://ambit.sf.net/bibtex.owl#"
+    xmlns:cvs="https://www.cvshome.org/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:bo="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#"
@@ -47,13 +48,13 @@
     <rdfs:subClassOf>
       <owl:Class rdf:about="#Descriptor"/>
     </rdfs:subClassOf>
-    <owl:disjointWith>
-      <owl:Class rdf:ID="ProteinDescriptor"/>
-    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
     <owl:disjointWith>
       <owl:Class rdf:ID="BondDescriptor"/>
     </owl:disjointWith>
-    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ProteinDescriptor"/>
+    </owl:disjointWith>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Molecular Descriptors</rdfs:label>
     <dc:contributor rdf:resource="#elw"/>
@@ -85,11 +86,11 @@
   <owl:Class rdf:about="#BondDescriptor">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-07-07</dc:date>
+    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
+    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
     <owl:disjointWith>
       <owl:Class rdf:about="#ProteinDescriptor"/>
     </owl:disjointWith>
-    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
-    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
     <rdfs:subClassOf rdf:resource="#Descriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Atomic Descriptors</rdfs:label>
@@ -114,9 +115,9 @@
     <dc:contributor rdf:resource="#rg"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-11-02</dc:date>
-    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
-    <owl:disjointWith rdf:resource="#BondDescriptor"/>
     <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
+    <owl:disjointWith rdf:resource="#BondDescriptor"/>
+    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
   </owl:Class>
   <owl:Class rdf:ID="Reference"/>
   <owl:Class rdf:ID="DescriptorValue">
@@ -229,8 +230,8 @@
         <dc:contributor rdf:resource="#elw"/>
       </bo:Category>
     </bo:isClassifiedAs>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:description rdf:parseType="Literal">
             This descriptor is described by Katritzky et al.
             <bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="KAT96"></bibtex:cite>
@@ -239,7 +240,20 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Gravitational Index</rdfs:label>
     <bo:cites>
-      <bo:Reference rdf:ID="KAT96">
+      <bibrdf:Article rdf:ID="KAT96">
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1996</bibrdf:hasYear>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Correlation of Boiling Points With Molecular Structure. 1. A Training Set of 298 Diverse
+                    Organics and a Test Set of 9 Simple Inorganics
+                </bibrdf:hasTitle>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Phys. Chem.</bibrdf:hasJournal>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >100</bibrdf:hasVolume>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Katritzky, A.R. and Mu, L. and Lobanov, V.S. and Karelson, M.</bibrdf:hasAuthor>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Katritzky, A.R. and Mu, L. and Lobanov, V.S. and Karelson, M.</bibtex:author>
@@ -252,7 +266,9 @@
                 <bibtex:pages>10400-10407</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10400-10407</bibrdf:hasPages>
+      </bibrdf:Article>
     </bo:cites>
     <bo:definition rdf:parseType="Literal">
             Descriptor characterizing the mass distribution of the molecule.
@@ -376,13 +392,13 @@
 
             <math xmlns="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#" display="block" overflow="scroll">
                 <msup>
-                    <mi>Î¾</mi>
+                    <mi>ÃŽÂ¾</mi>
                     <mi>c</mi>
 
                 </msup>
                 <mo>=</mo>
                 <munder>
-                    <mo>âˆ‘</mo>
+                    <mo>Ã¢Ë†â€˜</mo>
                     <mrow>
                         <mi>i</mi>
                         <mo>=</mo>
@@ -392,13 +408,13 @@
                 </munder>
                 <mi>n</mi>
                 <mi>E</mi>
-                <mo>â�¡</mo>
+                <mo>Ã¢ï¿½Â¡</mo>
                 <mfenced>
 
                     <mi>i</mi>
                 </mfenced>
                 <mi>V</mi>
-                <mo>â�¡</mo>
+                <mo>Ã¢ï¿½Â¡</mo>
                 <mfenced>
                     <mi>i</mi>
                 </mfenced>
@@ -459,8 +475,8 @@
         </bo:definition>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
   </bo:MolecularDescriptor>
   <bo:BondDescriptor rdf:ID="bondPartialSigmaCharge">
     <bo:description rdf:parseType="Literal">
@@ -562,7 +578,11 @@
             Descriptor that calculates the number of nonrotatable bonds on a molecule.
         </bo:definition>
     <bo:cites>
-      <bo:Reference rdf:ID="DAY01">
+      <bibrdf:Misc rdf:ID="DAY01">
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SMILES on-line tutorial</bibrdf:hasTitle>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Daylight</bibrdf:hasAuthor>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:misc xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Daylight</bibtex:author>
@@ -570,7 +590,10 @@
                 <bibtex:url>http://www.daylight.com/dayhtml_tutorials/languages/smarts/smarts_examples.html</bibtex:url>
             </bibtex:misc>
         </bibtex:entry>
-      </bo:Reference>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasURL rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >http://www.daylight.com/dayhtml_tutorials/languages/smarts/smarts_examples.html</bibrdf:hasURL>
+      </bibrdf:Misc>
     </bo:cites>
     <bo:description rdf:parseType="Literal">
             The number of rotatable bonds is given by the SMARTS specified by Daylight on
@@ -622,7 +645,9 @@
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="WHIM">
     <bo:cites>
-      <bo:Reference rdf:ID="TOD98">
+      <bibrdf:Article rdf:ID="TOD98">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Todeschini, R. and Gramatica, P.</bibrdf:hasAuthor>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Todeschini, R. and Gramatica, P.</bibtex:author>
@@ -632,10 +657,19 @@
                 <bibtex:pages>355-380</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >New 3D Molecular Descriptors: The WHIM theory and QAR Applications</bibrdf:hasTitle>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1998</bibrdf:hasYear>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Persepectives in Drug Discovery and Design</bibrdf:hasJournal>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >355-380</bibrdf:hasPages>
+      </bibrdf:Article>
     </bo:cites>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -662,8 +696,8 @@
             The topological and geometric shape indices described Petitjean and Bath et al.
             respectively. Both measure the anisotropy in a molecule.
         </bo:definition>
-    <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-01-15</dc:date>
   </bo:MolecularDescriptor>
@@ -678,8 +712,8 @@
         </bo:definition>
   </bo:AtomicDescriptor>
   <bo:MolecularDescriptor rdf:ID="xlogP">
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >XLogP</rdfs:label>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -694,7 +728,17 @@
             .
         </bo:description>
     <bo:cites>
-      <bo:Reference rdf:ID="WANG97">
+      <bibrdf:Article rdf:ID="WANG97">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Wang, R., Fu, Y., and Lai, L.</bibrdf:hasAuthor>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >37</bibrdf:hasVolume>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >615-621</bibrdf:hasPages>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1997</bibrdf:hasYear>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >A New Atom-Additive Method for Calculating Partition Coefficients</bibrdf:hasTitle>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Wang, R., Fu, Y., and Lai, L.</bibtex:author>
@@ -707,7 +751,12 @@
                 <bibtex:pages>615-621</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Journal of Chemical Information and Computer
+                    Sciences
+                </bibrdf:hasJournal>
+        <rdf:type rdf:resource="#Reference"/>
+      </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="chi0vC">
@@ -869,6 +918,17 @@
     >Partial Pi Charge</rdfs:label>
     <bo:cites>
       <bo:Reference rdf:ID="MARSILI">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Gasteiger, J.</bibrdf:hasAuthor>
+        <rdf:type rdf:resource="http://ambit.sf.net/bibtex.owl#Article"/>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1980</bibrdf:hasYear>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Tetrahedron</bibrdf:hasJournal>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Marsili, M.</bibrdf:hasAuthor>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >36</bibrdf:hasVolume>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Gasteiger, J.</bibtex:author>
@@ -883,6 +943,13 @@
                 <bibtex:pages>3219-3228</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3219-3228</bibrdf:hasPages>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >
+                    Iterative Partial Equalization of Orbital
+                    Electronegativity- A Rapid Access to Atomic Charges
+                </bibrdf:hasTitle>
       </bo:Reference>
     </bo:cites>
   </bo:MolecularDescriptor>
@@ -922,7 +989,15 @@
         </bo:description>
     <dc:contributor rdf:resource="#mf"/>
     <bo:cites>
-      <bo:Reference rdf:ID="CHER2003">
+      <bibrdf:Article rdf:ID="CHER2003">
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2039-2047</bibrdf:hasPages>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >43</bibrdf:hasVolume>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Cherkasov, A.</bibrdf:hasAuthor>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Cherkasov, A.</bibtex:author>
@@ -936,7 +1011,16 @@
                 <bibtex:doi>10.1021/ci034147w</bibtex:doi>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2003</bibrdf:hasYear>
+        <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci034147w</bibrdf:hasDoi>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Inductive Electronegativity Scale. Iterative Calculation of Inductive Partial
+                    Charges
+                </bibrdf:hasTitle>
+      </bibrdf:Article>
     </bo:cites>
     <bo:definition rdf:parseType="Literal">
             This class calculates the atomic softness of a given atom.
@@ -955,8 +1039,8 @@
     <bo:definition rdf:parseType="Literal">
             The sum of the squared atom degrees of all heavy atoms.
         </bo:definition>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
@@ -1155,8 +1239,8 @@
         </bo:description>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Vertex adjacency information magnitude</rdfs:label>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:definition rdf:parseType="Literal">
             Descriptor that calculates the vertex adjacency information of a molecule.
         </bo:definition>
@@ -1169,8 +1253,8 @@
             <bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="WES98"></bibtex:cite>
             .
         </bo:description>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#elw"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Gravitational Index (Square and Cube Roots)</rdfs:label>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1448,13 +1532,13 @@
     <bo:definition rdf:parseType="Literal">
             The Moreau-Broto autocorrelation descriptors using atomic weight
         </bo:definition>
+    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor>
       <bo:Contributor rdf:ID="fm">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Federico Marighetti</rdfs:label>
       </bo:Contributor>
     </dc:contributor>
-    <dc:contributor rdf:resource="#rguha"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="petitjeanNumber">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1514,7 +1598,16 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Distance to Atom</rdfs:label>
   </bo:Descriptor>
-  <bo:Reference rdf:ID="TC00">
+  <bibrdf:Article rdf:ID="TC00">
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Handbook of Molecular Descriptors</bibrdf:hasTitle>
+    <bibrdf:hasISBN rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3-52-29913-0</bibrdf:hasISBN>
+    <rdf:type rdf:resource="#Reference"/>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2000</bibrdf:hasYear>
+    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Todeschini, R. and Consonni, V.</bibrdf:hasAuthor>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
               <bibtex:author>Todeschini, R. and Consonni, V.</bibtex:author>
@@ -1523,12 +1616,12 @@
               <bibtex:isbn>3-52-29913-0</bibtex:isbn>
             </bibtex:article>
         </bibtex:entry>
-  </bo:Reference>
+  </bibrdf:Article>
   <bo:MolecularDescriptor rdf:ID="apol">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Atomic Polarizabilities</rdfs:label>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:description rdf:parseType="Literal">
             Polarizabilities derive from periodic tables.
         </bo:description>
@@ -1607,10 +1700,10 @@
     >Acceptors or Donors Field Atoms (Boehm,Klebe)</rdfs:label>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <bo:cites>
-      <bo:Reference rdf:ID="BK02">
+      <bibrdf:Article rdf:ID="BK02">
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
-                <bibtex:author>BÃ¶hm, M. and Klebe, G.</bibtex:author>
+                <bibtex:author>BÃƒÂ¶hm, M. and Klebe, G.</bibtex:author>
                 <bibtex:title>Development of New Hydrogen-Bond Descriptors and Their {A}pplication to Comparative Molecular Field Analyses</bibtex:title>
                 <bibtex:journal>J. Med. Chem.</bibtex:journal>
                 <bibtex:year>2002</bibtex:year>
@@ -1618,7 +1711,20 @@
                 <bibtex:pages>1585-1597</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >45</bibrdf:hasVolume>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1585-1597</bibrdf:hasPages>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Development of New Hydrogen-Bond Descriptors and Their {A}pplication to Comparative Molecular Field Analyses</bibrdf:hasTitle>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2002</bibrdf:hasYear>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Böhm, M. and Klebe, G.</bibrdf:hasAuthor>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Med. Chem.</bibrdf:hasJournal>
+      </bibrdf:Article>
     </bo:cites>
     <bo:description rdf:parseType="Literal">
         Force field based definition of hydrogen bond acceptors or donors <bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="BK02"></bibtex:cite>.
@@ -1753,8 +1859,8 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-01-15</dc:date>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
-    <dc:contributor rdf:resource="#fm"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#fm"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="largestPiSystem">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1770,8 +1876,8 @@
     <bo:isClassifiedAs rdf:resource="#constitutionalDescriptor"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="hBondacceptors">
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
@@ -1829,8 +1935,8 @@
     <bo:cites rdf:resource="#GHOSE1986"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="CPSA">
-    <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <bo:definition rdf:parseType="Literal">
             A variety of descriptors combining surface area and partial charge information
         </bo:definition>
@@ -1858,8 +1964,8 @@
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
   </bo:BondDescriptor>
   <bo:MolecularDescriptor rdf:ID="hBondacceptorsDaylight">
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
         Descriptor that calculates the number of hydrogen bond acceptors.
@@ -1901,8 +2007,8 @@
     <bo:description rdf:parseType="Literal">
             Polarizabilities are assigned to the heavy atom by Polarizability class.
         </bo:description>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
@@ -1919,8 +2025,8 @@
             Descriptor that calculates the sum of the absolute value of the difference between atomic
             polarizabilities of all bonded atoms in the molecule (including implicit hydrogens).
         </bo:definition>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1933,8 +2039,8 @@
     <bo:definition rdf:parseType="Literal">
             The Moreau-Broto autocorrelation descriptors using partial charges
         </bo:definition>
-    <dc:contributor rdf:resource="#fm"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#fm"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Moreau-Broto Autocorrelation (charge) descriptors</rdfs:label>
   </bo:MolecularDescriptor>
@@ -1955,12 +2061,12 @@
     <dc:contributor rdf:resource="#rguha"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="tpsa">
-    <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Topological Polar Surface Area</rdfs:label>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:definition rdf:parseType="Literal">
             Calculation of topological polar surface area based on fragment
             contributions
@@ -2028,8 +2134,8 @@
     <rdf:type rdf:resource="#Reference"/>
   </bibrdf:Book>
   <bo:MolecularDescriptor rdf:ID="weight">
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Molecular Weight</rdfs:label>
     <bo:definition rdf:parseType="Literal">
@@ -2050,12 +2156,22 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >BCUT</rdfs:label>
     <bo:isClassifiedAs rdf:resource="#hybridDescriptor"/>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
     <bo:cites>
-      <bo:Reference rdf:ID="PEA99">
+      <bibrdf:Article rdf:ID="PEA99">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Pearlman, R.S. and Smith, K.M.</bibrdf:hasAuthor>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >28-35</bibrdf:hasPages>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Metric Validation and the Receptor-Relevant Subspace Concept</bibrdf:hasTitle>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1999</bibrdf:hasYear>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >39</bibrdf:hasVolume>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Pearlman, R.S. and Smith, K.M.</bibtex:author>
@@ -2067,7 +2183,10 @@
                 <bibtex:pages>28-35</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
+      </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
   <bibrdf:Article rdf:ID="PET92">
@@ -2163,8 +2282,8 @@
     <bo:definition rdf:parseType="Literal">
             Descriptor based on the number of aromatic bonds of a molecule.
         </bo:definition>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
   </bo:MolecularDescriptor>
@@ -2373,7 +2492,23 @@
     >Carbon Types</rdfs:label>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
   </bo:MolecularDescriptor>
-  <bo:Reference rdf:ID="BAT95">
+  <bibrdf:Article rdf:ID="BAT95">
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >714-716</bibrdf:hasPages>
+    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bath, P.A. and Poirette, A.R. and Willet, P. and Allen, F.H.
+                </bibrdf:hasAuthor>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1995</bibrdf:hasYear>
+    <rdf:type rdf:resource="#Reference"/>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >35</bibrdf:hasVolume>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Extent of the Relationship between the Graph-Theoretical and the Geometrical Shape
+                    Coefficients of Chemical Compounds
+                </bibrdf:hasTitle>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Bath, P.A. and Poirette, A.R. and Willet, P. and Allen, F.H.
@@ -2387,8 +2522,11 @@
                 <bibtex:pages>714-716</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-  </bo:Reference>
-  <bo:Reference rdf:ID="RAN84">
+  </bibrdf:Article>
+  <bibrdf:Article rdf:ID="RAN84">
+    <rdf:type rdf:resource="#Reference"/>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1984</bibrdf:hasYear>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Randic, M.
@@ -2400,7 +2538,18 @@
                 <bibtex:pages>164-175</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-  </bo:Reference>
+    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Randic, M.
+                </bibrdf:hasAuthor>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >On molecular identification numbers</bibrdf:hasTitle>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >164-175</bibrdf:hasPages>
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >24</bibrdf:hasVolume>
+  </bibrdf:Article>
   <bo:MolecularDescriptor rdf:ID="atomCount">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Element Count</rdfs:label>
@@ -2423,8 +2572,8 @@
     <bo:definition rdf:parseType="Literal">
             Descriptor based on the number of bonds of a certain bond order.
         </bo:definition>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#mf"/>
+    <dc:contributor rdf:resource="#elw"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Bond Count</rdfs:label>
   </bo:MolecularDescriptor>
@@ -2434,8 +2583,8 @@
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Moments of Inertia</rdfs:label>
-    <dc:contributor rdf:resource="#elw"/>
     <dc:contributor rdf:resource="#rguha"/>
+    <dc:contributor rdf:resource="#elw"/>
     <bo:definition rdf:parseType="Literal">
             Descriptor that calculates the principal moments of inertia and ratios
             of the principal moments. Als calculates the radius of gyration.
@@ -2718,7 +2867,11 @@
         </bo:definition>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <bo:cites>
-      <bo:Reference rdf:ID="GAST2002">
+      <bibrdf:Article rdf:ID="GAST2002">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Aires-de-Sousa, J. and Hemmer, M.C. and Gasteiger, J.</bibrdf:hasAuthor>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >74</bibrdf:hasVolume>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Aires-de-Sousa, J. and Hemmer, M.C. and Gasteiger, J.</bibtex:author>
@@ -2731,7 +2884,18 @@
                 <bibtex:doi>10.1021/ac010737m</bibtex:doi>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2002</bibrdf:hasYear>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >80-90</bibrdf:hasPages>
+        <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ac010737m</bibrdf:hasDoi>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Anal. Chem.</bibrdf:hasJournal>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Prediction of 1H NMR Chemical Shifts Using Neural Networks</bibrdf:hasTitle>
+      </bibrdf:Article>
     </bo:cites>
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -2769,8 +2933,18 @@
     </bo:definition>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Donor Field Atoms (Boehm,Klebe)</rdfs:label>
+    <bo:cites rdf:resource="#BK02"/>
     <bo:cites>
-      <bo:Reference rdf:ID="PL96">
+      <bibrdf:Article rdf:ID="PL96">
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1996</bibrdf:hasYear>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Patani, G. A. and LaVoie, E. J.</bibrdf:hasAuthor>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bioisosterism: A Rational Approach in Drug Design</bibrdf:hasTitle>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3147-3176</bibrdf:hasPages>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
               <bibtex:author>Patani, G. A. and LaVoie, E. J.</bibtex:author>
@@ -2781,9 +2955,12 @@
               <bibtex:pages>3147-3176</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-      </bo:Reference>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >96</bibrdf:hasVolume>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Chem. Rev.</bibrdf:hasJournal>
+      </bibrdf:Article>
     </bo:cites>
-    <bo:cites rdf:resource="#BK02"/>
     <dc:contributor rdf:resource="#jkw"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="chi0C">
@@ -2832,7 +3009,16 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-05-08</dc:date>
   </bo:BondDescriptor>
-  <bo:Reference rdf:ID="GWB98">
+  <bibrdf:Article rdf:ID="GWB98">
+    <rdf:type rdf:resource="#Reference"/>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Identification of Biological Activity Profiles Using Substructural Analysis and Genetic Algorithms</bibrdf:hasTitle>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >38</bibrdf:hasVolume>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1998</bibrdf:hasYear>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
               <bibtex:author>Gillet, J. and Willett, P. and Bradshaw, J.</bibtex:author>
@@ -2843,7 +3029,11 @@
               <bibtex:pages>165-179</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-  </bo:Reference>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >165-179</bibrdf:hasPages>
+    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Gillet, J. and Willett, P. and Bradshaw, J.</bibrdf:hasAuthor>
+  </bibrdf:Article>
   <owl:AnnotationProperty rdf:about="http://bibtexml.sf.net/entry"/>
   <bo:MolecularDescriptor rdf:ID="wienerNumbers">
     <dc:contributor rdf:resource="#mf"/>
