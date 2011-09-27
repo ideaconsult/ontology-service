@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF
-    xmlns:mathml="http://www.w3.org/1998/Math/MathML"
+    xmlns="http://www.w3.org/1998/Math/MathML"
     xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
     xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
-    xmlns:bibrdf="http://ambit.sf.net/bibtex.owl#"
     xmlns:cvs="https://www.cvshome.org/"
+    xmlns:bibrdf="http://ambit.sf.net/bibtex.owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:bo="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#"
@@ -47,13 +47,13 @@
     <rdfs:subClassOf>
       <owl:Class rdf:about="#Descriptor"/>
     </rdfs:subClassOf>
-    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
-    <owl:disjointWith>
-      <owl:Class rdf:ID="BondDescriptor"/>
-    </owl:disjointWith>
     <owl:disjointWith>
       <owl:Class rdf:ID="ProteinDescriptor"/>
     </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="BondDescriptor"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Molecular Descriptors</rdfs:label>
     <dc:contributor rdf:resource="#elw"/>
@@ -85,11 +85,11 @@
   <owl:Class rdf:about="#BondDescriptor">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-07-07</dc:date>
-    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
-    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
     <owl:disjointWith>
       <owl:Class rdf:about="#ProteinDescriptor"/>
     </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
+    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
     <rdfs:subClassOf rdf:resource="#Descriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Atomic Descriptors</rdfs:label>
@@ -114,9 +114,9 @@
     <dc:contributor rdf:resource="#rg"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-11-02</dc:date>
-    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
-    <owl:disjointWith rdf:resource="#BondDescriptor"/>
     <owl:disjointWith rdf:resource="#MolecularDescriptor"/>
+    <owl:disjointWith rdf:resource="#BondDescriptor"/>
+    <owl:disjointWith rdf:resource="#AtomicDescriptor"/>
   </owl:Class>
   <owl:Class rdf:ID="Reference"/>
   <owl:Class rdf:ID="DescriptorValue">
@@ -157,7 +157,7 @@
     <rdfs:domain rdf:resource="#Implementation"/>
     <rdfs:range rdf:resource="#Algorithm"/>
   </owl:ObjectProperty>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/ALOGP"/>
+  
   <bo:MolecularDescriptor rdf:ID="kierHallSmarts">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-09-26</dc:date>
@@ -230,8 +230,8 @@
         <dc:contributor rdf:resource="#elw"/>
       </bo:Category>
     </bo:isClassifiedAs>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <bo:description rdf:parseType="Literal">
             This descriptor is described by Katritzky et al.
             <bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="KAT96"></bibtex:cite>
@@ -476,7 +476,7 @@
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <dc:contributor rdf:resource="#rguha"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/hBondacceptorsDaylight"/>
+  
   <bo:Contributor rdf:ID="pmr">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Peter Murray-Rust</rdfs:label>
@@ -516,10 +516,10 @@
         </bo:definition>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/BCUT"/>
+  
   <bo:BondDescriptor rdf:ID="bondPartialSigmaCharge">
     <bo:description rdf:parseType="Literal">
             Calculation is calculated determining the difference the
@@ -553,7 +553,7 @@
             Descriptor that returns the hybridization state of an atom.
         </bo:definition>
   </bo:AtomicDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/hBondDonorsDaylight"/>
+  
   <bo:MolecularDescriptor rdf:ID="chiChain">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-11-12</dc:date>
@@ -669,8 +669,8 @@
     <dc:contributor rdf:resource="#mf"/>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="WHIM">
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -697,8 +697,8 @@
             The topological and geometric shape indices described Petitjean and Bath et al.
             respectively. Both measure the anisotropy in a molecule.
         </bo:definition>
-    <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-01-15</dc:date>
   </bo:MolecularDescriptor>
@@ -724,8 +724,8 @@
         </bo:definition>
   </bo:AtomicDescriptor>
   <bo:MolecularDescriptor rdf:ID="xlogP">
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >XLogP</rdfs:label>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -922,7 +922,7 @@
         </bo:definition>
     <dc:contributor rdf:resource="#chhoppe"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/hBondDonorsBoehmKlebe"/>
+  
   <bo:AtomicDescriptor rdf:ID="atomicSoftness">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-04-21</dc:date>
@@ -941,7 +941,7 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Inductive atomic softness</rdfs:label>
   </bo:AtomicDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/tpsa"/>
+  
   <bo:DataFeature rdf:ID="has2DCoordinates">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >has 2D Coordinates</rdfs:label>
@@ -952,8 +952,8 @@
     <bo:definition rdf:parseType="Literal">
             The sum of the squared atom degrees of all heavy atoms.
         </bo:definition>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
@@ -1117,8 +1117,8 @@
         </bo:description>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Vertex adjacency information magnitude</rdfs:label>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <bo:definition rdf:parseType="Literal">
             Descriptor that calculates the vertex adjacency information of a molecule.
         </bo:definition>
@@ -1131,8 +1131,8 @@
             <bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="WES98"></bibtex:cite>
             .
         </bo:description>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Gravitational Index (Square and Cube Roots)</rdfs:label>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1257,9 +1257,7 @@
             greather than 0.
         </bo:description>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/rotatableBondsCount"/>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/hBondAcceptorsDonorsBoehmKlebe"/>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/xlogP"/>
+  
   <bo:Reference rdf:ID="MARSILI">
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
@@ -1379,15 +1377,15 @@
     <bo:definition rdf:parseType="Literal">
             The Moreau-Broto autocorrelation descriptors using atomic weight
         </bo:definition>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor>
       <bo:Contributor rdf:ID="fm">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Federico Marighetti</rdfs:label>
       </bo:Contributor>
     </dc:contributor>
+    <dc:contributor rdf:resource="#rguha"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/mde"/>
+  
   <bo:MolecularDescriptor rdf:ID="petitjeanNumber">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-02-07</dc:date>
@@ -1459,8 +1457,8 @@
   <bo:MolecularDescriptor rdf:ID="apol">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Atomic Polarizabilities</rdfs:label>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <bo:description rdf:parseType="Literal">
             Polarizabilities derive from periodic tables.
         </bo:description>
@@ -1685,8 +1683,8 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-01-15</dc:date>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#fm"/>
+    <dc:contributor rdf:resource="#rguha"/>
   </bo:MolecularDescriptor>
   <bo:AtomicDescriptor rdf:ID="isProtonInConjugatedPiSystem">
     <bo:isClassifiedAs rdf:resource="#constitutionalDescriptor"/>
@@ -1700,8 +1698,8 @@
     >2005-01-27</dc:date>
   </bo:AtomicDescriptor>
   <bo:MolecularDescriptor rdf:ID="hBondacceptors">
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
@@ -1759,8 +1757,8 @@
     </dc:contributor>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="CPSA">
-    <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <bo:definition rdf:parseType="Literal">
             A variety of descriptors combining surface area and partial charge information
         </bo:definition>
@@ -1821,8 +1819,8 @@
         </bibtex:entry>
   </bibrdf:Article>
   <bo:MolecularDescriptor rdf:ID="hBondacceptorsDaylight">
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
         Descriptor that calculates the number of hydrogen bond acceptors.
@@ -1863,8 +1861,8 @@
     <bo:description rdf:parseType="Literal">
             Polarizabilities are assigned to the heavy atom by Polarizability class.
         </bo:description>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
@@ -1881,8 +1879,8 @@
             Descriptor that calculates the sum of the absolute value of the difference between atomic
             polarizabilities of all bonded atoms in the molecule (including implicit hydrogens).
         </bo:definition>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1895,18 +1893,18 @@
     <bo:definition rdf:parseType="Literal">
             The Moreau-Broto autocorrelation descriptors using partial charges
         </bo:definition>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#fm"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Moreau-Broto Autocorrelation (charge) descriptors</rdfs:label>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="tpsa">
-    <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
+    <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Topological Polar Surface Area</rdfs:label>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <bo:definition rdf:parseType="Literal">
             Calculation of topological polar surface area based on fragment
             contributions
@@ -1988,8 +1986,8 @@
     <rdf:type rdf:resource="#Reference"/>
   </bibrdf:Article>
   <bo:MolecularDescriptor rdf:ID="weight">
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Molecular Weight</rdfs:label>
     <bo:definition rdf:parseType="Literal">
@@ -2010,8 +2008,8 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >BCUT</rdfs:label>
     <bo:isClassifiedAs rdf:resource="#hybridDescriptor"/>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2005-01-27</dc:date>
   </bo:MolecularDescriptor>
@@ -2083,7 +2081,7 @@
             Descriptor that returns the VdW radius of a given atom.
         </bo:definition>
   </bo:AtomicDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/hBondAcceptorsBoehmKlebe"/>
+  
   <bo:MolecularDescriptor rdf:ID="hBondDonorsDaylight">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
@@ -2100,7 +2098,7 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/partialSigmaCharge"/>
+  
   <bo:MolecularDescriptor rdf:ID="aromaticBondsCount">
     <bo:isClassifiedAs rdf:resource="#constitutionalDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -2108,8 +2106,8 @@
     <bo:definition rdf:parseType="Literal">
             Descriptor based on the number of aromatic bonds of a molecule.
         </bo:definition>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2004-11-26</dc:date>
   </bo:MolecularDescriptor>
@@ -2291,7 +2289,7 @@
             Descriptor that calculates Kier and Hall kappa molecular shape indices.
         </bo:definition>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/gravitationalIndex"/>
+  
   <bo:ProteinDescriptor rdf:ID="taeAminoAcid">
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-08-23</dc:date>
@@ -2370,7 +2368,7 @@
     <bo:isClassifiedAs rdf:resource="#constitutionalDescriptor"/>
     <dc:contributor rdf:resource="#mf"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/WHIM"/>
+  
   <bo:DataFeature rdf:ID="has3DCoordinates">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >has 3D Coordinates</rdfs:label>
@@ -2382,8 +2380,8 @@
     <bo:definition rdf:parseType="Literal">
             Descriptor based on the number of bonds of a certain bond order.
         </bo:definition>
-    <dc:contributor rdf:resource="#mf"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#mf"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Bond Count</rdfs:label>
   </bo:MolecularDescriptor>
@@ -2404,8 +2402,8 @@
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Moments of Inertia</rdfs:label>
-    <dc:contributor rdf:resource="#rguha"/>
     <dc:contributor rdf:resource="#elw"/>
+    <dc:contributor rdf:resource="#rguha"/>
     <bo:definition rdf:parseType="Literal">
             Descriptor that calculates the principal moments of inertia and ratios
             of the principal moments. Als calculates the radius of gyration.
@@ -2699,7 +2697,7 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >has Partial Atomic Charges</rdfs:label>
   </bo:DataFeature>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/gravitationalIndex_SquareAndCubeRoots"/>
+  
   <bo:Reference rdf:ID="CHER2003">
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
@@ -2816,7 +2814,7 @@
             </bibtex:article>
         </bibtex:entry>
   </bo:Reference>
-  <bo:MolecularDescriptor rdf:about="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/rdfProtonCalculatedValues"/>
+  
   <owl:AnnotationProperty rdf:about="http://bibtexml.sf.net/entry"/>
   <bo:MolecularDescriptor rdf:ID="wienerNumbers">
     <dc:contributor rdf:resource="#mf"/>
