@@ -216,6 +216,64 @@
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
   
+   <bo:MolecularDescriptor rdf:ID="toxtreeverhaar2">
+     <bo:cites rdf:resource="#VER92"/>
+     <bo:cites rdf:resource="#VER00"/>
+   <bo:cites>
+	  <bibrdf:Article rdf:about="#ENO08">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+		<bibrdf:hasAuthor>S.J. Enoch</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>M. Hewitt</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>M.T.D. Cronin</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>S. Azam</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>J.C. Madden</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Classification of chemicals according to mechanism of aquatic toxicity: An evaluation of the implementation of the Verhaar scheme in Toxtree</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Chemosphere</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    <bibrdf:hasVolume>73</bibrdf:hasVolume>
+	    <bibrdf:hasPages>243-248</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/j.chemosphere.2008.06.052</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+  
+   <bo:MolecularDescriptor rdf:ID="toxtreeverhaar">
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#VER92">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Verhaar HJM</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>van Leeuwen CJ</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Hermens JLM</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Classifying environmental pollutants. 1. Structure-activity relationships for prediction of aquatic toxicity</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Chemosphere</bibrdf:hasJournal>
+	    <bibrdf:hasYear>1992</bibrdf:hasYear>
+	    <bibrdf:hasVolume>25</bibrdf:hasVolume>
+	    <bibrdf:hasPages>471-491</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/0045-6535(92)90280-5</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+   <bo:cites>
+	  <bibrdf:Article rdf:about="#VER00">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+		<bibrdf:hasAuthor>Verhaar HJM</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>van Leeuwen CJ</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>Solbe J</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>Hermens JLM</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Classifying environmental pollutants: Part 3. External validation of the classification system</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Chemosphere</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2000</bibrdf:hasYear>
+	    <bibrdf:hasVolume>40</bibrdf:hasVolume>
+	    <bibrdf:hasPages>875-883</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/S0045-6535(99)00317-3</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+  
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
