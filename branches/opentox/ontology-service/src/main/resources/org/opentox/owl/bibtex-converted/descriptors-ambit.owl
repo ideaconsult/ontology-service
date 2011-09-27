@@ -274,6 +274,59 @@
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
   
+  
+  <bo:MolecularDescriptor rdf:ID="toxtreeskin">
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#GER04">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Ingrid Gerner</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Kerstin Schlegel</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>John D. Walker</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Etje Hulzebosc</bibrdf:hasAuthor>
+	    
+	    <bibrdf:hasTitle>Use of Physicochemical Property Limits to Develop Rules for Identifying Chemical Substances with no Skin Irritation or Corrosion Potential</bibrdf:hasTitle>
+	    <bibrdf:hasJournal> QSAR Comb. Sci.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2004</bibrdf:hasYear>
+	    <bibrdf:hasVolume>23</bibrdf:hasVolume>
+	    <bibrdf:hasPages>726-733</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/qsar.200430880</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+      <bo:cites>
+	  <bibrdf:Article rdf:about="#GER05">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Etje Hulzebosc</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>John D. Walker</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Ingrid Gerner</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Kerstin Schlegel</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Use of structural alerts to develop rules for identifying chemical substances with skin irritation or skin corrosion potential</bibrdf:hasTitle>
+	    <bibrdf:hasJournal> QSAR Comb. Sci.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>24</bibrdf:hasVolume>
+	    <bibrdf:hasPages>332-342</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/qsar.200430905</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+      <bo:cites>
+	  <bibrdf:Article rdf:about="#WAL05">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>John D. Walker</bibrdf:hasAuthor>
+        <bibrdf:hasAuthor>Ingrid Gerner</bibrdf:hasAuthor>
+		<bibrdf:hasAuthor>Etje Hulzebosc</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Kerstin Schlegel</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>The Skin Irritation Corrosion Rules Estimation Tool (SICRET)</bibrdf:hasTitle>
+	    <bibrdf:hasJournal> QSAR Comb. Sci.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>24</bibrdf:hasVolume>
+	    <bibrdf:hasPages>378-384</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/qsar.200430906</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
