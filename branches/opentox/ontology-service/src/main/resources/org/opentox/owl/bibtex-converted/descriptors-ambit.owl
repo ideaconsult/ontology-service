@@ -327,6 +327,62 @@
     </bo:cites>    
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
+  
+ <bo:MolecularDescriptor rdf:ID="toxtreeeye">
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#GER05">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Ingrid Gerner</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Liebsch, M.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Spielmann, H.</bibrdf:hasAuthor>
+	    
+	    <bibrdf:hasTitle>Assessment of the eye irritating properties of chemicals by applying alternatives to the Draize rabbit eye test: the use of QSARs and in vitro tests for the classification of eye irritation</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Alternatives to Laboratory Animals</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2005</bibrdf:hasYear>
+	    <bibrdf:hasVolume>33</bibrdf:hasVolume>
+	    <bibrdf:hasPages>215-237</bibrdf:hasPages>
+	  </bibrdf:Article>      
+    </bo:cites>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+    
+ <bo:MolecularDescriptor rdf:ID="toxtreecarc">
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#BEN07">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>C. Bossa</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Rodomonte</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>I. Tsakovska</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>T. Netzeva</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Mechanistic QSAR of aromatic amines: new models for discriminating between mutagens and nonmutagens, and validation of models for carcinogens.</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Environ mol mutag.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2007</bibrdf:hasYear>
+	    <bibrdf:hasVolume>48</bibrdf:hasVolume>
+	    <bibrdf:hasPages>754-771</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/em.20355</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+      <bo:cites>
+	  <bibrdf:Techreport rdf:about="#BEN08">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>C. Bossa</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>N. Jeliazkova</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>T. Netzeva</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Worth</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>The Benigni / Bossa rulebase for mutagenicity and carcinogenicity - a module of Toxtree</bibrdf:hasTitle>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    <bibrdf:hasInstitution>European Commission, JRC</bibrdf:hasInstitution>
+	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/EUR_23241_EN.pdf</bibrdf:hasURL>
+
+	  </bibrdf:Techreport>      
+    </bo:cites>
+   
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+      
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
