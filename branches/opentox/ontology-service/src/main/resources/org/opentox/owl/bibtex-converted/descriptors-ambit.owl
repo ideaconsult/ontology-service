@@ -747,7 +747,7 @@ suggest significant toxicity or have reactive functional groups.
     >Cytochromes P450 (CYP450)-mediated sites of metabolism (SOM) prediction for the six most important metabolic reactions</bo:definition>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
     <bo:cites>
-	  <bibrdf:Article rdf:about="#LEE2008">
+	  <bibrdf:Article rdf:about="#ZHE09">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
 	    <bibrdf:hasAuthor>Mingyue Zheng</bibrdf:hasAuthor>
 	    <bibrdf:hasAuthor>Xiaomin Luo</bibrdf:hasAuthor>
