@@ -146,6 +146,19 @@
            &lt;bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="XING2002"&gt;&lt;/bibtex:cite&gt; and &lt;bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="JAW2007"&gt;&lt;/bibtex:cite&gt;</bo:definition>
   </bo:MolecularDescriptor>
   <bo:MolecularDescriptor rdf:ID="toxtreecramer">
+        <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cramer rules. Assigns compounds to 
+Class I (substances are simple chemical structures with efficient modes of metabolism suggesting a low order of oral toxicity);
+Class II are assigned to intermediate substances;
+Class III substances are those that permit no strong initial presumption of safety, or may even
+suggest significant toxicity or have reactive functional groups.
+</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreecramer</rdfs:label> 
     <bo:cites>
 	  <bibrdf:Article rdf:about="#CRA78">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -178,10 +191,32 @@
         >10.1080/10629360802083871</bo:DOI>
 	  </bibrdf:Article>      
     </bo:cites>    
+   <bo:cites>
+	  <bibrdf:Manual rdf:about="#TT250MANUAL">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>, www.ideaconsult.net</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Toxtree 2.5.0 User manual</bibrdf:hasTitle>
+	    <bibrdf:hasURL>http://sourceforge.net/projects/toxtree/files/toxtree/Toxtree-v.2.5.0/Toxtree_user_manual.pdf/download</bibrdf:hasURL>
+	    <bibrdf:hasYear>2011</bibrdf:hasYear>
+	    
+	  </bibrdf:Manual>      
+    </bo:cites>      
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
   
   <bo:MolecularDescriptor rdf:ID="toxtreecramer2">
+        <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cramer rules with extensions: 
+    This plug-in is a copy of the original plug-in, plus minor extensions. 
+    Like the Cramer plug-in, this plug-in works by assigning compounds to Class I, II, or III, according to the rules from Cramer, and some extra ones. 
+    Several compounds were classified by Munro in 1996 as Class I or Class II compounds according to the Cramer rules, even though Munro reported low NOEL values upon oral administration (indicating relatively high toxicity). 
+    To overcome such misclassifications,five rules have been introduced to capture the possible toxicity of these compounds.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreecramer2</rdfs:label>   
     <bo:cites rdf:resource="#CRA78"/>
     <bo:cites rdf:resource="#PAT08"/>
 	  
@@ -217,8 +252,19 @@
   </bo:MolecularDescriptor>
   
    <bo:MolecularDescriptor rdf:ID="toxtreeverhaar2">
+        <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Verhaar scheme for predicting toxicity mode of action (modified). Reuses rules from Verhaar scheme module, and is partially updated, according to recommendations in [Enoch 2008]
+    </bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreeverhaar2</rdfs:label>     
      <bo:cites rdf:resource="#VER92"/>
      <bo:cites rdf:resource="#VER00"/>
+     <bo:cites rdf:resource="#TT250MANUAL"/>
+     
    <bo:cites>
 	  <bibrdf:Article rdf:about="#ENO08">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -240,6 +286,15 @@
   </bo:MolecularDescriptor>
   
    <bo:MolecularDescriptor rdf:ID="toxtreeverhaar">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Verhaar scheme for predicting toxicity mode of action</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreeverhaar</rdfs:label>        
+   <bo:cites rdf:resource="#TT250MANUAL"/>
     <bo:cites>
 	  <bibrdf:Article rdf:about="#VER92">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -276,6 +331,16 @@
   
   
   <bo:MolecularDescriptor rdf:ID="toxtreeskin">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Estimates skin corrosion and irritatiion potential by physicochemical property ranges and structural rules</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreeskin</rdfs:label>        
+ 
+  <bo:cites rdf:resource="#TT250MANUAL"/>
     <bo:cites>
 	  <bibrdf:Article rdf:about="#GER04">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -329,6 +394,16 @@
   </bo:MolecularDescriptor>
   
  <bo:MolecularDescriptor rdf:ID="toxtreeeye">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Estimates eye irritation and corrosion potential by physicochemical property ranges and structural rules.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreeeye</rdfs:label>        
+ 
+  <bo:cites rdf:resource="#TT250MANUAL"/> 
     <bo:cites>
 	  <bibrdf:Article rdf:about="#GER05">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -347,6 +422,16 @@
   </bo:MolecularDescriptor>
     
  <bo:MolecularDescriptor rdf:ID="toxtreecarc">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A decision tree for estimating carcinogenicity and mutagenicity by discriminant analysis and structural rules, based on published in the document [Benigni 2008]</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreecarc</rdfs:label>        
+ 
+  <bo:cites rdf:resource="#TT250MANUAL"/>  
     <bo:cites>
 	  <bibrdf:Article rdf:about="#BEN07">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -384,6 +469,15 @@
   </bo:MolecularDescriptor>
       
  <bo:MolecularDescriptor rdf:ID="toxtreemic">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Structure Alerts for the in vivo micronucleus assay in rodents.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreemic</rdfs:label>        
+  
       <bo:cites>
 	  <bibrdf:Techreport rdf:about="#EUR23844">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -401,6 +495,14 @@
   </bo:MolecularDescriptor>      
 
  <bo:MolecularDescriptor rdf:ID="toxtreefunc">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Computational Characterisation of Chemicals and Datasets in Terms of Organic Functional Groups.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreefunc</rdfs:label>   
       <bo:cites>
 	  <bibrdf:Techreport rdf:about="#EUR24871">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
@@ -416,6 +518,176 @@
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>      
   
+  <bo:MolecularDescriptor rdf:ID="toxtreestart">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >START (Structural Alerts for Reactivity in Toxtree) biodegradation and persistence plug-in is based on a compilation of structural alerts for environmental persistence and biodegradability. 
+    These structural alerts are molecular functional groups or substructures that are known to be linked to the environmental persistence or biodegradability of chemicals. 
+    The rulebase utilizes the structural alerts in logical decision trees. If one or more the structural alerts embedded in the molecular structure of the chemical are recognized, the system flags the potential persistence or biodegradability of the chemical.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreestart</rdfs:label>    
+    <bo:cites>
+	  <bibrdf:Manual rdf:about="#START08">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>www.molecular-networks.com</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>START (Structural Alerts for Reactivity in Toxtree) biodegradation and persistence decision tree</bibrdf:hasTitle>
+	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/Toxtree_start_manual.pdf</bibrdf:hasURL>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    
+	  </bibrdf:Manual>      
+    </bo:cites>       
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+    
+  <bo:MolecularDescriptor rdf:ID="toxtreemichaelacc">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Identifies Michael Acceptors by Structural Alerts</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreemichaelacc</rdfs:label>   
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#SCH07">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>T. Wayne Schultz</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Jason W. Yarbrough</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Robert S. Hunter</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Aynur O. Aptula</bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>Verification of the Structural Alerts for Michael Acceptors.</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Chem. Res. Toxicol.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2007</bibrdf:hasYear>
+	    <bibrdf:hasVolume>20</bibrdf:hasVolume>
+	    <bibrdf:hasPages>1359-1363</bibrdf:hasPages>
+	    
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/tx700212u</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+  
+  <bo:MolecularDescriptor rdf:ID="toxtreednabinding">
+  
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Protein binding</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreednabinding</rdfs:label>    
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#EMC08">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Enoch SJ</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Madden JC</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Cronin MT</bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>Identification of mechanisms of toxic action for skin sensitisation using a SMARTS pattern based approach.</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>SAR QSAR Environ Res.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    <bibrdf:hasVolume>19(5-6)</bibrdf:hasVolume>
+	    <bibrdf:hasPages>555-578</bibrdf:hasPages>
+	    
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1080/10629360802348985</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+      
+<bo:MolecularDescriptor rdf:ID="toxtreesmartcyp">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Toxtree plugin, predicting sites of metabolism and metabolites.</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreesmartcyp</rdfs:label>    
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#RYD10-1">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Rydberg P.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Gloriam D.E.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Zaretzki E.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Breneman C.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Olsen L.</bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>SMARTCyp: A 2D Method for Prediction of Cytochrome P450-Mediated Drug Metabolism</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>ACS Med. Chem. Lett.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2010</bibrdf:hasYear>
+	    <bibrdf:hasVolume>1(3)</bibrdf:hasVolume>
+	    <bibrdf:hasPages>96-100</bibrdf:hasPages>
+	    
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ml100016x</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#RYD10-2">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Rydberg P.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Gloriam D.E.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Olsen L.</bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>The SMARTCyp cytochrome P450 metabolism prediction server</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Bioinformatics</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2010</bibrdf:hasYear>
+	    <bibrdf:hasVolume>26</bibrdf:hasVolume>
+	    <bibrdf:hasPages>2988-2989</bibrdf:hasPages>
+	    
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1093/bioinformatics/btq584</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+        
+<bo:MolecularDescriptor rdf:ID="toxtreekroes">
+      <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-09-27</dc:date>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kroes Threshold of Toxicological Concern decision tree</bo:definition>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >toxtreekroes</rdfs:label>    
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#KRO04">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Kroes, R.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Renwick, A.G.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Cheeseman, M.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Kleiner, J.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Mangelsdorf, I.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Piersma, A.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Schilter, B.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Schlatter, J.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>van Schothorst, F.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Vos, J.G.</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Wurtzen, G. </bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>Structure based thresholds of toxicological concern (TTC): guidance for application to substances present at low levels in the diet</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Food Chem. Toxicol.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2004</bibrdf:hasYear>
+	    <bibrdf:hasVolume>42</bibrdf:hasVolume>
+	    <bibrdf:hasPages>65-83</bibrdf:hasPages>
+	    
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/j.fct.2003.08.006</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+   
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+          
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
