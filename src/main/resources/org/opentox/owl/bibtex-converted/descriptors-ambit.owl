@@ -14,12 +14,11 @@
     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
     xmlns:bibtex="http://bibtexml.sf.net/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xml:base="file:/D:/src-clean/ontology-service/src/main/resources/org/opentox/owl/bibtex-converted/descriptors-ambit.owl">
-  <owl:Ontology rdf:about="http://ambit.sourceforge.net/descriptors.owl">
-    <owl:imports rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#"/>
-    <owl:imports rdf:resource=""/>
+  xml:base="http://ambit.sourceforge.net/descriptors.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/"/>
   </owl:Ontology>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#SpherosityDescriptor">
+  <bo:MolecularDescriptor rdf:ID="SpherosityDescriptor">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
@@ -31,7 +30,7 @@
     >Spherosity (ref. Todescini 2000)</bo:definition>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#PlanarityDescriptor">
+  <bo:MolecularDescriptor rdf:ID="PlanarityDescriptor">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Spherosity (ref. Todescini 2000)</bo:definition>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -43,11 +42,11 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Planarity</rdfs:label>
   </bo:MolecularDescriptor>
-  <bo:Contributor rdf:about="http://ambit.sourceforge.net/descriptors.owl#ngn">
+  <bo:Contributor rdf:ID="ngn">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Nina Jeliazkova</rdfs:label>
   </bo:Contributor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#FunctionalGroups">
+  <bo:MolecularDescriptor rdf:ID="FunctionalGroups">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Functional groups</rdfs:label>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -59,7 +58,7 @@
     >Functional groups presence, as per http://ambit.acad.bg/downloads/AmbitDb/html/funcgroups.xml</bo:definition>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#constitutionalDescriptor"/>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#MoleculeSize">
+  <bo:MolecularDescriptor rdf:ID="MoleculeSize">
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
@@ -71,21 +70,7 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-01-13</dc:date>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#CrossectionalDiameter">
-    <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
-    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Cross sectional diameter of the molecule</bo:definition>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >2009-01-13</dc:date>
-    <bo:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >returns double[] where [max length, max diameter, min diameter ]</bo:description>
-    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
-    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Crossectional diameter</rdfs:label>
-  </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#MolecularWeight">
+  <bo:MolecularDescriptor rdf:ID="MolecularWeight">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Molecular Weight</rdfs:label>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#constitutionalDescriptor"/>
@@ -100,17 +85,41 @@
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
   </bo:MolecularDescriptor>
-  <bibrdf:Article rdf:about="http://ambit.sourceforge.net/descriptors.owl#JAW2007">
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >3-4</bibrdf:hasPages>
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >2007</bibrdf:hasYear>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >18</bibrdf:hasVolume>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SAR and QSAR in Environmental Research</bibrdf:hasJournal>
-    <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
+  <bo:MolecularDescriptor rdf:ID="CrossectionalDiameter">
+    <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
+    <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cross sectional diameter of the molecule</bo:definition>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2009-01-13</dc:date>
+    <bo:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >returns double[] where [max length, max diameter, min diameter ]</bo:description>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#has3DCoordinates"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Crossectional diameter</rdfs:label>
+  </bo:MolecularDescriptor>
+  <bo:MolecularDescriptor rdf:ID="AtomEnvironment">
+    <bo:cites>
+      <bibrdf:Article rdf:ID="XING2002">
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci010315d</bo:DOI>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+        <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
+&lt;bibtex:author&gt;Xing, L., Glen, R.C.&lt;/bibtex:author&gt;
+&lt;bibtex:title&gt;Novel Methods for the prediction of logger P, pKa and log D.&lt;/bibtex:title&gt;
+&lt;bibtex:journal&gt;J. Chem. Inf. Comput. Sci.&lt;/bibtex:journal&gt;
+&lt;bibtex:year&gt;2002&lt;/bibtex:year&gt;
+&lt;bibtex:volume&gt;42&lt;/bibtex:volume&gt;
+&lt;bibtex:pages&gt;796-805&lt;/bibtex:pages&gt;
+&lt;/bibtex:article&gt;</bibtex:entry>
+      </bibrdf:Article>
+    </bo:cites>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="JAW2007">
+        <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
 &lt;bibtex:author&gt;Jaworska J., Nikolova-Jeliazkova N.&lt;/bibtex:author&gt;
 &lt;bibtex:title&gt;How can structural similarity analysis help in category formation&lt;/bibtex:title&gt;
 &lt;bibtex:journal&gt;SAR and QSAR in Environmental Research&lt;/bibtex:journal&gt;
@@ -118,38 +127,11 @@
 &lt;bibtex:volume&gt;18&lt;/bibtex:volume&gt;
 &lt;bibtex:pages&gt;3-4&lt;/bibtex:pages&gt;
 &lt;/bibtex:article&gt;</bibtex:entry>
-    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
-    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Jaworska J., Nikolova-Jeliazkova N.</bibrdf:hasAuthor>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >How can structural similarity analysis help in category formation</bibrdf:hasTitle>
-  </bibrdf:Article>
-  <bibrdf:Article rdf:about="http://ambit.sourceforge.net/descriptors.owl#LEE2008">
-    <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
-&lt;bibtex:author&gt;Adam C. Lee, Jing-yu Yu, and Gordon M. Crippen&lt;/bibtex:author&gt;
-&lt;bibtex:title&gt;pKa Prediction of Monoprotic Small Molecules the SMARTS Way&lt;/bibtex:title&gt;
-&lt;bibtex:journal&gt;J. Chem. Inf. Model.&lt;/bibtex:journal&gt;
-&lt;bibtex:year&gt;2008&lt;/bibtex:year&gt;
-&lt;bibtex:volume&gt;48&lt;/bibtex:volume&gt;
-&lt;bibtex:number&gt;10&lt;/bibtex:number&gt;
-&lt;bibtex:pages&gt;2042-2053&lt;/bibtex:pages&gt;
-&lt;/bibtex:article&gt;</bibtex:entry>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >2042-2053</bibrdf:hasPages>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >48</bibrdf:hasVolume>
-    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Adam C. Lee, Jing-yu Yu, and Gordon M. Crippen</bibrdf:hasAuthor>
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >2008</bibrdf:hasYear>
-    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >pKa Prediction of Monoprotic Small Molecules the SMARTS Way</bibrdf:hasTitle>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >J. Chem. Inf. Model.</bibrdf:hasJournal>
-  </bibrdf:Article>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#AtomEnvironment">
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1080/10629360701306050</bo:DOI>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+      </bibrdf:Article>
+    </bo:cites>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-01-13</dc:date>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
@@ -163,31 +145,44 @@
 
            &lt;bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="XING2002"&gt;&lt;/bibtex:cite&gt; and &lt;bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="JAW2007"&gt;&lt;/bibtex:cite&gt;</bo:definition>
   </bo:MolecularDescriptor>
-  <bibrdf:Article rdf:about="http://ambit.sourceforge.net/descriptors.owl#XING2002">
-    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Xing, L., Glen, R.C.</bibrdf:hasAuthor>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >796-805</bibrdf:hasPages>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Novel Methods for the prediction of logger P, pKa and log D.</bibrdf:hasTitle>
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >2002</bibrdf:hasYear>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >42</bibrdf:hasVolume>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
-    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
-    <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
-&lt;bibtex:author&gt;Xing, L., Glen, R.C.&lt;/bibtex:author&gt;
-&lt;bibtex:title&gt;Novel Methods for the prediction of logger P, pKa and log D.&lt;/bibtex:title&gt;
-&lt;bibtex:journal&gt;J. Chem. Inf. Comput. Sci.&lt;/bibtex:journal&gt;
-&lt;bibtex:year&gt;2002&lt;/bibtex:year&gt;
-&lt;bibtex:volume&gt;42&lt;/bibtex:volume&gt;
-&lt;bibtex:pages&gt;796-805&lt;/bibtex:pages&gt;
-&lt;/bibtex:article&gt;</bibtex:entry>
-  </bibrdf:Article>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#pkaSMARTS">
+  <bo:MolecularDescriptor rdf:ID="toxtreecramer">
+    <bo:cites>
+	  <bibrdf:Article rdf:about="#CRA78">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Cramer GM</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Ford RA</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Hall RL</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Estimation of Toxic Hazard - A Decision Tree Approach</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>J. Cosmet. Toxicol.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>1978</bibrdf:hasYear>
+	    <bibrdf:hasVolume>16</bibrdf:hasVolume>
+	    <bibrdf:hasPages>255-276</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/S0015-6264(76)80522-6</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>
+   <bo:cites>
+	  <bibrdf:Article rdf:about="#PAT08">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Patlewicz G</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Jeliazkova N</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Safford RJ</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Worth AP</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Aleksiev B.</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>An evaluation of the implementation of the Cramer classification scheme in the Toxtree software</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>SAR QSAR Environ Res.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    <bibrdf:hasVolume>19(5-6)</bibrdf:hasVolume>
+	    <bibrdf:hasPages>495-524</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1080/10629360802083871</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
+  
+  
+  <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -198,8 +193,25 @@
     >pKa</rdfs:label>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hybridDescriptor"/>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="LEE2008">
+        <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
+&lt;bibtex:author&gt;Adam C. Lee, Jing-yu Yu, and Gordon M. Crippen&lt;/bibtex:author&gt;
+&lt;bibtex:title&gt;pKa Prediction of Monoprotic Small Molecules the SMARTS Way&lt;/bibtex:title&gt;
+&lt;bibtex:journal&gt;J. Chem. Inf. Model.&lt;/bibtex:journal&gt;
+&lt;bibtex:year&gt;2008&lt;/bibtex:year&gt;
+&lt;bibtex:volume&gt;48&lt;/bibtex:volume&gt;
+&lt;bibtex:number&gt;10&lt;/bibtex:number&gt;
+&lt;bibtex:pages&gt;2042-2053&lt;/bibtex:pages&gt;
+&lt;/bibtex:article&gt;</bibtex:entry>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci8001815</bo:DOI>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+      </bibrdf:Article>
+    </bo:cites>
   </bo:MolecularDescriptor>
-  <bo:MolecularDescriptor rdf:about="http://ambit.sourceforge.net/descriptors.owl#MOPAC">
+  <bo:MolecularDescriptor rdf:ID="MOPAC">
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >MOPAC wrapper for electronic descriptor calculation</bo:definition>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -210,6 +222,7 @@
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#geometricalDescriptor"/>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#electronicDescriptor"/>
   </bo:MolecularDescriptor>
+ 
 </rdf:RDF>
 
 <!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->
