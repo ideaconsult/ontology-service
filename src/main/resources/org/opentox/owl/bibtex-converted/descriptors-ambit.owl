@@ -181,6 +181,40 @@
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
   
+  <bo:MolecularDescriptor rdf:ID="toxtreecramer2">
+    <bo:cites rdf:resource="#CRA78"/>
+    <bo:cites rdf:resource="#PAT08"/>
+	  
+
+   <bo:cites>
+	  <bibrdf:Article rdf:about="#MUN96">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>I.C. Munro</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>R.A. Ford</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>E. Kennepohl</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>J.G. Sprenger</bibrdf:hasAuthor>
+
+	    <bibrdf:hasTitle>Correlation of structural class with No-Observed-Effect Levels: A proposal for establishing a threshold of concern</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Food Chem. Toxicol.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>1996</bibrdf:hasYear>
+	    <bibrdf:hasVolume>34</bibrdf:hasVolume>
+	    <bibrdf:hasPages>829-867</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/S0278-6915(96)00049-X</bo:DOI>
+	  </bibrdf:Article>      
+    </bo:cites>    
+   <bo:cites>
+	  <bibrdf:Manual rdf:about="#CRA2MANUAL">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>, www.Curios-IT.com</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>User Manual.Cramer rules with extensions.the Cramer rulebase with more human compounds and structural alerts.</bibrdf:hasTitle>
+	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/Toxtree_Cramer_extensions.pdf</bibrdf:hasURL>
+	    <bibrdf:hasYear>2009</bibrdf:hasYear>
+	    
+	  </bibrdf:Manual>      
+    </bo:cites>       
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>
   
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
