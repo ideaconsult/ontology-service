@@ -365,7 +365,7 @@
 	  </bibrdf:Article>      
     </bo:cites>
       <bo:cites>
-	  <bibrdf:Techreport rdf:about="#BEN08">
+	  <bibrdf:Techreport rdf:about="#EUR23241">
 	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
 	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
 	    <bibrdf:hasAuthor>C. Bossa</bibrdf:hasAuthor>
@@ -383,6 +383,39 @@
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
   </bo:MolecularDescriptor>
       
+ <bo:MolecularDescriptor rdf:ID="toxtreemic">
+      <bo:cites>
+	  <bibrdf:Techreport rdf:about="#EUR23844">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>C. Bossa</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>O. Tcheremenskaya</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Worth</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Development of structural alerts for the in vivo micronucleus assay in rodents</bibrdf:hasTitle>
+	    <bibrdf:hasYear>2009</bibrdf:hasYear>
+	    <bibrdf:hasInstitution>European Commission, JRC</bibrdf:hasInstitution>
+	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/EUR_23844_EN.pdf</bibrdf:hasURL>
+	  </bibrdf:Techreport>      
+    </bo:cites>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>      
+
+ <bo:MolecularDescriptor rdf:ID="toxtreefunc">
+      <bo:cites>
+	  <bibrdf:Techreport rdf:about="#EUR24871">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>O. Tcheremenskaya</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Worth</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>Computational Characterisation of Chemicals and Datasets in Terms of Organic Functional Groups - a New Toxtree Rulebase</bibrdf:hasTitle>
+	    <bibrdf:hasYear>2011</bibrdf:hasYear>
+	    <bibrdf:hasInstitution>European Commission, JRC</bibrdf:hasInstitution>
+	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/EUR_24871_EN.pdf</bibrdf:hasURL>
+	  </bibrdf:Techreport>      
+    </bo:cites>
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:MolecularDescriptor>      
+  
   <bo:MolecularDescriptor rdf:ID="pkaSMARTS">
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >http://ambit.sourceforge.net/descriptors.owl#ngn</dc:contributor>
