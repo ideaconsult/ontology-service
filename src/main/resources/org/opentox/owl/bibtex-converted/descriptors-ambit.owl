@@ -694,23 +694,24 @@ suggest significant toxicity or have reactive functional groups.
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2009-01-13</dc:date>
     <bo:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >pKa estimation , as described in             &lt;bibtex:cite xmlns:bibtex="http://bibtexml.sf.net/" ref="LEE2008"&gt;&lt;/bibtex:cite&gt;</bo:definition>
+    >A decision tree for prediction of pKa for small molecules based on a set of SMARTS strings</bo:definition>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >pKa</rdfs:label>
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
     <bo:isClassifiedAs rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#hybridDescriptor"/>
     <bo:cites>
-      <bibrdf:Article rdf:ID="LEE2008">
-        <bibtex:entry rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >&lt;bibtex:article xmlns:bibtex="http://bibtexml.sf.net/"&gt;
-&lt;bibtex:author&gt;Adam C. Lee, Jing-yu Yu, and Gordon M. Crippen&lt;/bibtex:author&gt;
-&lt;bibtex:title&gt;pKa Prediction of Monoprotic Small Molecules the SMARTS Way&lt;/bibtex:title&gt;
-&lt;bibtex:journal&gt;J. Chem. Inf. Model.&lt;/bibtex:journal&gt;
-&lt;bibtex:year&gt;2008&lt;/bibtex:year&gt;
-&lt;bibtex:volume&gt;48&lt;/bibtex:volume&gt;
-&lt;bibtex:number&gt;10&lt;/bibtex:number&gt;
-&lt;bibtex:pages&gt;2042-2053&lt;/bibtex:pages&gt;
-&lt;/bibtex:article&gt;</bibtex:entry>
+	  <bibrdf:Article rdf:about="#LEE2008">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>Adam C. Lee</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Jing-yu Yu</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>Gordon M. Croppen</bibrdf:hasAuthor>
+	    <bibrdf:hasTitle>pKa Prediction of Monoprotic Small Molecules the SMARTS Way</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>J. Chem. Inf. Model.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2008</bibrdf:hasYear>
+	    <bibrdf:hasVolume>10</bibrdf:hasVolume>
+	    <bibrdf:hasPages>2042-2053</bibrdf:hasPages>
+	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/j.fct.2003.08.006</bo:DOI>
         <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >10.1021/ci8001815</bo:DOI>
         <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
