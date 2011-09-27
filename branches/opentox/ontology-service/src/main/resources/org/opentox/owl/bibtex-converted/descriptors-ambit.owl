@@ -478,7 +478,27 @@ suggest significant toxicity or have reactive functional groups.
 	    <bibrdf:hasInstitution>European Commission, JRC</bibrdf:hasInstitution>
 	    <bibrdf:hasURL>http://ihcp.jrc.ec.europa.eu/our_labs/computational_toxicology/doc/EUR_23241_EN.pdf</bibrdf:hasURL>
 
-	  </bibrdf:Techreport>      
+	  </bibrdf:Techreport>  
+	  </bo:cites> 
+      <bo:cites>
+	  <bibrdf:Article rdf:about="#BEN09">
+	    <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+	    <bibrdf:hasAuthor>R. Benigni</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Worth</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>T. Netzeva</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>N. Jeliazkova</bibrdf:hasAuthor>	    
+	    <bibrdf:hasAuthor>C. Bossa</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>A. Gruska</bibrdf:hasAuthor>
+	    <bibrdf:hasAuthor>R. Franke</bibrdf:hasAuthor>
+	    
+	    <bibrdf:hasTitle>Structural motifs modulating the carcinogenic risk of aromatic amines.</bibrdf:hasTitle>
+	    <bibrdf:hasJournal>Environ mol mutag.</bibrdf:hasJournal>
+	    <bibrdf:hasYear>2009</bibrdf:hasYear>
+	    <bibrdf:hasVolume>50</bibrdf:hasVolume>
+	    <bibrdf:hasPages>152-161</bibrdf:hasPages>
+	     <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/em.20461</bo:DOI>
+	  </bibrdf:Article>      
     </bo:cites>
    
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
