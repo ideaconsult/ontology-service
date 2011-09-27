@@ -243,23 +243,24 @@
     >Gravitational Index</rdfs:label>
     <bo:cites>
       <bibrdf:Article rdf:ID="KAT96">
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Katritzky, A.R. and Mu, L. and Lobanov, V.S. and Karelson, M.</bibrdf:hasAuthor>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >J. Phys. Chem.</bibrdf:hasJournal>
-        <rdf:type rdf:resource="#Reference"/>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/jp953224q</bo:DOI>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1996</bibrdf:hasYear>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >100</bibrdf:hasVolume>
         <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Correlation of Boiling Points With Molecular Structure. 1. A Training Set of 298 Diverse
                     Organics and a Test Set of 9 Simple Inorganics
                 </bibrdf:hasTitle>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >1996</bibrdf:hasYear>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Phys. Chem.</bibrdf:hasJournal>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Katritzky, A.R. and Mu, L. and Lobanov, V.S. and Karelson, M.</bibrdf:hasAuthor>
         <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >10400-10407</bibrdf:hasPages>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Katritzky, A.R. and Mu, L. and Lobanov, V.S. and Karelson, M.</bibtex:author>
                 <bibtex:title>Correlation of Boiling Points With Molecular Structure. 1. A Training Set of 298 Diverse
                     Organics and a Test Set of 9 Simple Inorganics
@@ -268,8 +269,7 @@
                 <bibtex:year>1996</bibtex:year>
                 <bibtex:volume>100</bibtex:volume>
                 <bibtex:pages>10400-10407</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
+            </bibtex:article></bibtex:entry>
       </bibrdf:Article>
     </bo:cites>
     <bo:definition rdf:parseType="Literal">
@@ -654,15 +654,13 @@
         >Persepectives in Drug Discovery and Design</bibrdf:hasJournal>
         <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >355-380</bibrdf:hasPages>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Todeschini, R. and Gramatica, P.</bibtex:author>
                 <bibtex:title>New 3D Molecular Descriptors: The WHIM theory and QAR Applications</bibtex:title>
                 <bibtex:journal>Persepectives in Drug Discovery and Design</bibtex:journal>
                 <bibtex:year>1998</bibtex:year>
                 <bibtex:pages>355-380</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
+            </bibtex:article></bibtex:entry>
         <rdf:type rdf:resource="#Reference"/>
         <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Todeschini, R. and Gramatica, P.</bibrdf:hasAuthor>
@@ -854,16 +852,11 @@
         </bo:description>
     <bo:cites>
       <bibrdf:Article rdf:ID="WANG97">
-        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >615-621</bibrdf:hasPages>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >A New Atom-Additive Method for Calculating Partition Coefficients</bibrdf:hasTitle>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Journal of Chemical Information and Computer
-                    Sciences
-                </bibrdf:hasJournal>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1997</bibrdf:hasYear>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci960169p</bo:DOI>
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Wang, R., Fu, Y., and Lai, L.</bibtex:author>
                 <bibtex:title>A New Atom-Additive Method for Calculating Partition Coefficients</bibtex:title>
                 <bibtex:journal>Journal of Chemical Information and Computer
@@ -872,15 +865,20 @@
                 <bibtex:year>1997</bibtex:year>
                 <bibtex:volume>37</bibtex:volume>
                 <bibtex:pages>615-621</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
+            </bibtex:article></bibtex:entry>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Journal of Chemical Information and Computer
+                    Sciences
+                </bibrdf:hasJournal>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >A New Atom-Additive Method for Calculating Partition Coefficients</bibrdf:hasTitle>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >615-621</bibrdf:hasPages>
+        <rdf:type rdf:resource="#Reference"/>
         <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Wang, R., Fu, Y., and Lai, L.</bibrdf:hasAuthor>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >37</bibrdf:hasVolume>
-        <rdf:type rdf:resource="#Reference"/>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >1997</bibrdf:hasYear>
       </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
@@ -930,10 +928,7 @@
                     Electronegativity- A Rapid Access to Atomic Charges
                 </bibrdf:hasTitle>
         <rdf:type rdf:resource="#Reference"/>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >1980</bibrdf:hasYear>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Gasteiger, J.</bibtex:author>
                 <bibtex:author>Marsili, M.</bibtex:author>
                 <bibtex:title>
@@ -944,8 +939,11 @@
                 <bibtex:year>1980</bibtex:year>
                 <bibtex:volume>36</bibtex:volume>
                 <bibtex:pages>3219-3228</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
+            </bibtex:article></bibtex:entry>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1980</bibrdf:hasYear>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1016/0040-4020(80)80168-2</bo:DOI>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >36</bibrdf:hasVolume>
         <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -996,8 +994,17 @@
         >Cherkasov, A.</bibrdf:hasAuthor>
         <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >2003</bibrdf:hasYear>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Inductive Electronegativity Scale. Iterative Calculation of Inductive Partial
+                    Charges
+                </bibrdf:hasTitle>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
+        <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci034147w</bibrdf:hasDoi>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci034147w</bo:DOI>
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Cherkasov, A.</bibtex:author>
                 <bibtex:title>Inductive Electronegativity Scale. Iterative Calculation of Inductive Partial
                     Charges
@@ -1007,16 +1014,7 @@
                 <bibtex:volume>43</bibtex:volume>
                 <bibtex:pages>2039-2047</bibtex:pages>
                 <bibtex:doi>10.1021/ci034147w</bibtex:doi>
-            </bibtex:article>
-        </bibtex:entry>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Inductive Electronegativity Scale. Iterative Calculation of Inductive Partial
-                    Charges
-                </bibrdf:hasTitle>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
-        <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >10.1021/ci034147w</bibrdf:hasDoi>
+            </bibtex:article></bibtex:entry>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >43</bibrdf:hasVolume>
         <rdf:type rdf:resource="#Reference"/>
@@ -1060,26 +1058,8 @@
             .
         </bo:description>
     <bo:cites>
-      <bibrdf:Article rdf:ID="LIU98">
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Journal of Chemical Information and Computer Sciences</bibrdf:hasJournal>
-        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >387-394</bibrdf:hasPages>
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Liu, S. and Cao, C. and Li, Z.
-                </bibrdf:hasAuthor>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Approach to Estimation and Prediction for Normal
-                    Boiling Point (NBP) of Alkanes Based on a Novel Molecular
-                    Distance Edge (MDE) Vector, lambda
-                </bibrdf:hasTitle>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >i1998</bibrdf:hasYear>
-        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >38</bibrdf:hasVolume>
-        <rdf:type rdf:resource="#Reference"/>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+      <bo:Reference rdf:ID="LIU98">
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Liu, S. and Cao, C. and Li, Z.
                 </bibtex:author>
                 <bibtex:title>Approach to Estimation and Prediction for Normal
@@ -1090,9 +1070,27 @@
                 <bibtex:year>i1998</bibtex:year>
                 <bibtex:volume>38</bibtex:volume>
                 <bibtex:pages>387-394</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
-      </bibrdf:Article>
+            </bibtex:article></bibtex:entry>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Liu, S. and Cao, C. and Li, Z.
+                </bibrdf:hasAuthor>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >38</bibrdf:hasVolume>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >i1998</bibrdf:hasYear>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Journal of Chemical Information and Computer Sciences</bibrdf:hasJournal>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci970109z</bo:DOI>
+        <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >387-394</bibrdf:hasPages>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Approach to Estimation and Prediction for Normal
+                    Boiling Point (NBP) of Alkanes Based on a Novel Molecular
+                    Distance Edge (MDE) Vector, lambda
+                </bibrdf:hasTitle>
+      </bo:Reference>
     </bo:cites>
     <bo:definition rdf:parseType="Literal">
             Evaluate molecular distance edge descriptors for C, N and O
@@ -1267,19 +1265,24 @@
         </bo:definition>
     <bo:cites>
       <bibrdf:Article rdf:ID="WES98">
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Wessel, M.D. and Jurs, P.C. and Tolan, J.W. and Muskal, S.M.
-                </bibrdf:hasAuthor>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1998</bibrdf:hasYear>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci980029a</bo:DOI>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >726-735</bibrdf:hasPages>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >38</bibrdf:hasVolume>
         <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Journal of Chemical Information and Computer
                     Sciences
                 </bibrdf:hasJournal>
-        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >726-735</bibrdf:hasPages>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Prediction of Human Intestinal Absorption of Drug Compounds
+                    From Molecular Structure
+                </bibrdf:hasTitle>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Wessel, M.D. and Jurs, P.C. and Tolan, J.W. and Muskal, S.M.
                 </bibtex:author>
                 <bibtex:title>Prediction of Human Intestinal Absorption of Drug Compounds
@@ -1291,15 +1294,10 @@
                 <bibtex:year>1998</bibtex:year>
                 <bibtex:volume>38</bibtex:volume>
                 <bibtex:pages>726-735</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Prediction of Human Intestinal Absorption of Drug Compounds
-                    From Molecular Structure
-                </bibrdf:hasTitle>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >1998</bibrdf:hasYear>
-        <rdf:type rdf:resource="#Reference"/>
+            </bibtex:article></bibtex:entry>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Wessel, M.D. and Jurs, P.C. and Tolan, J.W. and Muskal, S.M.
+                </bibrdf:hasAuthor>
       </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
@@ -1438,14 +1436,17 @@
                     Systemen durch eine Quantifizierung des
                     Mesomeriekonzeptes
                 </bibrdf:hasTitle>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1002/ange.19850970818</bo:DOI>
         <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >97</bibrdf:hasVolume>
         <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >Saller, H.</bibrdf:hasAuthor>
         <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >1985</bibrdf:hasYear>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Angew. Chem.</bibrdf:hasJournal>
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Gasteiger, J.</bibtex:author>
                 <bibtex:author>Saller, H.</bibtex:author>
                 <bibtex:title>
@@ -1457,10 +1458,7 @@
                 <bibtex:year>1985</bibtex:year>
                 <bibtex:volume>97</bibtex:volume>
                 <bibtex:pages>699-701</bibtex:pages>
-            </bibtex:article>
-        </bibtex:entry>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Angew. Chem.</bibrdf:hasJournal>
+            </bibtex:article></bibtex:entry>
         <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >699-701</bibrdf:hasPages>
         <rdf:type rdf:resource="#Reference"/>
@@ -1703,8 +1701,10 @@
     <bo:isClassifiedAs rdf:resource="#electronicDescriptor"/>
     <bo:cites>
       <bibrdf:Article rdf:ID="BK02">
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >J. Med. Chem.</bibrdf:hasJournal>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >45</bibrdf:hasVolume>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Böhm, M. and Klebe, G.</bibrdf:hasAuthor>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>BÃƒÂ¶hm, M. and Klebe, G.</bibtex:author>
@@ -1715,17 +1715,17 @@
                 <bibtex:pages>1585-1597</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-        <rdf:type rdf:resource="#Reference"/>
-        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >2002</bibrdf:hasYear>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Development of New Hydrogen-Bond Descriptors and Their {A}pplication to Comparative Molecular Field Analyses</bibrdf:hasTitle>
-        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >45</bibrdf:hasVolume>
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Böhm, M. and Klebe, G.</bibrdf:hasAuthor>
         <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >1585-1597</bibrdf:hasPages>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/jm011039x</bo:DOI>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Development of New Hydrogen-Bond Descriptors and Their {A}pplication to Comparative Molecular Field Analyses</bibrdf:hasTitle>
+        <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Med. Chem.</bibrdf:hasJournal>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2002</bibrdf:hasYear>
       </bibrdf:Article>
     </bo:cites>
     <bo:description rdf:parseType="Literal">
@@ -2077,6 +2077,19 @@
         </bo:definition>
     <bo:cites>
       <bo:Reference rdf:ID="ERTL2000">
+        <bibtex:entry rdf:parseType="Literal"><bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
+                <bibtex:author>Ertl, P. and Rohde, B. and Selzer, P.</bibtex:author>
+                <bibtex:title>Fast Calculation of Molecular Polar Surface Area as a Sum of
+                    Fragment-Based Contributions and Its Application to the Prediction of
+                    Drug Transport Properties
+                </bibtex:title>
+                <bibtex:journal>J. Med. Chem.</bibtex:journal>
+                <bibtex:year>2000</bibtex:year>
+                <bibtex:volume>43</bibtex:volume>
+                <bibtex:number>20</bibtex:number>
+                <bibtex:pages>3714-3717</bibtex:pages>
+                <bibtex:doi>10.1021/jm000942e</bibtex:doi>
+            </bibtex:article></bibtex:entry>
         <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >10.1021/jm000942e</bibrdf:hasDoi>
         <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -2090,26 +2103,13 @@
         >43</bibrdf:hasVolume>
         <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >3714-3717</bibrdf:hasPages>
+        <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
         <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >2000</bibrdf:hasYear>
-        <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
         <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >J. Med. Chem.</bibrdf:hasJournal>
-        <bibtex:entry rdf:parseType="Literal">
-            <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
-                <bibtex:author>Ertl, P. and Rohde, B. and Selzer, P.</bibtex:author>
-                <bibtex:title>Fast Calculation of Molecular Polar Surface Area as a Sum of
-                    Fragment-Based Contributions and Its Application to the Prediction of
-                    Drug Transport Properties
-                </bibtex:title>
-                <bibtex:journal>J. Med. Chem.</bibtex:journal>
-                <bibtex:year>2000</bibtex:year>
-                <bibtex:volume>43</bibtex:volume>
-                <bibtex:number>20</bibtex:number>
-                <bibtex:pages>3714-3717</bibtex:pages>
-                <bibtex:doi>10.1021/jm000942e</bibtex:doi>
-            </bibtex:article>
-        </bibtex:entry>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/jm000942e</bo:DOI>
       </bo:Reference>
     </bo:cites>
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -2164,18 +2164,8 @@
     >2005-01-27</dc:date>
     <bo:cites>
       <bibrdf:Article rdf:ID="PEA99">
-        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >28-35</bibrdf:hasPages>
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Pearlman, R.S. and Smith, K.M.</bibrdf:hasAuthor>
-        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >39</bibrdf:hasVolume>
         <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >1999</bibrdf:hasYear>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Metric Validation and the Receptor-Relevant Subspace Concept</bibrdf:hasTitle>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Pearlman, R.S. and Smith, K.M.</bibtex:author>
@@ -2187,22 +2177,25 @@
                 <bibtex:pages>28-35</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
         <rdf:type rdf:resource="#Reference"/>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >39</bibrdf:hasVolume>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Metric Validation and the Receptor-Relevant Subspace Concept</bibrdf:hasTitle>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ci980137x</bo:DOI>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >28-35</bibrdf:hasPages>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Pearlman, R.S. and Smith, K.M.</bibrdf:hasAuthor>
       </bibrdf:Article>
     </bo:cites>
   </bo:MolecularDescriptor>
-  <bibrdf:Article rdf:ID="PET92">
+  <bo:Reference rdf:ID="PET92">
     <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >32</bibrdf:hasVolume>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Applications of the radius-diameter diagram to the classification of topological and
-                    geometrical shapes of chemical compounds
-                </bibrdf:hasTitle>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >331-337</bibrdf:hasPages>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
-    <rdf:type rdf:resource="#Reference"/>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Petitjean, M.
@@ -2218,10 +2211,21 @@
         </bibtex:entry>
     <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1992</bibrdf:hasYear>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >331-337</bibrdf:hasPages>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applications of the radius-diameter diagram to the classification of topological and
+                    geometrical shapes of chemical compounds
+                </bibrdf:hasTitle>
+    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10.1021/ci00008a012</bo:DOI>
     <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Petitjean, M.
                 </bibrdf:hasAuthor>
-  </bibrdf:Article>
+    <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
+  </bo:Reference>
   <bo:AtomicDescriptor rdf:ID="atomValence">
     <bo:definition rdf:parseType="Literal">
             Descriptor that calculates the valence of an atom.
@@ -2494,20 +2498,9 @@
     >Carbon Types</rdfs:label>
     <bo:isClassifiedAs rdf:resource="#topologicalDescriptor"/>
   </bo:MolecularDescriptor>
-  <bibrdf:Article rdf:ID="BAT95">
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1995</bibrdf:hasYear>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >35</bibrdf:hasVolume>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >714-716</bibrdf:hasPages>
-    <rdf:type rdf:resource="#Reference"/>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The Extent of the Relationship between the Graph-Theoretical and the Geometrical Shape
-                    Coefficients of Chemical Compounds
-                </bibrdf:hasTitle>
+  <bo:Reference rdf:ID="BAT95">
+    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10.1021/ci00026a007</bo:DOI>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Bath, P.A. and Poirette, A.R. and Willet, P. and Allen, F.H.
@@ -2521,15 +2514,30 @@
                 <bibtex:pages>714-716</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Extent of the Relationship between the Graph-Theoretical and the Geometrical Shape
+                    Coefficients of Chemical Compounds
+                </bibrdf:hasTitle>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1995</bibrdf:hasYear>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >35</bibrdf:hasVolume>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >714-716</bibrdf:hasPages>
+    <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
     <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Bath, P.A. and Poirette, A.R. and Willet, P. and Allen, F.H.
                 </bibrdf:hasAuthor>
-  </bibrdf:Article>
-  <bibrdf:Article rdf:ID="RAN84">
-    <rdf:type rdf:resource="#Reference"/>
-    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Randic, M.
-                </bibrdf:hasAuthor>
+  </bo:Reference>
+  <bo:Reference rdf:ID="RAN84">
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >24</bibrdf:hasVolume>
+    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10.1021/ci00043a009</bo:DOI>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >164-175</bibrdf:hasPages>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
                 <bibtex:author>Randic, M.
@@ -2541,17 +2549,17 @@
                 <bibtex:pages>164-175</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >24</bibrdf:hasVolume>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >On molecular identification numbers</bibrdf:hasTitle>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >164-175</bibrdf:hasPages>
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1984</bibrdf:hasYear>
     <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Journal of Chemical Information and Computer Science</bibrdf:hasJournal>
-  </bibrdf:Article>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1984</bibrdf:hasYear>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >On molecular identification numbers</bibrdf:hasTitle>
+    <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Randic, M.
+                </bibrdf:hasAuthor>
+    <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
+  </bo:Reference>
   <bo:MolecularDescriptor rdf:ID="atomCount">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Element Count</rdfs:label>
@@ -2897,6 +2905,8 @@
         <bibrdf:hasDoi rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >10.1021/ac010737m</bibrdf:hasDoi>
         <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/ac010737m</bo:DOI>
       </bo:Reference>
     </bo:cites>
     <bo:isClassifiedAs rdf:resource="#geometricalDescriptor"/>
@@ -2937,11 +2947,21 @@
     >Donor Field Atoms (Boehm,Klebe)</rdfs:label>
     <bo:cites>
       <bibrdf:Article rdf:ID="PL96">
-        <rdf:type rdf:resource="#Reference"/>
-        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Chem. Rev.</bibrdf:hasJournal>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3147-3176</bibrdf:hasPages>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bioisosterism: A Rational Approach in Drug Design</bibrdf:hasTitle>
         <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >1996</bibrdf:hasYear>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >96</bibrdf:hasVolume>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Patani, G. A. and LaVoie, E. J.</bibrdf:hasAuthor>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Chem. Rev.</bibrdf:hasJournal>
+        <rdf:type rdf:resource="#Reference"/>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1021/cr950066q</bo:DOI>
         <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
               <bibtex:author>Patani, G. A. and LaVoie, E. J.</bibtex:author>
@@ -2952,14 +2972,6 @@
               <bibtex:pages>3147-3176</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Bioisosterism: A Rational Approach in Drug Design</bibrdf:hasTitle>
-        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >96</bibrdf:hasVolume>
-        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3147-3176</bibrdf:hasPages>
-        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Patani, G. A. and LaVoie, E. J.</bibrdf:hasAuthor>
       </bibrdf:Article>
     </bo:cites>
     <bo:cites rdf:resource="#BK02"/>
@@ -3011,14 +3023,11 @@
     <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >2006-05-08</dc:date>
   </bo:BondDescriptor>
-  <bibrdf:Article rdf:ID="GWB98">
-    <rdf:type rdf:resource="#Reference"/>
-    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1998</bibrdf:hasYear>
-    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >38</bibrdf:hasVolume>
-    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
+  <bo:Reference rdf:ID="GWB98">
+    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10.1021/ci970431+</bo:DOI>
+    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Identification of Biological Activity Profiles Using Substructural Analysis and Genetic Algorithms</bibrdf:hasTitle>
     <bibtex:entry rdf:parseType="Literal">
             <bibtex:article xmlns:bibtex="http://bibtexml.sf.net/">
               <bibtex:author>Gillet, J. and Willett, P. and Bradshaw, J.</bibtex:author>
@@ -3029,13 +3038,18 @@
               <bibtex:pages>165-179</bibtex:pages>
             </bibtex:article>
         </bibtex:entry>
-    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >165-179</bibrdf:hasPages>
-    <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Identification of Biological Activity Profiles Using Substructural Analysis and Genetic Algorithms</bibrdf:hasTitle>
+    <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >38</bibrdf:hasVolume>
     <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Gillet, J. and Willett, P. and Bradshaw, J.</bibrdf:hasAuthor>
-  </bibrdf:Article>
+    <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1998</bibrdf:hasYear>
+    <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >J. Chem. Inf. Comput. Sci.</bibrdf:hasJournal>
+    <rdf:type rdf:resource="http://zeitkunst.org/bibtex/0.1/bibtex.owl#Article"/>
+    <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >165-179</bibrdf:hasPages>
+  </bo:Reference>
   <owl:AnnotationProperty rdf:about="http://bibtexml.sf.net/entry"/>
   <bo:MolecularDescriptor rdf:ID="wienerNumbers">
     <dc:contributor rdf:resource="#mf"/>
