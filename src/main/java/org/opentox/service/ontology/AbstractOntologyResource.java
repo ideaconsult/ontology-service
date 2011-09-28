@@ -85,19 +85,21 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			@Override
 			public String getSPARQL() {
 				return String.format("%s%s",getPrefix(),
-				"select distinct ?Algorithm ?label ?cites ?doi ?algo_in_ontology ?def ?desc\n"+
-				"	where {\n"+
-				"	   ?Algorithm rdf:type ot:Algorithm.\n"+
-				"	   ?Algorithm dc:title ?label.\n"+
-				"	   OPTIONAL {?Algorithm rdfs:comment ?comment}.\n"+
-				"	   OPTIONAL {?Algorithm bo:instanceOf ?algo_in_ontology.\n"+
-				"      ?algo_in_ontology bo:cites ?cites.\n"+
-				"      OPTIONAL {?cites bo:DOI ?doi}.\n"+
-				"      ?algo_in_ontology bo:definition ?def.\n"+
-                "       ?algo_in_ontology bo:description ?desc.}\n"+
+				"select distinct ?OpenToxAlgorithm ?label ?doi ?Reference ?OntologyEntry\n"+
+				"		where {\n"+
+				"			   ?OpenToxAlgorithm rdf:type ot:Algorithm.\n"+
+				"			   ?OpenToxAlgorithm dc:title ?label.\n"+
+				"		   OPTIONAL {\n"+
+				"	               ?OpenToxAlgorithm bo:instanceOf ?OntologyEntry.\n"+
+				"	               OPTIONAL {\n"+
+				"	                   ?OntologyEntry bo:cites ?Reference.\n"+
+				"		                   OPTIONAL {?Reference bo:DOI ?doi.}\n"+
+				"	               }\n"+
+				"			}\n"+
 				"		}\n"+
-				"	order by ?Algorithm ?Property ?Value\n"+
-				"limit 20");
+				"	order by ?OpenToxAlgorithm\n"
+				);
+
 			}
 		},
 		Model{
@@ -125,8 +127,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  rdf:type ota:DescriptorCalculation;" +
 				"  bo:instanceOf ?desc ." +
 				"  ?desc rdf:type bo:MolecularDescriptor." +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
@@ -141,8 +143,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:Algorithm;" +
 				"  rdf:type ota:Learning." +
 				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
@@ -161,8 +163,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:Algorithm;" +
 				"  rdf:type ota:Classification." +
 				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
@@ -181,8 +183,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:Algorithm;" +
 				"  rdf:type ota:Regression." +
 				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
@@ -201,8 +203,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:Algorithm;" +
 				"  rdf:type ota:Rules." +
 				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
@@ -221,8 +223,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:AppDomain;" +
 				"  rdf:type ota:Rules." +
 				"  OPTIONAL {?algo bo:instanceOf ?desc .}" +
-				"}\n"+
-				"limit 20");
+				"}\n"
+				);
 			}
 			@Override
 			public Keys parent() {
