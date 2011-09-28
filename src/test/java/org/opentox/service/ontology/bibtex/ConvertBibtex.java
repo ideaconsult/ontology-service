@@ -14,11 +14,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.Ontology;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -137,10 +140,21 @@ public class ConvertBibtex {
 		
 	}
 	protected Model parseBO(InputStream boRDF) throws Exception {
-			
+			String boPrefix = "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/";
 			Model rdf = ModelFactory.createDefaultModel();
+			rdf.setNsPrefix("bo", boPrefix);
 			rdf.read(boRDF,null);
+			
+			Model rdfBibtex = ModelFactory.createDefaultModel();
+			rdfBibtex.setNsPrefix("bo", boPrefix);
+			rdfBibtex.setNsPrefix("bibrdf",bibtex_rdf_ns);
 
+			//Ontology o = rdf.getOntology("http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/");
+			//System.out.println(o);
+			//rdf.enterCriticalSection(Lock.WRITE) ;
+			//o.addImport(rdf.createResource(bibtex_rdf_ns));
+			//rdf.leaveCriticalSection();
+			
 			//have to import it somehow instead
 			/*
 			Model bibrdf = ModelFactory.createDefaultModel();
@@ -148,35 +162,61 @@ public class ConvertBibtex {
 			bibrdf.setNsPrefix("bibrdf",bibtex_rdf_ns);
 			rdf.add(bibrdf);
 			*/
-			
+			//rdf.enterCriticalSection(Lock.READ) ;
 			RDFNode node = rdf.createResource("http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference");
 			Property bibtexProp = rdf.createProperty("http://bibtexml.sf.net/entry");
-			rdf.setNsPrefix("bo", "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#");
+			
 			rdf.setNsPrefix("bibrdf",bibtex_rdf_ns);
 			
 			StmtIterator iter = rdf.listStatements(null,RDF.type,node);
 			while (iter.hasNext()) {
 				Statement st = iter.nextStatement();
 				System.out.println(">>> "+st.getSubject());
-				Literal txt = st.getSubject().getProperty(bibtexProp).getLiteral();
-				System.out.println(">>>> "+txt.getString());
-				
-				parseBibteXML(rdf,st.getSubject(),txt.getString());
+				try {
+					//rdf.enterCriticalSection(Lock.WRITE);
+					Literal txt = st.getSubject().getProperty(bibtexProp).getLiteral();
+					System.out.println(">>>> "+txt.getString());
+					
+					parseBibteXML(rdfBibtex,st.getSubject(),txt.getString());
+				} catch (Exception x) {
+					//System.out.println(bibtexProp);
+				} finally {
+					//rdf.leaveCriticalSection();
+				}
+
 				
 			}
 			iter.close();
-			return rdf;
+			//
+			return rdfBibtex;
 
 	}
 	public static void main(String[] args) {
 		String infile = args[0];
 		try {
+			String boPrefix = "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#";
+			
 			ConvertBibtex bx = new ConvertBibtex();
 			File input = new File(infile);
 			Model rdf = bx.parseBO(new FileInputStream(input));
+			OntModel owl = ModelFactory.createOntologyModel();
+			owl.add(rdf);
+			owl.setNsPrefix("bibrdf",bibtex_rdf_ns);
+			owl.setNsPrefix("bo", boPrefix);
+			owl.setNsPrefix("", boPrefix);
+			owl.setNsPrefix("bibxml","http://bibtexml.sf.net/");
+			Ontology ont = owl.createOntology("http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/");
+			ont.setImport(owl.createResource("http://zeitkunst.org/bibtex/0.1/bibtex.owl"));
+
+			RDFWriter writer = owl.getWriter("RDF/XML-ABBREV");
+			writer.setProperty("xmlbase",owl.getNsPrefixURI(""));
+			writer.setProperty("showXmlDeclaration", Boolean.TRUE);
+			writer.setProperty("showDoctypeDeclaration", Boolean.TRUE);	
 			
-			rdf.write(new FileWriter("converted.owl"));
+			writer.write(owl,new FileWriter("converted.owl"),boPrefix);
+			
 			rdf.close();
+			owl.close();
 		} catch (Exception x) {
 			x.printStackTrace();
 		} finally {

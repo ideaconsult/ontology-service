@@ -85,10 +85,16 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			@Override
 			public String getSPARQL() {
 				return String.format("%s%s",getPrefix(),
-				"select ?Algorithm ?Property ?Value\n"+
+				"select distinct ?Algorithm ?label ?cites ?doi ?algo_in_ontology ?def ?desc\n"+
 				"	where {\n"+
 				"	   ?Algorithm rdf:type ot:Algorithm.\n"+
-				"	   OPTIONAL {?Algorithm ?Property ?Value}.\n"+
+				"	   ?Algorithm dc:title ?label.\n"+
+				"	   OPTIONAL {?Algorithm rdfs:comment ?comment}.\n"+
+				"	   OPTIONAL {?Algorithm bo:instanceOf ?algo_in_ontology.\n"+
+				"      ?algo_in_ontology bo:cites ?cites.\n"+
+				"      OPTIONAL {?cites bo:DOI ?doi}.\n"+
+				"      ?algo_in_ontology bo:definition ?def.\n"+
+                "       ?algo_in_ontology bo:description ?desc.}\n"+
 				"		}\n"+
 				"	order by ?Algorithm ?Property ?Value\n"+
 				"limit 20");
@@ -582,10 +588,13 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			String.format("PREFIX dc:<%s>\n",DC.NS)+
 			"PREFIX dcterms:<http://purl.org/dc/terms/>\n"+ 
 			"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+			"PREFIX bo1:<http://ambit.sf.net/descriptors.owl#>\n"+
 			"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
 			"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
 			"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
+			"PREFIX bibrdf:<http://purl.org/net/nknouf/ns/bibtex#>\n"+
 			"PREFIX toxcast:<http://www.opentox.org/toxcast#>\n";
+			
 		}
 		public String getSPARQL() {
 			return getSPARQL("ot","rdf:type");
@@ -660,35 +669,57 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	protected Representation get(Variant variant) throws ResourceException {
 		Form form = getRequest().getResourceRef().getQueryAsForm();
 		String query = form.getFirstValue("query");
+		String uri = form.getFirstValue("uri");
 		if(query == null) {
-			String ns = "ot";
-			String predicate = "rdf:type";
-			Object key = getRequest().getAttributes().get(resourceKey);
-			if (key==null) { 
-				query = 
-				"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
-				"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
-				"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-				"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
-				"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
-				"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-				"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
-				"select ?descriptor ?label ?definition ?requires ?category ?contributor\n"+
-				"		where {\n"+
-				"	        ?descriptor rdf:type bo:MolecularDescriptor.\n"+
-				"   		OPTIONAL {?descriptor rdfs:label ?label}.\n"+
-				"                OPTIONAL {?descriptor bo:definition ?definition}.\n"+
-				"                OPTIONAL {?descriptor dc:contributor ?contributor}.\n"+
-				"                OPTIONAL {?descriptor bo:isClassifiedAs ?category}.\n"+
-				"                OPTIONAL {?descriptor bo:requires?requires}.\n"+
-				"		}\n";
-
-			} else try {
-				query =  Keys.valueOf(key.toString()).getSPARQL();
-			} catch (Exception x) {
-				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,key.toString());
-			}	
+			if (uri!=null) {
+				query = String.format(
+					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
+					"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
+					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
+					"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
+					"PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
+					"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+					"select ?p ?o\n"+
+					"		where {\n"+
+					"	        <%s> ?p ?o.\n"+
+					"		}",uri,uri);
+			} else {
+				String ns = "ot";
+				String predicate = "rdf:type";
+				Object key = getRequest().getAttributes().get(resourceKey);
+				if (key==null) { 
+					query = 
+					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
+					"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
+					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
+					"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
+					"PREFIX bibrdf:<http://zeitkunst.org/bibtex/0.1/bibtex.owl#>\n"+
+					"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+					"select ?descriptor ?label ?cites ?doi ?definition ?requires ?category ?contributor\n"+
+					"		where {\n"+
+					"	        ?descriptor rdf:type bo:MolecularDescriptor.\n"+
+					"   		OPTIONAL {?descriptor rdfs:label ?label}.\n"+
+					"                OPTIONAL {?descriptor bo:definition ?definition}.\n"+
+					"                OPTIONAL {?descriptor dc:contributor ?contributor}.\n"+
+					"                OPTIONAL {?descriptor bo:isClassifiedAs ?category}.\n"+
+					"                OPTIONAL {?descriptor bo:requires?requires}.\n"+
+					"                OPTIONAL {\n" +
+					"                    ?descriptor bo:cites ?cites.\n" +
+					"                    ?cites bibrdf:hasTitle ?title.\n" +					
+					"					 OPTIONAL {?cites bo:DOI ?doi.}\n" +
+					"                }.\n"+
+					"		}\n";
+	
+				} else try {
+					query =  Keys.valueOf(key.toString()).getSPARQL();
+				} catch (Exception x) {
+					throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,key.toString());
+				}	
+			}
 		}
 		return sparql(query,variant);		
 	}
@@ -696,11 +727,12 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	protected void readOntologies(Model ontology) {
 		String[] owls = new String[] {
 				"opentox.owl",
-				"descriptor-algorithms.owl",
+				"bibtex-converted/descriptor-algorithms.owl",
 				"echa-endpoints.owl",
 				"AlgorithmTypes.owl",
-				"descriptors-ambit.owl",
+				"bibtex-converted/descriptors-ambit.owl",
 				"toxcast.owl",
+				"bibtex.owl"
 		};
 		for (String owl:owls)
 			try {
@@ -738,7 +770,6 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 						
 						DownloadTool.download(in, tmpFile);
 
-						System.out.println(tmpFile.getAbsolutePath());
 						if (tmpFile.exists()) {
 							readOWL(new File(tmpFile.getAbsolutePath()),model);
 							in = null;
@@ -842,7 +873,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 											if ((value.indexOf("<")>=0) && (value.indexOf(">")>=0))//some xml inside
 												w.write(String.format("<textarea readonly width='100%%'>%s</textarea>",value));
 											else if (value.startsWith("http"))
-												w.write(String.format("<a href='%s' target='_blank'>%s</a>", value,value));
+												w.write(String.format("%s&nbsp;<a href='?uri=%s'>?</a>", value,Reference.encode(value)));
+											else if ("doi".equals(vars.get(i)))
+												w.write(String.format("&nbsp;<a href='http://dx.doi.org/%s'>%s</a>", value,value));														
 											else	
 												w.write(value);
 										}
