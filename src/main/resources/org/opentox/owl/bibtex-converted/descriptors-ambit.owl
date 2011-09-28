@@ -746,8 +746,6 @@ suggest significant toxicity or have reactive functional groups.
 	    <bibrdf:hasYear>2008</bibrdf:hasYear>
 	    <bibrdf:hasVolume>10</bibrdf:hasVolume>
 	    <bibrdf:hasPages>2042-2053</bibrdf:hasPages>
-	    <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >10.1016/j.fct.2003.08.006</bo:DOI>
         <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >10.1021/ci8001815</bo:DOI>
         <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
