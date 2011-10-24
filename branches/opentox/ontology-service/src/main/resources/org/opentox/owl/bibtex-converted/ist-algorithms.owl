@@ -16,9 +16,9 @@
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/"/>
   </owl:Ontology>
-  <bo:Algorithm rdf:ID="fminer_last">
+  <bo:MolecularDescriptor rdf:ID="fminer_last">
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
-  </bo:Algorithm>
+  </bo:MolecularDescriptor>
   <bo:Algorithm rdf:ID="lazar">
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
     <bo:cites>
@@ -62,7 +62,7 @@
       </bibrdf:Article>
     </bo:cites>
   </bo:Algorithm>
-  <bo:Algorithm rdf:ID="fminer_bbrc">
+  <bo:MolecularDescriptor rdf:ID="fminer_bbrc">
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
     <bo:cites>
       <bibrdf:Article rdf:ID="MAU2011">
@@ -87,7 +87,7 @@
         <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
       </bibrdf:Article>
     </bo:cites>
-  </bo:Algorithm>
+  </bo:MolecularDescriptor>
 </rdf:RDF>
 
 <!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->
