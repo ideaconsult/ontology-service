@@ -126,7 +126,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"  ?algo rdf:type ot:Algorithm;" +
 				"  rdf:type ota:DescriptorCalculation;" +
 				"  bo:instanceOf ?desc ." +
-				"  ?desc rdf:type bo:MolecularDescriptor." +
+				" {{?desc rdf:type bo:Algorithm} UNION {?desc rdf:type bo:MolecularDescriptor}}."+
 				"}\n"
 				);
 			}
@@ -325,7 +325,47 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			public String toString() {
 				return "Endpoints";
 			}
+			@Override
+			public String getHint() {
+				return "ECHA classification of toxicological endpoints http://www.opentox.org/echaEndpoints.owl";
+			}
 		},	
+		BODO {
+			@Override
+			public String getSPARQL() {
+				return
+					"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
+					"PREFIX ota:<http://www.opentox.org/algorithmTypes.owl#>\n"+
+					"PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
+					"PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
+					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+					"PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
+					"PREFIX bibrdf:<http://zeitkunst.org/bibtex/0.1/bibtex.owl#>\n"+
+					"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
+					"select ?descriptor ?label ?cites ?doi ?definition ?requires ?category ?contributor\n"+
+					"		where {\n"+
+					"	        {{?descriptor rdf:type bo:Algorithm} UNION {?descriptor rdf:type bo:MolecularDescriptor}}.\n"+
+					"   		OPTIONAL {?descriptor rdfs:label ?label}.\n"+
+					"                OPTIONAL {?descriptor bo:definition ?definition}.\n"+
+					"                OPTIONAL {?descriptor dc:contributor ?contributor}.\n"+
+					"                OPTIONAL {?descriptor bo:isClassifiedAs ?category}.\n"+
+					"                OPTIONAL {?descriptor bo:requires?requires}.\n"+
+					"                OPTIONAL {\n" +
+					"                    ?descriptor bo:cites ?cites.\n" +
+					"                    ?cites bibrdf:hasTitle ?title.\n" +					
+					"					 OPTIONAL {?cites bo:DOI ?doi.}\n" +
+					"                }.\n"+
+					"		}\n";
+			}
+			@Override
+			public String toString() {
+				return "Ontology";
+			}
+			@Override
+			public String getHint() {
+				return "Blue Obelisk Ontology of cheminformatic algorithms (extended)";
+			}
+		},
 		ToxCast {
 			@Override
 			public String getSPARQL() {
@@ -353,6 +393,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			public String toString() {
 				return "ToxCast";
 			}
+			@Override
+			public String getHint() {
+				return "ToxCast metadata converted to ontology format";
+			}
 
 		},			
 		ToxCast_gene {
@@ -374,6 +418,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			@Override
 			public String toString() {
 				return "ToxCast (gene)";
+			}
+			@Override
+			public String getHint() {
+				return "ToxCast assays/gene associations";
 			}
 			@Override
 			public Keys parent() {
@@ -403,6 +451,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				return "ToxCast ESR Assays";
 			}
 			@Override
+			public String getHint() {
+				return "ToxCast assays, associated with ESR1 gene (example how to query for particular gene)";
+			}
+			@Override
 			public Keys parent() {
 				return ToxCast;
 			}
@@ -418,7 +470,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					);
 						
 			}
-
+			@Override
+			public String getHint() {
+				return "ToxCast assays, associated with CYP450 (example how to query for particular target family)";
+			}
 			@Override
 			public Keys parent() {
 				return ToxCast;
@@ -446,6 +501,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			public String toString() {
 				return "Target family: GPCR";
 			}
+			@Override
+			public String getHint() {
+				return "ToxCast assays, associated with GPCR (example how to query for particular target family)";
+			}			
 		},	
 
 		ToxCast_Ion_Channel {
@@ -456,7 +515,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					);
 						
 			}
-
+			@Override
+			public String getHint() {
+				return "ToxCast assays, associated with Ion Channel (example how to query for particular target family)";
+			}	
 			@Override
 			public Keys parent() {
 				return ToxCast;
@@ -627,6 +689,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		public String toString() {
 			return String.format("%s", name());
 		}
+		public String getHint() {
+			return toString();
+		}
 	}
 	
 	@Override
@@ -703,7 +768,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					"PREFIX bo:<http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#>\n"+
 					"select ?descriptor ?label ?cites ?doi ?definition ?requires ?category ?contributor\n"+
 					"		where {\n"+
-					"	        ?descriptor rdf:type bo:MolecularDescriptor.\n"+
+					"	        {{?descriptor rdf:type bo:Algorithm} UNION {?descriptor rdf:type bo:MolecularDescriptor}}.\n"+
 					"   		OPTIONAL {?descriptor rdfs:label ?label}.\n"+
 					"                OPTIONAL {?descriptor bo:definition ?definition}.\n"+
 					"                OPTIONAL {?descriptor dc:contributor ?contributor}.\n"+
@@ -1044,9 +1109,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		for (Keys key : Keys.values()) {
 			Keys parent = key.parent();
 			
-			String sparql = String.format("<a href='%s/query/%s' title='%s'>%s</a>&nbsp;",
+			String sparql = String.format("<a href='%s/query/%s' title='%s\n\n%s'>%s</a>&nbsp;",
 					getRequest().getRootRef(),
 					key.name(),
+					key.getHint(),
 					key.getSPARQL(),
 					key.toString()
 						
