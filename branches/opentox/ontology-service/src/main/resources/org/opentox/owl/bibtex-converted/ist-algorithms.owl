@@ -18,6 +18,31 @@
   </owl:Ontology>
   <bo:MolecularDescriptor rdf:ID="fminer_last">
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="MAU2010">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Maunz, Andreas</bibrdf:hasAuthor>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2010</bibrdf:hasYear>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Helma, Christoph</bibrdf:hasAuthor>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Kramer, Stefan</bibrdf:hasAuthor>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Cramer, Tobias</bibrdf:hasAuthor>        
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Latent Structure Pattern Mining</bibrdf:hasTitle>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >353-368</bibrdf:hasPages>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1007/978-3-642-15883-4_23</bo:DOI>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >6322/2010</bibrdf:hasVolume>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Lecture Notes in Computer Science. Machine Learning and Knowledge Discovery in Databases</bibrdf:hasJournal>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+ 	</bibrdf:Article>           
+       </bo:cites> 
   </bo:MolecularDescriptor>
   <bo:Algorithm rdf:ID="lazar">
     <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
