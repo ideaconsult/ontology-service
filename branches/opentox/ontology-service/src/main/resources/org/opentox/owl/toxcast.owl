@@ -4,7 +4,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.0="http://www.opentox.org/toxcast#ASSAY_LIGAND "
+    xmlns:j.0="http://www.opentox.org/toxcast#ASSAY_LIGAND"
     xmlns:toxcast="http://www.opentox.org/toxcast#"
     xmlns:dc="http://purl.org/dc/elements/1.1/" > 
   <rdf:Description rdf:about="http://www.opentox.org/toxcast#NVS_ENZ_hZAP70">
