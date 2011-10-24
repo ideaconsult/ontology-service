@@ -733,6 +733,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				"echa-endpoints.owl",
 				"AlgorithmTypes.owl",
 				"bibtex-converted/descriptors-ambit.owl",
+				"bibtex-converted/ist-algorithms.owl",
 				"toxcast.owl",
 				"bibtex.owl"
 		};

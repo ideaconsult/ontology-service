@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:p1="http://www.w3.org/1998/Math/MathML"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:bibrdf="http://zeitkunst.org/bibtex/0.1/bibtex.owl#"
+    xmlns="http://opentox.org/ontology/ist-algorithms.owl#"
+    xmlns:bo="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://opentox.org/ontology/ist-algorithms.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/"/>
+  </owl:Ontology>
+  <bo:Algorithm rdf:ID="fminer_last">
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+  </bo:Algorithm>
+  <bo:Algorithm rdf:ID="lazar">
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="HEL2005">
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10/2</bibrdf:hasVolume>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1007/s11030-005-9001-5</bo:DOI>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >MOLECULAR DIVERSITY</bibrdf:hasJournal>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Lazy structure-activity relationships (lazar) for the prediction of rodent carcinogenicity and Salmonella mutagenicity</bibrdf:hasTitle>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >147-158</bibrdf:hasPages>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Helma, Christoph</bibrdf:hasAuthor>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2005</bibrdf:hasYear>
+      </bibrdf:Article>
+    </bo:cites>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="MAU2008">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Helma, Christoph</bibrdf:hasAuthor>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >413-431</bibrdf:hasPages>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Maunz, Andreas</bibrdf:hasAuthor>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SAR and QSAR in Environmental Research</bibrdf:hasJournal>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >19/5-6</bibrdf:hasVolume>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1080/10629360802358430</bo:DOI>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Prediction of chemical toxicity with local support vector regression and activity-specific kernels</bibrdf:hasTitle>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2008</bibrdf:hasYear>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+      </bibrdf:Article>
+    </bo:cites>
+  </bo:Algorithm>
+  <bo:Algorithm rdf:ID="fminer_bbrc">
+    <bo:requires rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#GraphRepresentation"/>
+    <bo:cites>
+      <bibrdf:Article rdf:ID="MAU2011">
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Maunz, Andreas</bibrdf:hasAuthor>
+        <bibrdf:hasYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2011</bibrdf:hasYear>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Helma, Christoph</bibrdf:hasAuthor>
+        <bibrdf:hasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Kramer, Stefan</bibrdf:hasAuthor>
+        <bibrdf:hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Efficient mining for structurally diverse subgraph patterns in large molecular databases</bibrdf:hasTitle>
+        <bibrdf:hasPages rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >193-218</bibrdf:hasPages>
+        <bo:DOI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >10.1007/s10994-010-5187-6</bo:DOI>
+        <bibrdf:hasVolume rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >83/2</bibrdf:hasVolume>
+        <bibrdf:hasJournal rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Machine Learning</bibrdf:hasJournal>
+        <rdf:type rdf:resource="http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#Reference"/>
+      </bibrdf:Article>
+    </bo:cites>
+  </bo:Algorithm>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->
