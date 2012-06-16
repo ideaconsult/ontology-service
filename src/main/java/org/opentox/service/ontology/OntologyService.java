@@ -45,10 +45,12 @@ public class OntologyService extends Application {
 		 Directory metaDir = new Directory(getContext(), "war:///META-INF");
 		 Directory jqueryDir = new Directory(getContext(), "war:///jquery");
 		 Directory styleDir = new Directory(getContext(), "war:///style");
+		 Directory scriptsDir = new Directory(getContext(), "war:///scripts");
  		 router.attach("/meta/", metaDir);
 		 
  		 router.attach("/jquery/", jqueryDir);
- 		router.attach("/style/", styleDir); 	
+ 		router.attach("/style/", styleDir);
+ 		router.attach("/scripts/", scriptsDir); 	
  		
 		//Just sets the token, don't return error if not valid one
 		Filter authn = new OpenSSOAuthenticator(getContext(),false,"opentox.org",new OpenSSOFakeVerifier(false));
