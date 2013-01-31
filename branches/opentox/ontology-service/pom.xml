@@ -132,11 +132,11 @@
 		<directory>src/main/resources</directory>
 		<filtering>true</filtering>
 		<excludes>
-		<exclude>**/org/*</exclude>
+		<exclude>*.owl</exclude>
 		</excludes>
 	</resource>
 	<resource>
-		<directory>src/main/resources/org/opentox</directory>
+		<directory>src/main/resources/org/opentox/owl</directory>
 		<filtering>false</filtering>
 	</resource>
   </resources>
