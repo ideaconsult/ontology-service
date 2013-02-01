@@ -67,8 +67,11 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 
 	};
 	private final static String[] css = new String[] {
-		"<link href=\"%s/style/ambit.css\" rel=\"stylesheet\" type=\"text/css\">\n",
-		"<!--[if IE 7]><link rel='stylesheet' type='text/css' media='all' href='%s/style/ambit-msie7.css'><![endif]-->",
+		"<link href=\"%s/style/base.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+		"<link href=\"%s/style/skeleton.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+		"<link href=\"%s/style/layout.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+		"<link href=\"%s/style/ambit2.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+		"<!--[if lt IE 9]><script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->",
 		"<link href=\"%s/style/jquery-ui-1.8.18.custom.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<link href=\"%s/style/jquery.dataTables.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<link href=\"%s/images/favicon.ico\" rel=\"shortcut icon\" type=\"image/ico\">\n"
@@ -922,8 +925,14 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 							OutputStreamWriter w = new OutputStreamWriter(out);
 							w.write(
 									String.format(
-								"<html><head><title>Search Opentox RDF</title>"+
-								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">"
+								"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">"+
+								"<!--[if lt IE 7 ]><html class=\"ie ie6\" lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"> <![endif]-->"+
+								"<!--[if IE 7 ]><html class=\"ie ie7\" lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"> <![endif]-->"+
+								"<!--[if IE 8 ]><html class=\"ie ie8\" lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"> <![endif]-->"+
+								"<!--[if (gte IE 9)|!(IE)]><!--><html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"> <!--<![endif]-->"+											
+								"<head><title>Search Opentox RDF</title>"+
+								"<meta name=\"robots\" content=\"index,nofollow\"><META NAME=\"GOOGLEBOT\" CONTENT=\"index,NOFOLLOW\">" +
+								"<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>"
 							    ));
 							
 							//css			
@@ -936,16 +945,22 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 							final String dtableOptions = "'bJQueryUI': true, "+
 									//"'sPaginationType': 'full_numbers',"+
 									"'bPaginate'      : true,"+
-									"\"sDom\": 'T<\"clear\"><\"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix\"lfr>t<\"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix\"ip>'";
+									//"'sDom' : '<\"remove-bottom\"i><p>Trt<lf>'";
+									"\"sDom\": 'T<\"remove-bottom\"><\"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix\"lfr>t<\"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix\"ip>'";
 
 							w.write(String.format("<script>$(function() {$( \".datatable\" ).dataTable({%s });});</script>",dtableOptions));
 							
 							w.write("<script>$(function() {$(\"#submit\").button();});</script>");
 
-							w.write("</head><body><div class='ui-widget summary' style='padding:5 20 5 20'>");
-							if (!resultsOnly) 	writehtmlheader(w,ontology,queryString,elapsed);
-							else w.write(String.format("<h4>%s</h4>",title==null?"":title));
-								w.write("<table class='datatable' id='results'>");		
+							w.write("</head><body><div class='container' style='padding:5 5 5 5;margin-left:20px;margin-top:10px;'>\n");
+							if (!resultsOnly) 	{
+								w.write("<FORM>");
+								writehtmlheader(w,ontology,queryString,elapsed);
+							} else
+								w.write(String.format("<h4>%s</h4>",title==null?"":title));
+							
+							//	w.write("<div class='row' id='header'><div class='ten columns'>TOP</div></div>");
+								w.write("<table class='datatable row' id='results'>\n");		
 							
 								w.write("<thead>");
 								List<String> vars = results.getResultVars();
@@ -978,29 +993,30 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 									w.write("</tr>");
 								}
 								w.flush();
-								w.write("</tbody></table>");
+								w.write("</tbody></table>\n");
 								
+
 								if (!resultsOnly) {
-									w.write("</div></FORM>");
+									w.write("</FORM>");
 									w.write(
-											"<br><div class='ui-widget' style='padding:5 100 5 100'>"+
+											"<div class='row'>&nbsp;</div><div class='sixteen columns'>\n"+
 											"<FORM action='' method='post'>"+
-											"<div class='ui-widget-header ui-corner-top' >Import RDF data into Ontology service</div>"+
-											"<div class='ui-widget-content ui-corner-bottom'>"+
-											"<label for=\"uri\">URL</label>"+
-										    "<input name=\"uri\" size=\"80\" tabindex=\"4\">"+
-										    "<INPUT name=\"run\" type=\"submit\" value=\"SUBMIT\" tabindex=\"7\">"+
-											"</FORM></div></div>"
+											"<div class='ten ui-widget-header ui-corner-top remove-bottom' >Import RDF data into Ontology service</div>"+
+											"<div class='row ui-widget-content ui-corner-bottom remove-bottom'>"+
+											"<div class='row'></div><div class='two columns alpha'></div>"+
+											"<label for='uri' class='three columns omega'>URL</label>"+
+										    "<input name='uri' class='eight columns omega'>"+
+										    "<INPUT name='run' class='three columns omega' type='submit' value='SUBMIT'>"+
+											"</div></div></FORM>\n"
 													);		
-									
-									w.write(String.format("Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a><br>",
+									w.write(String.format("<div class='row add-bottom'>&nbsp;</div><div class='row'>Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a></div>",
 											getRequest().getRootRef(),
 											version==null?"":version,
 											version));
 								}
-								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
 								
-								w.write("</div></div></div></body>");
+								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
+								w.write("</div></body>"); //container
 
 					
 							w.flush();
@@ -1133,12 +1149,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		StmtIterator iter = ontology.listStatements(new SimpleSelector(ontology.createResource(uri),null,(RDFNode)null));
 		ontology.remove(iter);
 	}
-	/*
-	public static String jsTableSorter(String tableid,String pagerid) {
-		return String.format("<script type=\"text/javascript\">$(document).ready(function() {  $(\"#%s\").tablesorter({widgets: ['zebra'] }).tablesorterPager({container: $(\"#%s\")}); } );</script>",tableid,pagerid);
-	}
-	*/
+
 	public void writehtmlheader(Writer w,Model ontology,String queryString,long elapsed) throws Exception {
+		w.write("<div class='ui-widget-header row remove-bottom'>");
 		
 		Keys qkey = null;
 		try { qkey = Keys.valueOf(getRequest().getAttributes().get(resourceKey).toString()); } catch (Exception x) {}
@@ -1147,7 +1160,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		for (Keys key : Keys.values()) {
 			Keys parent = key.parent();
 			
-			String sparql = String.format("<a href='%s/query/%s' title='%s\n\n%s'>%s</a>&nbsp;",
+			String sparql = String.format("<a class='remove-bottom' href='%s/query/%s' title='%s\n\n%s'>%s</a>&nbsp;",
 					getRequest().getRootRef(),
 					key.name(),
 					key.getHint(),
@@ -1162,32 +1175,32 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				if (parent.equals(qkey)) { b.append(sparql);	b.append("|");}
 			}
 		}
+		w.write("</div>");
+		w.write("<div class='ui-widget-header row half-bottom'>");
 		if (qkey!=null)
 		w.write(String.format("<br>%s&nbsp;%s&nbsp;",qkey.toString(),"\u00BB"));
 		w.write(b.toString());
-							
+		w.write("</div>");
+								
 		w.write(
 				String.format(
-			"<div class='ui-widget' style='padding:0 0 20 0'>"+			
-			"<div class='ui-widget-header ui-corner-top' >Search the Ontology service&nbsp;[%s triples]</div>"+
-			"<div class='ui-widget-content ui-corner-bottom'>"+
+			"<div class='row ui-widget-header ui-corner-top remove-bottom'>Search the Ontology service&nbsp;[%s triples]</div>"+
+			"<div class='row ui-widget-content ui-corner-bottom'>"+
 			"<FORM action='' method='post'>"+
-			"<div style='padding:5 5 5 5'>"+
-		    "<TEXTAREA  name=\"query\" rows=\"10\" cols=\"100\" tabindex=\"1\">",
+		    "<TEXTAREA  class='columns sixteen' name='query' rows='10' cols='100' style='padding:10 10 10 10;'>",
 		    ontology==null?0:ontology.size(),
 		    getRequest().getRootRef()));
 		w.flush();
 		w.write(queryString);
 		w.write(
-		    "</TEXTAREA><br>"+
+		    "</TEXTAREA>"+
+			"<div class='row remove-bottom' style='padding:5 5 5 5;'>"+
 		    "<INPUT name=\"run\" type=\"submit\" value='Submit SPARQL' tabindex=\"2\">"
 				);
-		w.write("</div></div></div>");
-		//w.write(jsTableSorter("results","pager"));
-		w.write("<div class='ui-widget'>");
-		w.write(String.format(
-				"<div class='ui-widget-header'>Results [found in %d ms]</div>",elapsed));
-		w.write("<div class='ui-widget-content'>");
+		w.write("</div></div>");
+	
+		w.write(String.format("<div class='row'><div class='columns ten'>Results [found in %d ms]</div></div>",elapsed));
+
 	}
 	
 	@Override
