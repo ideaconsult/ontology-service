@@ -109,7 +109,7 @@ div#header {
 
 #header_bottom {
 	height: 1.5em;
-	background: url("../../images/header-background.png") repeat-x scroll left top;
+	background: url("../images/header-background.png") repeat-x scroll left top;
 }
 ul.topLinks {
 	position: absolute;

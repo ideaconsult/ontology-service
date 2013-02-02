@@ -1,10 +1,13 @@
 package org.opentox.rest.component;
 
+import java.util.Hashtable;
+
+import net.idea.restnet.aa.opensso.OpenSSOVerifier;
+
 import org.opentox.aa.OTAAParams;
 import org.opentox.aa.opensso.OpenSSOToken;
 import org.restlet.Request;
 import org.restlet.Response;
-import org.restlet.data.Cookie;
 import org.restlet.data.Form;
 import org.restlet.security.User;
 import org.restlet.security.Verifier;
@@ -15,17 +18,16 @@ import org.restlet.security.Verifier;
  * @author nina
  *
  */
-public class OpenSSOFakeVerifier implements Verifier {
-	protected boolean enabled = false;
+public class OpenSSOFakeVerifier extends OpenSSOVerifier {
 	
 	public OpenSSOFakeVerifier() throws Exception {
-		this( OpenSSOServicesConfig.getInstance().isEnabled());
+		this( OntServiceOpenSSOConfig.getInstance().isEnabled());
 	}
 
 	public OpenSSOFakeVerifier(boolean enabled) {
-		this.enabled = enabled;
+		super(enabled);
 	}
-	
+	@Override
 	public int verify(Request request, Response response) {
 		try {
 			
@@ -44,7 +46,7 @@ public class OpenSSOFakeVerifier implements Verifier {
 			
 			
 			if ((token != null) && (!"".equals(token))) {
-				OpenSSOToken ssoToken = new OpenSSOToken(OpenSSOServicesConfig.getInstance().getOpenSSOService());
+				OpenSSOToken ssoToken = new OpenSSOToken(OntServiceOpenSSOConfig.getInstance().getOpenSSOService());
 				ssoToken.setToken(token);
 				try {
 					//if (ssoToken.isTokenValid()) {
@@ -71,42 +73,22 @@ public class OpenSSOFakeVerifier implements Verifier {
 		}
 
 	}
-	
-	protected void setUser(OpenSSOToken ssoToken,Request request) throws Exception {
-		request.getClientInfo().setUser(createUser(ssoToken, request));
-	}
-	protected User createUser(OpenSSOToken ssoToken,Request request) throws Exception {
-		OpenSSOUser user = new OpenSSOUser();
-		user.setToken(ssoToken.getToken());
-		user.setUseSecureCookie(useSecureCookie(request));
-		request.getCookies().removeAll("subjectid");
-		request.getCookies().add("subjectid",ssoToken.getToken());
+
+	@Override
+	protected User createUser(OpenSSOToken ssoToken, Request request)
+			throws Exception {
+
+		User user = super.createUser(ssoToken, request);
+		Hashtable<String,String> results = new Hashtable<String, String>();
+				
+		try {
+			ssoToken.getAttributes(new String[] {"uid"}, results);
+
+			user.setIdentifier(results.get("uid"));} 
+		catch (Exception x) {
+			x.printStackTrace();
+		}
 		return user;
 	}
-	
-	protected String getTokenFromCookies(Request request) {
-		for (Cookie cookie : request.getCookies()) {
-			if ("subjectid".equals(cookie.getName()))
-				return cookie.getValue();
-				/*	
-		    System.out.println("name = " + cookie.getName());
-		    System.out.println("value = " + cookie.getValue());
-		    System.out.println("domain = " + cookie.getDomain());
-		    System.out.println("path = " + cookie.getPath());
-		    System.out.println("version = " + cookie.getVersion());
-		    */
-		}
-		return null;
-	}
-	
-	protected boolean useSecureCookie(Request request) {
-		for (Cookie cookie : request.getCookies()) {
-			if ("subjectid_secure".equals(cookie.getName())) try {
-				return Boolean.parseBoolean(cookie.getValue());
-			} catch (Exception x) {
-			}
-		}
-		//secure cookie by default
-		return true;
-	}	
+		
 }

@@ -68,7 +68,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	};
 	private final static String[] css = new String[] {
 		"<link href=\"%s/style/base.css\" rel=\"stylesheet\" type=\"text/css\">\n",
-		"<link href=\"%s/style/skeleton.css\" rel=\"stylesheet\" type=\"text/css\">\n",
+		"<link href=\"%s/style/skeleton-fluid.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<link href=\"%s/style/layout.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<link href=\"%s/style/ambit2.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<!--[if lt IE 9]><script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->",
@@ -76,6 +76,13 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		"<link href=\"%s/style/jquery.dataTables.css\" rel=\"stylesheet\" type=\"text/css\">\n",
 		"<link href=\"%s/images/favicon.ico\" rel=\"shortcut icon\" type=\"image/ico\">\n"
 	};
+	
+	private static String header = 
+	"<div class='row half-bottom' id='header'>\n"+
+	"<ul class='topLinks half-bottom'>\n"+
+	"<li class='topLinks'><span class='ui-icon ui-icon-document' style='float: left; margin-right: .3em;'></span><a class='topLinks login' title='Import RDF data into Ontology service' href='%s/import'>Registration of OpenTox resources</a></li>\n"+						
+	"</ul></div>\n";
+	
 	public static String sparql_ToxcastAssayTarget = 
 
 				"	select *\n"+
@@ -952,8 +959,10 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 							
 							w.write("<script>$(function() {$(\"#submit\").button();});</script>");
 
-							w.write("</head><body><div class='container' style='padding:5 5 5 5;margin-left:20px;margin-top:10px;'>\n");
+							w.write("</head><body><div class='container' style='padding:10 10 10 10;margin:20 20 20 20;'>\n");
+							
 							if (!resultsOnly) 	{
+								w.write(String.format(header,getRequest().getRootRef()));
 								w.write("<FORM>");
 								writehtmlheader(w,ontology,queryString,elapsed);
 							} else
@@ -998,21 +1007,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 
 								if (!resultsOnly) {
 									w.write("</FORM>");
-									w.write(
-											"<div class='row'>&nbsp;</div><div class='sixteen columns'>\n"+
-											"<FORM action='' method='post'>"+
-											"<div class='ten ui-widget-header ui-corner-top remove-bottom' >Import RDF data into Ontology service</div>"+
-											"<div class='row ui-widget-content ui-corner-bottom remove-bottom'>"+
-											"<div class='row'></div><div class='two columns alpha'></div>"+
-											"<label for='uri' class='three columns omega'>URL</label>"+
-										    "<input name='uri' class='eight columns omega'>"+
-										    "<INPUT name='run' class='three columns omega' type='submit' value='SUBMIT'>"+
-											"</div></div></FORM>\n"
-													);		
-									w.write(String.format("<div class='row add-bottom'>&nbsp;</div><div class='row'>Version:&nbsp;<a href='%s/meta/MANIFEST.MF' target=_blank alt='%s' title='Web application version'>%s</a></div>",
-											getRequest().getRootRef(),
-											version==null?"":version,
-											version));
+									w.write(String.format("<div class='row'><div class='columns ten'>Results [found in %d ms]</div></div>",elapsed));
 								}
 								
 								w.write(jsGoogleAnalytics()==null?"":jsGoogleAnalytics());
@@ -1178,7 +1173,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		w.write("</div>");
 		w.write("<div class='ui-widget-header row half-bottom'>");
 		if (qkey!=null)
-		w.write(String.format("<br>%s&nbsp;%s&nbsp;",qkey.toString(),"\u00BB"));
+		w.write(String.format("<br>%s&nbsp; >>",qkey.toString()));
+		
 		w.write(b.toString());
 		w.write("</div>");
 								
@@ -1187,19 +1183,17 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			"<div class='row ui-widget-header ui-corner-top remove-bottom'>Search the Ontology service&nbsp;[%s triples]</div>"+
 			"<div class='row ui-widget-content ui-corner-bottom'>"+
 			"<FORM action='' method='post'>"+
-		    "<TEXTAREA  class='columns sixteen' name='query' rows='10' cols='100' style='padding:10 10 10 10;'>",
+		    "<TEXTAREA  class='columns ten alpha' name='query' rows='10' cols='100' style='padding:10 10 10 10;'>",
 		    ontology==null?0:ontology.size(),
 		    getRequest().getRootRef()));
 		w.flush();
 		w.write(queryString);
 		w.write(
 		    "</TEXTAREA>"+
-			"<div class='row remove-bottom' style='padding:5 5 5 5;'>"+
+			"<div class='columns four omega' style='margin-top:10px;vertical-align:bottom;'>"+
 		    "<INPUT name=\"run\" type=\"submit\" value='Submit SPARQL' tabindex=\"2\">"
 				);
-		w.write("</div></div>");
-	
-		w.write(String.format("<div class='row'><div class='columns ten'>Results [found in %d ms]</div></div>",elapsed));
+		w.write("</div></div></div>");
 
 	}
 	
