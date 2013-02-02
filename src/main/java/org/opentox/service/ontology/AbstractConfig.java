@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import org.opentox.aa.exception.AAException;
 import org.opentox.aa.exception.AAPropertiesException;
-import org.opentox.rest.component.OpenSSOServicesConfig.CONFIG;
 
 public class AbstractConfig {
 	protected Properties properties;

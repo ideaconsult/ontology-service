@@ -10,9 +10,9 @@ import org.opentox.service.ontology.AbstractConfig;
  * @author nina
  *
  */
-public class OpenSSOServicesConfig extends AbstractConfig{
+public class OntServiceOpenSSOConfig extends AbstractConfig{
 	
-	private static OpenSSOServicesConfig ref;
+	private static OntServiceOpenSSOConfig ref;
 	
 	
 	public static enum CONFIG {
@@ -66,14 +66,14 @@ public class OpenSSOServicesConfig extends AbstractConfig{
 		public abstract String getDescription() ;
 
 	}	
-	private OpenSSOServicesConfig() throws AAException {
+	private OntServiceOpenSSOConfig() throws AAException {
 		super("org/opentox/config/aa.properties");
 	
 	}	
 
-	public static synchronized OpenSSOServicesConfig getInstance() throws AAException  {
+	public static synchronized OntServiceOpenSSOConfig getInstance() throws AAException  {
 	    if (ref == null)
-	        ref = new OpenSSOServicesConfig();		
+	        ref = new OntServiceOpenSSOConfig();		
 	    return ref;
 	}
 	
