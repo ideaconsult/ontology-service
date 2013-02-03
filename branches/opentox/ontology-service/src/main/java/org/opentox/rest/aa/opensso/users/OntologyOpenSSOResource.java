@@ -13,6 +13,7 @@ import net.idea.restnet.aa.opensso.users.OpenSSOUserResource;
 import net.idea.restnet.aa.opensso.users.OpenSSOUsersURIReporter;
 import net.idea.restnet.c.StringConvertor;
 
+import org.opentox.aa.exception.AAException;
 import org.opentox.rest.component.OntServiceOpenSSOConfig;
 import org.restlet.data.MediaType;
 import org.restlet.representation.Representation;
@@ -86,5 +87,9 @@ public class OntologyOpenSSOResource extends OpenSSOUserResource {
         setTokenCookies(variant, useSecureCookie(getRequest()));
         configureTemplateMap(map);
         return toRepresentation(map, getTemplateName(), MediaType.TEXT_PLAIN);
+	}
+	@Override
+	protected String getOpenSSOService() throws AAException {
+		return OntServiceOpenSSOConfig.getInstance().getOpenSSOService();
 	}
 }
