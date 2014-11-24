@@ -1,7 +1,7 @@
 package org.opentox.service.ontology;
 import net.idea.restnet.aa.opensso.OpenSSOAuthenticator;
 import net.idea.restnet.aa.opensso.users.OpenSSOUserResource;
-import net.idea.restnet.c.freemarker.FreeMarkerApplicaton;
+import net.idea.restnet.c.freemarker.FreeMarkerApplication;
 
 import org.opentox.rest.aa.opensso.users.OntologyOpenSSOResource;
 import org.opentox.rest.component.OpenSSOFakeVerifier;
@@ -22,7 +22,7 @@ import org.restlet.routing.Template;
  * @author nina
  */
 
-public class OntologyService extends FreeMarkerApplicaton<String> {
+public class OntologyService extends FreeMarkerApplication<String> {
 
 
 	public OntologyService() {

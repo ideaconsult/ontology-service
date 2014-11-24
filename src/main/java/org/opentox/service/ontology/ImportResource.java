@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.idea.restnet.aa.opensso.OpenSSOUser;
 import net.idea.restnet.c.resource.CatalogResource;
+import net.idea.restnet.i.freemarker.IFreeMarkerApplication;
 
 import org.opentox.rest.component.OntServiceOpenSSOConfig;
 import org.restlet.Context;
@@ -39,8 +40,9 @@ public class ImportResource extends CatalogResource<String> {
 	}
 	
 	@Override
-	public void configureTemplateMap(Map<String, Object> map) {
-		super.configureTemplateMap(map);
+	public void configureTemplateMap(Map<String, Object> map, Request request,
+			IFreeMarkerApplication app) {
+		super.configureTemplateMap(map,request,app);
         if (getClientInfo().getUser()!=null) {
         //	map.put("username", getClientInfo().getUser().getIdentifier());
         	try {
@@ -70,7 +72,7 @@ public class ImportResource extends CatalogResource<String> {
 			getClientInfo().setUser(ou);
 		}
         setTokenCookies(variant, useSecureCookie(getRequest()));
-        configureTemplateMap(map);
+        configureTemplateMap(map,getRequest(),(IFreeMarkerApplication)getApplication());
         return toRepresentation(map, getTemplateName(), MediaType.TEXT_PLAIN);
 	}
 
