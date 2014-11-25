@@ -1,15 +1,15 @@
 #OpenTox Ontology service
 ----------------------------------------------------------------------------------------------
 
+## Download
+
+[ontology-0.0.4-SNAPSHOT.war](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~org.opentox~ontology~0.0.4-SNAPSHOT~~)
+
 ##Deployment
 
 Copy ontology.war under webapps directory of the servlet container. The application should be accessible at
 
 http://localhost:8080/ontology
-
-## Download
-
-[ontology-0.0.4-SNAPSHOT.war](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~org.opentox~ontology~0.0.4-SNAPSHOT~~_
 
 ##Build
 
