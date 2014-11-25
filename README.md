@@ -7,10 +7,14 @@ Copy ontology.war under webapps directory of the servlet container. The applicat
 
 http://localhost:8080/ontology
 
+## Download
+
+[ontology-0.0.4-SNAPSHOT.war](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~org.opentox~ontology~0.0.4-SNAPSHOT~~_
+
 ##Build
 
 ````
-mvn package -P release -P tdb
+mvn package -P release -P tdb -P noaa -P extended
 ````
 
 ###Maven dependency:
@@ -19,7 +23,7 @@ mvn package -P release -P tdb
 <dependency>
   <groupId>org.opentox</groupId>
   <artifactId>ontology</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.4-SNAPSHOT</version>
   <type>war</type>
 </dependency>
 ````
