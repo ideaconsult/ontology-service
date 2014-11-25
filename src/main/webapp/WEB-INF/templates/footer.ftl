@@ -1,17 +1,18 @@
-<div class="sixteen columns add-bottom"></div>
-<div class="sixteen columns">
-		<div class="two columns alpha"></div>
-		<div class="eight columns omega">
-			<span style='vertical-align:bottom;'>
-			Developed by <br>
-			<a class='footerLink' href='http://www.ideaconsult.net/'>IdeaConsult Ltd.</a> 
-			(2010 - 2013)
-			</span>
-		</div>
-		<div class='six columns omega'>
-			<a href='http://www.opentox.org'><img src=${ambit_root}/images/logo.png border='0' width='115' height='60'></a>
-		</div>
+<div class="sixteen  columns add-bottom">&nbsp;</div>
+
+<div class='row add-bottom' >
+	<div class="five columns alpha ">&nbsp;</div>
+	<div class="ten columns omega ui-state-error " id='log' style='display:none;' >&nbsp;</div> 
 </div>
+
+		<div id='footer-out' class="sixteen columns">
+		<div id='footer-in'>
+		<div id='footer'>
+			<a class='footerLink' href='http://www.ideaconsult.net/' title='Developed By'>IdeaConsult Ltd.</a> 
+		</div>
+		</div>
+		</div>
+		
 		
 <#if username??>
 		<form id='logoutForm' name='logoutForm' action='${ambit_root}/openssouser?method=DELETE' method='POST'><input type='hidden' value='${username}'></input></form>

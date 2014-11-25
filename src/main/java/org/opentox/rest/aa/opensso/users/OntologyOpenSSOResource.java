@@ -75,6 +75,11 @@ public class OntologyOpenSSOResource extends OpenSSOUserResource {
         }
         map.put("creator","IdeaConsult Ltd.");
         map.put("ambit_root",getRequest().getRootRef().toString());		
+        map.put("ambit_version_short",app.getVersionShort());
+	    map.put("ambit_version_long",app.getVersionLong());
+	    //map.put(AMBITConfig.googleAnalytics.name(),app.getGACode());
+	    map.put("menu_profile",app.getProfile());
+        
 	}
 
 	@Override

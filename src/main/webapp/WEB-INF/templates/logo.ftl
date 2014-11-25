@@ -2,5 +2,5 @@
 <a href='${ambit_root}/ui'>
 	<img class='scale-with-grid' border='0' src='${ambit_root}/images/ambit-logo.png' title='Home' alt='AMBIT logo'>
 </a>
-<h6 style='color:#729203;'>Ontology service v0.0.3</h6>
+<h6 style='color:#729203;' title='${ambit_version_long}'>Ontology service v${ambit_version_short}</h6>
 </div>

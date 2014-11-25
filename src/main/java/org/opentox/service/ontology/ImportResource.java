@@ -44,13 +44,16 @@ public class ImportResource extends CatalogResource<String> {
 			IFreeMarkerApplication app) {
 		super.configureTemplateMap(map,request,app);
         if (getClientInfo().getUser()!=null) {
-        //	map.put("username", getClientInfo().getUser().getIdentifier());
+        	map.put("username", getClientInfo().getUser().getIdentifier());
         	try {
         		map.put("openam_token",((OpenSSOUser) getClientInfo().getUser()).getToken());  
-        		System.out.println(((OpenSSOUser) getClientInfo().getUser()).getFirstName());
         	} catch (Exception x) {
         		map.remove("openam_token");
         	}
+        } else {
+        	OpenSSOUser ou = new OpenSSOUser();
+			ou.setUseSecureCookie(useSecureCookie(getRequest()));
+			getClientInfo().setUser(ou);
         }
         try {
         	map.put("openam_service", OntServiceOpenSSOConfig.getInstance().getOpenSSOService());
@@ -58,19 +61,16 @@ public class ImportResource extends CatalogResource<String> {
         	map.remove("openam_service");
         }
         map.put("creator","IdeaConsult Ltd.");
-        map.put("ambit_root",getRequest().getRootRef().toString());		
+        map.put("ambit_root",getRequest().getRootRef().toString());
+        map.put("ambit_version_short",app.getVersionShort());
+	    map.put("ambit_version_long",app.getVersionLong());
+	    //map.put(AMBITConfig.googleAnalytics.name(),app.getGACode());
+	    map.put("menu_profile",app.getProfile());        
 	}
 
 	@Override
 	protected Representation getHTMLByTemplate(Variant variant) throws ResourceException {
         Map<String, Object> map = new HashMap<String, Object>();
-        if (getClientInfo().getUser()!=null) 
-        	map.put("username", getClientInfo().getUser().getIdentifier());
-        else {
-			OpenSSOUser ou = new OpenSSOUser();
-			ou.setUseSecureCookie(useSecureCookie(getRequest()));
-			getClientInfo().setUser(ou);
-		}
         setTokenCookies(variant, useSecureCookie(getRequest()));
         configureTemplateMap(map,getRequest(),(IFreeMarkerApplication)getApplication());
         return toRepresentation(map, getTemplateName(), MediaType.TEXT_PLAIN);

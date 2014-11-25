@@ -1,6 +1,6 @@
 	<!-- Basic Page Needs
   ================================================== -->
-	<title>AMBIT</title>
+	<title>Ontology service</title>
 	<meta name="robots" content="index,follow"><META NAME="GOOGLEBOT" CONTENT="index,FOLLOW">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="description" content="AMBIT">
@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="${ambit_root}/style/base.css" type="text/css">
 	<link rel="stylesheet" href="${ambit_root}/style/skeleton-fluid.css" type="text/css">
 	<link rel="stylesheet" href="${ambit_root}/style/layout.css" type="text/css">
+	<link rel="stylesheet" href="${ambit_root}/style/toplinks.css" type="text/css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,6 +28,7 @@
 	<script type='text/javascript' src='${ambit_root}/jquery/jquery-ui-1.8.18.custom.min.js'></script>
 	<script type='text/javascript' src='${ambit_root}/jquery/jquery.validate.min.js'></script>
 	<script type='text/javascript' charset='utf8' src='${ambit_root}/jquery/jquery.dataTables-1.9.0.min.js'></script>
+	<script type='text/javascript' charset='utf8' src='${ambit_root}/jquery/footer.js'></script>
 	
 	<link rel="stylesheet" href="${ambit_root}/style/jquery-ui-1.8.18.custom.css" type="text/css">
 	<link rel="stylesheet" href="${ambit_root}/style/jquery.dataTables.css" type="text/css">
