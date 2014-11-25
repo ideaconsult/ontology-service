@@ -123,6 +123,32 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>noaa</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<aa.opensso></aa.opensso>
+				<aa.policy></aa.policy>
+				<aa.enabled>false</aa.enabled>
+				<jena.persistence>tdb</jena.persistence>
+				<tdb.folder></tdb.folder>
+			</properties>
+		</profile>	
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<aa.opensso>http://localhost/opensso/identity</aa.opensso>
+				<aa.policy>http://localhost/Pol/opensso-pol</aa.policy>
+				<aa.enabled>false</aa.enabled>
+				<jena.persistence>tdb</jena.persistence>
+				<tdb.folder></tdb.folder>
+			</properties>
+		</profile>
+		<profile>
 			<id>tdb</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
@@ -132,6 +158,24 @@
 				<tdb.folder></tdb.folder>
 			</properties>
 		</profile>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<ambit.profile>default</ambit.profile>
+			</properties>
+		</profile>	
+		<profile>
+			<id>extended</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<ambit.profile>extended</ambit.profile>
+			</properties>
+		</profile>				
 	</profiles>
 	<build>
 		<finalName>ontology</finalName>

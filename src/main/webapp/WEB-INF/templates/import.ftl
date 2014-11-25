@@ -26,7 +26,11 @@
 </div>
 
 <div class="three columns" style="padding:0 2px 2px 2px 0;margin-right:0;" >
-<#include "/menu.ftl">
+<#if menu_profile??>
+		<#include "/menu/profile/${menu_profile}/menu.ftl">
+<#else>
+		<#include "/menu/profile/default/menu.ftl">
+</#if>
 </div>
 
 		
@@ -37,7 +41,7 @@
 	<div class="row remove-bottom ui-widget-header ui-corner-top">
 		Import RDF data into Ontology service
 	</div>
-	<form method='post' action='${ambit_root}'>
+	<form method='post' action='${ambit_root}/query'>
 	<div class="ui-widget-content ui-corner-bottom">
 	<div style='margin:5px;padding:5px;'>
 	<div class="row">

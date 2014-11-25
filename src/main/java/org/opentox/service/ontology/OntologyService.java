@@ -50,13 +50,20 @@ public class OntologyService extends FreeMarkerApplication<String> {
 	@Override
 	public Restlet createInboundRoot() {
 		initFreeMarkerConfiguration();
+		setProfile(getMenuProfile());
+		
 		Router router = new MyRouter(this.getContext());
 		router.attach("/", UIResource.class);
 		router.attach("", UIResource.class);
+		
+		router.attach("/ui", UIResource.class);
+		router.attach("/ui/{key}", UIResource.class);
+
 		router.attach("/query", TDBOntologyResource.class);
 		router.attach(String.format("/query/{%s}",TDBOntologyResource.resourceKey), TDBOntologyResource.class);
 		
-		router.attach("/model", ConfigurationOntologyResource.class);
+		if ("extended".equals(getProfile()))
+			router.attach("/admin", ConfigurationOntologyResource.class);
 		
 		router.setDefaultMatchingMode(Template.MODE_STARTS_WITH); 
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
@@ -85,7 +92,6 @@ public class OntologyService extends FreeMarkerApplication<String> {
 		Filter authn = new OpenSSOAuthenticator(getContext(),false,"opentox.org",new OpenSSOFakeVerifier(false));
 		authn.setNext(router);
 		
-		setProfile(getMenuProfile());
 		versionShort = readVersionShort();
 		versionLong = readVersionLong();
  		

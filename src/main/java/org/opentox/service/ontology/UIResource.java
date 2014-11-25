@@ -26,14 +26,14 @@ public class UIResource extends FreeMarkerResource {
 				public void setCacheHeaders(Response response) {
 					response.getCacheDirectives().add(CacheDirective.publicInfo());
 				}
-			}
+			},
+			model
 			;
 			public boolean enablePOST() {
 				return false;
 			}
 			public void setCacheHeaders(Response response) {
-				response.getCacheDirectives().add(CacheDirective.privateInfo());
-				response.getCacheDirectives().add(CacheDirective.maxAge(2700));		
+				response.getCacheDirectives().add(CacheDirective.noCache());
 			}
 		}
 	public UIResource() {
@@ -54,6 +54,9 @@ public class UIResource extends FreeMarkerResource {
 			//page = pages.valueOf(ui.toString());
 			//return ui==null?"index.ftl":String.format("%s.ftl", page.name());
 			switch (page) {
+			case index : {
+				return String.format("menu/profile/%s/index.ftl",((IFreeMarkerApplication)getApplication()).getProfile());
+			}
 			default: {
 				return String.format("%s.ftl", page.name());
 			}
@@ -98,13 +101,17 @@ public class UIResource extends FreeMarkerResource {
 			IFreeMarkerApplication app) {
 		super.configureTemplateMap(map,request,app);
         if (getClientInfo().getUser()!=null) {
-        //	map.put("username", getClientInfo().getUser().getIdentifier());
+        	map.put("username", getClientInfo().getUser().getIdentifier());
         	try {
         		map.put("openam_token",((OpenSSOUser) getClientInfo().getUser()).getToken());  
         	} catch (Exception x) {
         		map.remove("openam_token");
         	}
-        }
+        } else {
+        	OpenSSOUser ou = new OpenSSOUser();
+			ou.setUseSecureCookie(useSecureCookie(getRequest()));
+			getClientInfo().setUser(ou);
+        }        
         try {
         	map.put("openam_service", OntServiceOpenSSOConfig.getInstance().getOpenSSOService());
         } catch (Exception x) {

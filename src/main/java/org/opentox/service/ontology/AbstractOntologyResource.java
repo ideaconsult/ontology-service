@@ -974,7 +974,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 								w.write(String.format("<h4>%s</h4>",title==null?"":title));
 							
 							//	w.write("<div class='row' id='header'><div class='ten columns'>TOP</div></div>");
-								w.write("<table class='datatable row' id='results'>\n");		
+								w.write("<table class='datatable' id='results'  style='margin-left:5px;margin-right:5px;'>\n");		
 							
 								w.write("<thead>");
 								List<String> vars = results.getResultVars();
@@ -1130,7 +1130,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	}
 
 	public void writehtmlheader(Writer w,Model ontology,String queryString,long elapsed) throws Exception {
-		w.write("<div class='ui-widget-header row remove-bottom'>");
+		w.write("<div class='ui-widget-header row remove-bottom' style='margin-left:5px;margin-right:5px;'>");
+		
+		w.write(String.format("<a class='remove-bottom' href='%s' title='Home'>Home</a>&nbsp;",getRequest().getRootRef()));
 		
 		Keys qkey = null;
 		try { qkey = Keys.valueOf(getRequest().getAttributes().get(resourceKey).toString()); } catch (Exception x) {}
@@ -1156,7 +1158,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			}
 		}
 		w.write("</div>");
-		w.write("<div class='ui-widget-header row half-bottom'>");
+		w.write("<div class='ui-widget-header row half-bottom'  style='margin-left:5px;margin-right:5px;'>");
 		if (qkey!=null)
 		w.write(String.format("<br>%s&nbsp; >>",qkey.toString()));
 		
@@ -1165,8 +1167,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 								
 		w.write(
 				String.format(
-			"<div class='row ui-widget-header ui-corner-top remove-bottom'>Search the Ontology service&nbsp;[%s triples]</div>"+
-			"<div class='row ui-widget-content ui-corner-bottom'>"+
+			"<div class='row ui-widget-header ui-corner-top remove-bottom'  style='margin-left:5px;margin-right:5px;'>Search the Ontology service&nbsp;[%s triples]</div>"+
+			"<div class='row ui-widget-content ui-corner-bottom'  style='margin-left:5px;margin-right:5px;'>"+
 			"<FORM action='' method='post'>"+
 		    "<TEXTAREA  class='columns ten alpha' name='query' rows='10' cols='100' style='padding:10 10 10 10;'>",
 		    ontology==null?0:ontology.size(),

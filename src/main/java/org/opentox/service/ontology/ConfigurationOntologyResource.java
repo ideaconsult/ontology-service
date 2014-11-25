@@ -15,9 +15,20 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 public class ConfigurationOntologyResource<T extends Serializable> extends TDBOntologyResource<T> {
 
+	public ConfigurationOntologyResource() {
+		super();
+		tag = "/admin";
+	}
 	@Override
 	protected boolean addDefaultOntologies() {
 		return false;
+	}
+	@Override
+	protected Representation put(Representation representation, Variant variant)
+			throws ResourceException {
+
+		getResponse().redirectSeeOther(String.format("%s/ui/model",getRequest().getRootRef()));
+		return new StringRepresentation(String.format("%s",getRequest().getRootRef()),MediaType.TEXT_URI_LIST);
 	}
 	@Override
 	protected Representation post(Representation entity, Variant variant)
@@ -33,6 +44,7 @@ public class ConfigurationOntologyResource<T extends Serializable> extends TDBOn
 			try {ontology.close(); } catch (Exception x) {}
 			try {dataset.close(); } catch (Exception x) {}
 		}
+		getResponse().redirectSeeOther(String.format("%s/ui/model",getRequest().getRootRef()));
 		return new StringRepresentation(String.format("%s",getRequest().getRootRef()),MediaType.TEXT_URI_LIST);
 	}
 	@Override
@@ -47,6 +59,7 @@ public class ConfigurationOntologyResource<T extends Serializable> extends TDBOn
 			try { dataset.close(); } catch (Exception x) {}
 
 		}
+		getResponse().redirectSeeOther(String.format("%s/ui/model",getRequest().getRootRef()));
 		return new StringRepresentation(String.format("%s",getRequest().getRootRef()),MediaType.TEXT_URI_LIST);
 	}
 }

@@ -1,6 +1,7 @@
 <#include "/html.ftl">
 <head>
   <#include "/header.ftl">
+
 </head>
 <body>
 
@@ -17,7 +18,7 @@
 		<h3 class="remove-bottom">
 				OpenTox Ontology service
 		</h3>
-	    <h6>Welcome</h6>			
+	    <h6>Administration</h6>			
 	    </div>
 		</div>
 </div>		
@@ -26,11 +27,7 @@
 </div>
 
 <div class="three columns" style="padding:0 2px 2px 2px 0;margin-right:0;" >
-<#if menu_profile??>
-		<#include "/menu/profile/${menu_profile}/menu.ftl">
-<#else>
-		<#include "/menu/profile/default/menu.ftl">
-</#if>
+		<#include "/menu/profile/extended/menu.ftl">
 </div>
 
 		
@@ -38,9 +35,53 @@
 ================================================== -->
 
 <div class="eleven columns" style="padding:0;" >
-	Provides storage and standard SPARQL endpoint search functionality for objects, defined in OpenTox services and relevant ontologies.
-	<br/>
-	<a href="http://ambit.sourceforge.net/api_ontology.html" class='qxternal'>Documentation</a>
+	<div class="row" style="padding:5;" >
+		<a href='${ambit_root}/admin'>Browse Triple storage content</a>
+	</div>
+	<hr/>
+	<div class="row" style="padding:5;" >
+		<form action='${ambit_root}/admin?method=POST' method='POST' autocomplete='off'>
+			<label class='three columns alpha'>Add default ontologies</label>
+			<span class='thirteen columns omega'>
+			<input id='submit' type='submit' value='Submit' tabindex='2'>
+			</span>
+		</form>
+	</div>
+	<hr/>
+	<div class="row" style="padding:5;" >
+		<form action='${ambit_root}/admin?method=DELETE' method='POST' autocomplete='off'>
+			<label class='three columns alpha'>Clear all content</label>
+			<span class='thirteen columns omega'>
+			<input id='submit' type='submit' title='Clear all triples' value='Submit' tabindex='2'>
+			</span>
+		</form>
+	</div>
+	<!--
+	<hr/>
+	<div class="row" style="padding:5;" >
+		<form action='${ambit_root}/query?method=POST' id='algorithms' method='POST' autocomplete='off'>
+			<span class='row'>
+			<label class='three columns alpha'>AMBIT URI</label>
+			<input class='eight columns omega' name='uri' type='text' size='120' value=''>
+			<span class='five columns omega'>
+			<input id='submit' type='submit' value='Import algorithms' tabindex='2'>
+			</span>
+			</span>
+		</form>
+	</div>			
+	<hr/>
+	<div class="row" style="padding:5;" >
+		<form action='${ambit_root}/query?method=POST' id='models' method='POST' autocomplete='off'>
+			<span class='row'>
+			<label class='three columns alpha'>AMBIT URI</label>
+			<input class='eight columns omega' name='uri' type='text' size='120' value=''>
+			<span class='five columns omega'>
+			<input id='submit' type='submit' value='Import models' tabindex='2'>
+			</span>
+			</span>
+		</form>
+	</div>	
+	-->
 </div>
 
 

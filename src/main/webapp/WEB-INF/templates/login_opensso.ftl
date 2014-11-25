@@ -26,7 +26,11 @@
 </div>
 
 <div class="three columns" style="padding:0 2px 2px 2px 0;margin-right:0;" >
-<#include "/menu.ftl">
+<#if menu_profile??>
+		<#include "/menu/profile/${menu_profile}/menu.ftl">
+<#else>
+		<#include "/menu/profile/default/menu.ftl">
+</#if>
 </div>
 
 
