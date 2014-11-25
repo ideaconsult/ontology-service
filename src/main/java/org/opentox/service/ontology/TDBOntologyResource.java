@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import org.restlet.resource.ResourceException;
 
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.vocabulary.DC;
@@ -25,7 +26,7 @@ public class TDBOntologyResource<T extends Serializable> extends AbstractOntolog
 		super();
 	}
 
-	protected Model createOntologyModel(boolean init) throws ResourceException {
+	protected Dataset createOntologyModel(boolean init) throws ResourceException {
 		try {
 			String directory = OntologyServiceConfig.getInstance().getTDBDirectory();
 			File dir  = new File(directory);
@@ -37,21 +38,22 @@ public class TDBOntologyResource<T extends Serializable> extends AbstractOntolog
 					x.printStackTrace();
 				}
 			}
-			Model ontology = TDBFactory.createModel(directory) ;
+			Dataset dataset = TDBFactory.createDataset(directory);
+			Model ontology = dataset.getDefaultModel() ;
 			if (init && (ontology.size()==0)) readOntologies(ontology);
 			ontology.setNsPrefix( "ot", "http://www.opentox.org/api/1.1#");
 			ontology.setNsPrefix( "ota", "http://www.opentox.org/algorithmTypes.owl#" );
 			ontology.setNsPrefix( "otee", "http://www.opentox.org/echaEndpoints.owl#" );
 			ontology.setNsPrefix( "owl", OWL.NS );
 			ontology.setNsPrefix( "dc", DC.NS );
-			ontology.setNsPrefix( "bx", "http://purl.org/net/nknouf/ns/bibtex#" );
-			ontology.setNsPrefix( "bo", "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#" );		
+			//ontology.setNsPrefix( "bx", "http://purl.org/net/nknouf/ns/bibtex#" );
+			//ontology.setNsPrefix( "bo", "http://www.blueobelisk.org/ontologies/chemoinformatics-algorithms/#" );		
 			/*
 			if (ontology == null) ontology = TDBFactory.createModel(directory) ;
 			if (ontology.size()==0) readOntologies();
 			*/
 			
-			return ontology;
+			return dataset;
 		} catch (ResourceException x) {
 			throw x;
 		} catch (Exception x) {

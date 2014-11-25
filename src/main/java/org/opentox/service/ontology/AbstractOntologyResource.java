@@ -10,7 +10,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.HttpURLConnection;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,10 +26,10 @@ import org.restlet.data.Status;
 import org.restlet.representation.OutputRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.Variant;
-import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -50,7 +49,10 @@ import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.DC;
 
+
+
 public abstract class AbstractOntologyResource extends ServerResource implements IAuthToken {
+	protected String tag = "/query";
 	protected static String jsGoogleAnalytics = null;
 	public static final String resource="/ontology";
 	public static final String resourceKey="key";
@@ -58,7 +60,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	protected String title = null;
 	protected static String version = null;
 	
-	abstract protected Model createOntologyModel(boolean init) throws ResourceException ;
+	abstract protected Dataset createOntologyModel(boolean init) throws ResourceException ;
 	
 	private final static String[] js = new String[] {
 		"<script type='text/javascript' src='%s/jquery/jquery-1.7.1.min.js'></script>\n",
@@ -732,10 +734,8 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				MediaType.APPLICATION_SPARQL_RESULTS_JSON,
 				MediaType.TEXT_CSV,
 				MediaType.TEXT_PLAIN,
-				MediaType.TEXT_URI_LIST,
-				MediaType.TEXT_HTML
+				MediaType.TEXT_URI_LIST
 				});		
-		readVersion();
 		try {
 			resultsOnly = getRequest().getResourceRef().getQueryAsForm().getFirstValue("results").equals("yes");
 		} catch (Exception x) {
@@ -891,9 +891,13 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		}
 		return model;
 	}
+	protected boolean addDefaultOntologies() {
+		return true;
+	}
 	protected Representation sparql(final String queryString, Variant variant) throws ResourceException {
 		 
-		  final Model ontology = createOntologyModel(true);
+		  final Dataset dataset = createOntologyModel(addDefaultOntologies());
+		  final Model ontology = dataset.getDefaultModel();
 		  
 			return new OutputRepresentation(variant.getMediaType()) {
 				@Override
@@ -1029,6 +1033,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					}
 					} finally {
 						ontology.leaveCriticalSection() ; 
+
 					}
 				}
 		
@@ -1096,13 +1101,16 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		}
 	}
 	
-	protected void deleteModel(Model model) throws Exception {
+	protected void deleteModel(Dataset dataset) throws Exception {
+		Lock lock = null;
 		try {
-			model.enterCriticalSection(Lock.WRITE) ;
+			lock = dataset.getLock();
 			try {
-				model.removeAll();
-				try { model.commit(); } catch (Exception x) {}
+				lock.enterCriticalSection(Lock.WRITE);
+				dataset.getDefaultModel().getGraph().clear();
+				try { dataset.commit(); } catch (Exception x) {}
 			} catch (Exception x) {
+				x.printStackTrace();
 				Logger.getLogger(getClass().getName()).severe(x.toString());
 			} finally {
 
@@ -1110,37 +1118,12 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		} catch (Exception x) {
 			throw x;
 		} finally {
-			model.leaveCriticalSection() ; 
+			try { if (lock!=null) lock.leaveCriticalSection();} catch (Exception x) {}
 		}
 	}	
 	
 
-	protected String readVersion() {
-		if (version!=null)return version;
-		final String build = "Implementation-Build:";
-		Representation p=null;
-		try {
-			ClientResource r = new ClientResource(String.format("%s/meta/MANIFEST.MF",getRequest().getRootRef()));
-			p = r.get();
-			String text = p.getText();
-			System.out.println(text);
-			//String text = build + ":0.0.1-SNAPSHOT-r1793-1266340980278";
-			int i = text.indexOf(build);
-			if (i>=0) {
-				version = text.substring(i+build.length());
-				i = version.lastIndexOf('-');
-				if (i > 0) 
-					version = String.format("%s-%s", 
-							version.substring(1,i),
-							new Date(Long.parseLong(version.substring(i+1).trim())));
-			}
-		} catch (Exception x) {
-			version = "Unknown";
-		} finally {
-			//try { p.release();} catch (Exception x) {}
-		}
-		return version;
-	}
+
 	protected void removeURI(Model ontology, String uri) throws Exception {
 		StmtIterator iter = ontology.listStatements(new SimpleSelector(ontology.createResource(uri),null,(RDFNode)null));
 		ontology.remove(iter);
@@ -1156,8 +1139,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		for (Keys key : Keys.values()) {
 			Keys parent = key.parent();
 			
-			String sparql = String.format("<a class='remove-bottom' href='%s/query/%s' title='%s\n\n%s'>%s</a>&nbsp;",
+			String sparql = String.format("<a class='remove-bottom' href='%s%s/%s' title='%s\n\n%s'>%s</a>&nbsp;",
 					getRequest().getRootRef(),
+					tag,
 					key.name(),
 					key.getHint(),
 					key.getSPARQL(),
@@ -1203,10 +1187,12 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		String ref = "";
 		Form form = getRequest().getResourceRef().getQueryAsForm();
 		synchronized (this) {
+			Dataset dataset = null;
 			Model ontology= null;
 			try {
 				ResourceException xx = null;
-				ontology = createOntologyModel(true);
+				dataset = createOntologyModel(true);
+				ontology = dataset.getDefaultModel();
 				String[] uris = form.getValuesArray("uri");
 				try {
 					for (String uri:uris) {
@@ -1223,8 +1209,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			} catch(Exception x) {
 				throw new ResourceException(x);
 			} finally {
-				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
-				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+				try { if (ontology!=null) dataset.commit(); } catch (Exception x) { x.printStackTrace();}
+				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) { x.printStackTrace();}
+				try { if (dataset!=null) dataset.close(); dataset = null;} catch (Exception x) { x.printStackTrace();}
 			}
 		}
 		return get(variant);
@@ -1236,10 +1223,12 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		String ref = "";
 		Form form = new Form(entity);
 		synchronized (this) {
+			Dataset dataset = null;
 			Model ontology= null;
 			try {
 				ResourceException xx = null;
-				ontology = createOntologyModel(true);
+				dataset = createOntologyModel(true);
+				ontology = dataset.getDefaultModel();
 				String[] uris = form.getValuesArray("uri");
 				try {
 					for (String search:uris) {
@@ -1257,8 +1246,9 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			} catch(Exception x) {
 				throw new ResourceException(x);
 			} finally {
-				try { if (ontology!=null) ontology.commit(); } catch (Exception x) {}
-				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) {}
+				try { if (ontology!=null) dataset.commit(); } catch (Exception x) { x.printStackTrace();}
+				try { if (ontology!=null) ontology.close(); ontology = null;} catch (Exception x) { x.printStackTrace();}
+				try { if (dataset!=null) dataset.close(); dataset = null;} catch (Exception x) { x.printStackTrace();}
 			}
 			}
 			try {

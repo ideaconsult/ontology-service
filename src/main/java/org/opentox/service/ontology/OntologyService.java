@@ -6,11 +6,11 @@ import java.util.Properties;
 
 import net.idea.restnet.aa.opensso.OpenSSOAuthenticator;
 import net.idea.restnet.aa.opensso.users.OpenSSOUserResource;
+import net.idea.restnet.c.RESTComponent;
 import net.idea.restnet.c.freemarker.FreeMarkerApplication;
 
 import org.opentox.rest.aa.opensso.users.OntologyOpenSSOResource;
 import org.opentox.rest.component.OpenSSOFakeVerifier;
-import org.opentox.rest.component.RESTComponent;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Context;
@@ -54,7 +54,10 @@ public class OntologyService extends FreeMarkerApplication<String> {
 		router.attach("/", UIResource.class);
 		router.attach("", UIResource.class);
 		router.attach("/query", TDBOntologyResource.class);
-		router.attach(String.format("/query/{%s}",TDBOntologyResource.resourceKey), TDBOntologyResource.class);	
+		router.attach(String.format("/query/{%s}",TDBOntologyResource.resourceKey), TDBOntologyResource.class);
+		
+		router.attach("/model", ConfigurationOntologyResource.class);
+		
 		router.setDefaultMatchingMode(Template.MODE_STARTS_WITH); 
 	    router.setRoutingMode(Router.MODE_BEST_MATCH); 
 	    

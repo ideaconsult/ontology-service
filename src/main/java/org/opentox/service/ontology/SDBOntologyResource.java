@@ -2,7 +2,7 @@ package org.opentox.service.ontology;
 
 import org.restlet.resource.ResourceException;
 
-import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.query.Dataset;
 
 /**
  * http://www.devx.com/semantic/Article/40247/1954
@@ -18,7 +18,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class SDBOntologyResource extends AbstractOntologyResource {
 
 	@Override
-	protected Model createOntologyModel(boolean init) throws ResourceException {
+	protected Dataset createOntologyModel(boolean init) throws ResourceException {
 		/*
 		File dir  = new File(directory);
 		if (!dir.exists()) {
