@@ -53,8 +53,8 @@ public class OntologyService extends FreeMarkerApplication<String> {
 		setProfile(getMenuProfile());
 		
 		Router router = new MyRouter(this.getContext());
-		router.attach("/", UIResource.class);
-		router.attach("", UIResource.class);
+		router.attach("/", TDBOntologyResource.class);
+		router.attach("", TDBOntologyResource.class);
 		
 		router.attach("/ui", UIResource.class);
 		router.attach("/ui/{key}", UIResource.class);

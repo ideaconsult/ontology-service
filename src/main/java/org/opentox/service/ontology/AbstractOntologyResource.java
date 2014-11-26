@@ -1132,7 +1132,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	public void writehtmlheader(Writer w,Model ontology,String queryString,long elapsed) throws Exception {
 		w.write("<div class='ui-widget-header row remove-bottom' style='margin-left:5px;margin-right:5px;'>");
 		
-		w.write(String.format("<a class='remove-bottom' href='%s' title='Home'>Home</a>&nbsp;",getRequest().getRootRef()));
+		w.write(String.format("<a class='remove-bottom' href='%s/ui' title='Home'>Home</a>&nbsp;",getRequest().getRootRef()));
 		
 		Keys qkey = null;
 		try { qkey = Keys.valueOf(getRequest().getAttributes().get(resourceKey).toString()); } catch (Exception x) {}
