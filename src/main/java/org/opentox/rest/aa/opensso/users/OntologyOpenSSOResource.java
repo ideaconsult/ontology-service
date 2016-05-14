@@ -89,7 +89,6 @@ public class OntologyOpenSSOResource extends OpenSSOUserResource {
         	map.put("username", getClientInfo().getUser().getIdentifier());
         else {
 			OpenSSOUser ou = new OpenSSOUser();
-			ou.setUseSecureCookie(useSecureCookie(getRequest()));
 			getClientInfo().setUser(ou);
 		}
         setTokenCookies(variant, useSecureCookie(getRequest()));

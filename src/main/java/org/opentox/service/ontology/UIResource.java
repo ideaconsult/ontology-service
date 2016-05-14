@@ -109,7 +109,6 @@ public class UIResource extends FreeMarkerResource {
         	}
         } else {
         	OpenSSOUser ou = new OpenSSOUser();
-			ou.setUseSecureCookie(useSecureCookie(getRequest()));
 			getClientInfo().setUser(ou);
         }        
         try {

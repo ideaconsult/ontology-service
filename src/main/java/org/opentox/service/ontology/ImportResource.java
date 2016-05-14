@@ -52,7 +52,6 @@ public class ImportResource extends CatalogResource<String> {
         	}
         } else {
         	OpenSSOUser ou = new OpenSSOUser();
-			ou.setUseSecureCookie(useSecureCookie(getRequest()));
 			getClientInfo().setUser(ou);
         }
         try {
