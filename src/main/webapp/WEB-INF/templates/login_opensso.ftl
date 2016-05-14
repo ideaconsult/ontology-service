@@ -67,17 +67,6 @@
 		</div>
 		
 		<#if username??>
-		<#if openam_token??>
-		<div class="row">		
-		<label class='three columns alpha'>OpenAM token</label> 
-		<div class='thirteen columns omega'>
-			${openam_token}
-		</div>	
-		</div>
-		</#if>
-		</#if>
-		
-		<#if username??>
 		<#else>
 		<div class="row remove-bottom">		
 		<label class='three columns alpha'>Password</label> 
