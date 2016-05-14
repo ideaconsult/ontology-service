@@ -5,7 +5,7 @@
 	<artifactId>ontology</artifactId>
 	<packaging>war</packaging>
 	<name>Ontology service</name>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<description>OpenTox Ontology service</description>
 	<dependencies>
 
@@ -25,7 +25,7 @@
 			<artifactId>jena-tdb</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>ambit</groupId>
@@ -108,6 +108,7 @@
 				<aa.enabled>true</aa.enabled>
 				<jena.persistence>tdb</jena.persistence>
 				<tdb.folder></tdb.folder>
+				<webapp_root>true</webapp_root>
 			</properties>
 		</profile>
 		<profile>
@@ -121,6 +122,7 @@
 				<aa.enabled>true</aa.enabled>
 				<jena.persistence>tdb</jena.persistence>
 				<tdb.folder></tdb.folder>
+				<webapp_root>true</webapp_root>
 			</properties>
 		</profile>
 		<profile>
@@ -134,8 +136,9 @@
 				<aa.enabled>false</aa.enabled>
 				<jena.persistence>tdb</jena.persistence>
 				<tdb.folder></tdb.folder>
+				<webapp_root>true</webapp_root>
 			</properties>
-		</profile>	
+		</profile>
 		<profile>
 			<id>local</id>
 			<activation>
@@ -147,6 +150,7 @@
 				<aa.enabled>false</aa.enabled>
 				<jena.persistence>tdb</jena.persistence>
 				<tdb.folder></tdb.folder>
+				<webapp_root>true</webapp_root>
 			</properties>
 		</profile>
 		<profile>
@@ -167,7 +171,7 @@
 			<properties>
 				<ambit.profile>default</ambit.profile>
 			</properties>
-		</profile>	
+		</profile>
 		<profile>
 			<id>extended</id>
 			<activation>
@@ -176,7 +180,55 @@
 			<properties>
 				<ambit.profile>extended</ambit.profile>
 			</properties>
-		</profile>				
+		</profile>
+
+		<profile>
+			<id>JRE6</id>
+			<activation>
+				<jdk>1.6</jdk>
+			</activation>
+			<properties>
+				<sourceVersion>1.6</sourceVersion>
+			</properties>
+		</profile>
+		<profile>
+			<id>JRE7</id>
+			<activation>
+				<jdk>1.7</jdk>
+			</activation>
+			<properties>
+				<sourceVersion>1.7</sourceVersion>
+			</properties>
+		</profile>
+		<profile>
+			<id>JRE8</id>
+			<activation>
+				<jdk>1.8</jdk>
+			</activation>
+			<properties>
+				<sourceVersion>1.8</sourceVersion>
+			</properties>
+		</profile>
+		<profile>
+			<id>tomcat_root</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<baseurl.depth>0</baseurl.depth>
+				<baseurl>/</baseurl>
+			</properties>
+		</profile>
+		<profile>
+			<id>webapp_root</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<baseurl.depth>1</baseurl.depth>
+				<baseurl>/ontology</baseurl>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<finalName>ontology</finalName>
@@ -193,15 +245,28 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<server></server>
+					<path>${baseurl}</path>
+					<port>8082</port>
+				</configuration>
+			</plugin>
+		</plugins>
 		<pluginManagement>
+
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.2</version>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>${sourceVersion}</source>
+						<target>${sourceVersion}</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -211,15 +276,6 @@
 						<skip>true</skip>
 						<disableXmlReport>true</disableXmlReport>
 						<argLine>-Xmx1024m</argLine>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>tomcat-maven-plugin</artifactId>
-					<configuration>
-						<server>localhost</server>
-						<path>/ontology</path>
-						<port>8082</port>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -235,27 +291,29 @@
 						</execution>
 					</executions>
 					<configuration>
-						<revisionOnScmFailure>OntologyService</revisionOnScmFailure>
-						<doCheck>true</doCheck>
-						<doUpdate>true</doUpdate>
-						<!-- <providerImplementations> <svn>javasvn</svn> </providerImplementations> -->
+						<revisionOnScmFailure>-${maven.build.timestamp}</revisionOnScmFailure>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+						<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+						<locale>US</locale>
 					</configuration>
 				</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<webXml>${web_xml}</webXml>
-					<!-- <manifest> <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
-						</manifest> -->
-					<archive>
-						<manifestEntries>
-							<Implementation-Build>${build.version}</Implementation-Build>
-						</manifestEntries>
-					</archive>
-					<packagingExcludes>${exclude.jni}</packagingExcludes>
-				</configuration>
-			</plugin>
+
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1.1</version>
+					<configuration>
+						<webXml>${web_xml}</webXml>
+						<!-- <manifest> <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
+							</manifest> -->
+						<archive>
+							<manifestEntries>
+								<Implementation-Build>${build.version}</Implementation-Build>
+							</manifestEntries>
+						</archive>
+						<packagingExcludes>${exclude.jni}</packagingExcludes>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
