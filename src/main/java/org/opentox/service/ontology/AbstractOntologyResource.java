@@ -1116,29 +1116,28 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 
 					@Override
 					public void warning(Exception e) {
-						e.printStackTrace();
+						Logger.getLogger(getClass().getName()).warning(e.toString());
 
 					}
 
 					@Override
 					public void fatalError(Exception e) {
-						e.printStackTrace();
+						Logger.getLogger(getClass().getName()).severe(e.toString());
 
 					}
 
 					@Override
 					public void error(Exception e) {
-						e.printStackTrace();
+						Logger.getLogger(getClass().getName()).severe(e.toString());
 
 					}
 				});
-				reader.read(model, in, null);
+				reader.read(model, in, getRequest().getRootRef().toString());
 				try {
 					model.commit();
 				} catch (Exception x) {
 				}
 			} catch (Exception x) {
-				x.printStackTrace();
 				Logger.getLogger(getClass().getName()).severe(x.toString());
 			} finally {
 				try {
@@ -1166,7 +1165,6 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				} catch (Exception x) {
 				}
 			} catch (Exception x) {
-				x.printStackTrace();
 				Logger.getLogger(getClass().getName()).severe(x.toString());
 			} finally {
 
@@ -1279,21 +1277,21 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				try {
 					dataset.commit();
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 				try {
 					if (ontology != null)
 						ontology.close();
 					ontology = null;
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 				try {
 					if (dataset != null)
 						dataset.close();
 					dataset = null;
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 			}
 		}
@@ -1346,21 +1344,21 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 					if (ontology != null && updated)
 						dataset.commit();
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 				try {
 					if (ontology != null)
 						ontology.close();
 					ontology = null;
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 				try {
 					if (dataset != null)
 						dataset.close();
 					dataset = null;
 				} catch (Exception x) {
-					x.printStackTrace();
+					Logger.getLogger(getClass().getName()).severe(x.toString());
 				}
 			}
 		}

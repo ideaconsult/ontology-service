@@ -2,6 +2,7 @@ package org.opentox.service.ontology;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
@@ -37,7 +38,7 @@ public class TDBOntologyResource<T extends Serializable> extends
 					try {
 						new File(directory + "/fixed.opt").createNewFile();
 					} catch (Exception x) {
-						x.printStackTrace();
+						Logger.getLogger(getClass().getName()).warning(x.toString());
 					}
 			}
 			if (dir.exists()) {
@@ -48,7 +49,8 @@ public class TDBOntologyResource<T extends Serializable> extends
 					try {
 						dataset.commit();
 					} catch (Exception x) {
-						x.printStackTrace();
+						Logger.getLogger(getClass().getName()).warning(
+								x.getMessage());
 					}
 				}
 				ontology.setNsPrefix("ot", "http://www.opentox.org/api/1.1#");
