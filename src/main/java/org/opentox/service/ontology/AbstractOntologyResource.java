@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import net.idea.restnet.c.BotsGuard;
 import net.idea.restnet.c.task.ClientResourceWrapper;
 import net.idea.restnet.i.aa.IAuthToken;
 
@@ -694,6 +695,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 	@Override
 	protected void doInit() throws ResourceException {
 		super.doInit();
+		BotsGuard.checkForBots(getRequest());
 		customizeVariants(new MediaType[] { MediaType.TEXT_HTML,
 				MediaType.APPLICATION_SPARQL_RESULTS_XML,
 				MediaType.APPLICATION_RDF_XML,
@@ -1275,8 +1277,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				throw new ResourceException(x);
 			} finally {
 				try {
-					if (ontology != null)
-						dataset.commit();
+					dataset.commit();
 				} catch (Exception x) {
 					x.printStackTrace();
 				}
@@ -1305,11 +1306,16 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 		String ref = "";
 		Form form = null;
 		try {
+			if (!entity.isAvailable())
+				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,
+						"Invalid query");
 			form = new Form(entity);
 		} catch (Exception x) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL, x);
+			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,
+					x.getMessage());
 		}
 		synchronized (this) {
+			boolean updated = false;
 			Dataset dataset = null;
 			Model ontology = null;
 			try {
@@ -1322,6 +1328,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 						if (search != null) {
 							getOntology(ontology, new Reference(search));
 							ref = getRequest().getRootRef().toString();
+							updated = true;
 						}
 					}
 				} catch (ResourceException x) {
@@ -1336,7 +1343,7 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 				throw new ResourceException(x);
 			} finally {
 				try {
-					if (ontology != null)
+					if (ontology != null && updated)
 						dataset.commit();
 				} catch (Exception x) {
 					x.printStackTrace();
@@ -1361,10 +1368,14 @@ public abstract class AbstractOntologyResource extends ServerResource implements
 			String query = form.getFirstValue("query");
 			if (query != null) {
 				return sparql(query, variant);
-			} else {
-				getResponse().setLocationRef(ref);
-				return get(variant);
-			}
+
+			} else
+				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST);
+			/*
+			 * else { getResponse().setLocationRef(ref); return get(variant); }
+			 */
+		} catch (ResourceException x) {
+			throw x;
 		} catch (Exception x) {
 			throw new ResourceException(x);
 		} finally {
